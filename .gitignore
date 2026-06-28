@@ -12,10 +12,6 @@ Thumbs.db
 # Logs
 *.log
 
-# Personal source docs — keep local, do not publish
-CV.docx (1).md
-cv.docx.md
-
 # Local-only files (legacy tooling, if ever reintroduced)
 node_modules
 dist
