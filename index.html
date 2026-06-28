@@ -1,20 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apri's Personal Portfolio</title>
-    <meta name="description" content="Personal Portfolio" />
-    <meta name="author" content="Lovable" />
-    <meta property="og:image" content="/thumbnail.png" />
-    <link rel="icon" type="image/png" href="/p.jpg" />
-    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-          
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apri Dwi Rachmadi — AI Engineer & Data Scientist</title>
+  <meta name="description" content="AI/ML engineer and Statistics graduate building production machine-learning systems — LLM evaluation, computer vision, NLP, and tabular ML with Python, TensorFlow & PyTorch." />
+  <link rel="icon" href="public/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="vaporwave.css" />
+</head>
+<body>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="wrap nav__inner">
+      <a class="nav__brand" href="#top">apri<b>.</b>rachmadi</a>
+      <nav class="nav__links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="btn nav__cta" href="#contact">Hire me</a>
+    </div>
+  </header>
 
-  <body>
-    <div id="root"></div>
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__glow"></div>
+      <div class="hero__sun"></div>
+      <div class="wrap">
+        <div class="hero__inner reveal">
+          <p class="eyebrow">AI Engineer · Data Scientist</p>
+          <h1>Apri Dwi Rachmadi</h1>
+          <p class="hero__tag">
+            AI/ML engineer and <b>Statistics graduate</b> who ships machine-learning
+            systems end-to-end — from <b>LLM evaluation</b> and <b>RAG</b> to
+            <b>computer vision</b> and production <b>tabular models</b>, built with
+            Python, TensorFlow &amp; PyTorch.
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#projects">View Projects</a>
+            <a class="btn" href="#contact">Get in touch</a>
+          </div>
+        </div>
+
+        <div class="stats reveal">
+          <div class="stat"><div class="stat__num grad-text">3.73</div><div class="stat__label">GPA / 4.00</div></div>
+          <div class="stat"><div class="stat__num grad-text">84%</div><div class="stat__label">LLM-judge alignment</div></div>
+          <div class="stat"><div class="stat__num grad-text">8+</div><div class="stat__label">ML projects shipped</div></div>
+          <div class="stat"><div class="stat__num grad-text">3×</div><div class="stat__label">Satria Data finalist</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT / SKILLS -->
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">About</p>
+          <h2>I turn statistics &amp; research into <span class="grad-text">working ML systems.</span></h2>
+          <p>
+            A Statistics graduate of Universitas Diponegoro and a Bangkit Machine
+            Learning Distinction graduate. I build models end-to-end — data work,
+            training and fine-tuning, evaluation, and deployment — across LLMs,
+            computer vision, NLP, and tabular data, with a strong analytical
+            foundation honed through years of national data competitions.
+          </p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-cat reveal">
+            <h3>Languages</h3>
+            <div class="chips"><span class="chip">Python</span><span class="chip">R</span><span class="chip">SQL</span></div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>ML / Deep Learning</h3>
+            <div class="chips"><span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">PyTorch</span><span class="chip">scikit-learn</span><span class="chip">LightGBM</span></div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>LLMs &amp; NLP</h3>
+            <div class="chips"><span class="chip">Transformers</span><span class="chip">IndoBERT</span><span class="chip">Llama</span><span class="chip">LangChain</span><span class="chip">RAG</span><span class="chip">ChromaDB</span></div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>Computer Vision</h3>
+            <div class="chips"><span class="chip">YOLOv8 / YOLO11</span><span class="chip">TrOCR</span><span class="chip">PaddleOCR</span><span class="chip">MobileNet</span><span class="chip">OpenCV</span></div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>MLOps &amp; Serving</h3>
+            <div class="chips"><span class="chip">FastAPI</span><span class="chip">Flask</span><span class="chip">Streamlit</span><span class="chip">Groq</span></div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>Data &amp; Analytics</h3>
+            <div class="chips"><span class="chip">pandas</span><span class="chip">NumPy</span><span class="chip">Matplotlib</span><span class="chip">Tableau</span><span class="chip">EDA</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Projects</p>
+          <h2>Selected work, <span class="grad-text">with the receipts.</span></h2>
+          <p>Systems I designed, trained, and shipped — with the metrics that matter. Click any card for the full breakdown.</p>
+        </div>
+
+        <div class="proj-filters reveal" id="projectFilters"></div>
+        <div class="projects" id="projectGrid"></div>
+        <div class="view-all-wrap">
+          <button class="btn" id="viewAllBtn" type="button">View all projects</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Experience</p>
+          <h2>Where I've <span class="grad-text">shipped.</span></h2>
+        </div>
+
+        <div class="timeline">
+          <div class="tl-item reveal">
+            <div class="tl-item__head">
+              <span class="tl-item__role">AI Engineer / Data Scientist</span>
+              <span class="tl-item__co">· GDP Labs</span>
+              <span class="tl-item__date">Jun 2025 — May 2026</span>
+            </div>
+            <p class="tl-item__desc">Owned the LLM benchmarking codebase, scoring emerging models against proprietary datasets. Built an automated "LLM-as-a-Judge" pipeline reaching 84% alignment with human evaluators on RAG &amp; agent use cases, and productionized tabular models (demand forecasting, loan-fraud and anomaly detection) with drift monitoring, automated retraining, and unit testing.</p>
+          </div>
+          <div class="tl-item reveal">
+            <div class="tl-item__head">
+              <span class="tl-item__role">AI Engineer (Intern)</span>
+              <span class="tl-item__co">· PT Salam Pacific Indonesia Lines</span>
+              <span class="tl-item__date">Oct 2024 — Jan 2025</span>
+            </div>
+            <p class="tl-item__desc">Built an end-to-end automated cashier system (YOLO11 detection at 82% mAP, MobileNet classification at 99%, zero-shot segmentation for auto-annotation), a Llama + LangChain + ChromaDB RAG audit assistant, a PaddleOCR receipt-processing pipeline, and a collaborative-filtering training recommender — served via a Flask backend.</p>
+          </div>
+          <div class="tl-item reveal">
+            <div class="tl-item__head">
+              <span class="tl-item__role">Data Scientist (Part-time Intern)</span>
+              <span class="tl-item__co">· Braincore</span>
+              <span class="tl-item__date">Apr 2024 — Aug 2024</span>
+            </div>
+            <p class="tl-item__desc">Part of the Data Science &amp; Analytics division. Built a comprehensive Tableau dashboard for the KRL commuter line, analyzing schedule busyness and the number of operating stations and trains.</p>
+          </div>
+          <div class="tl-item reveal">
+            <div class="tl-item__head">
+              <span class="tl-item__role">Machine Learning Cohort</span>
+              <span class="tl-item__co">· Bangkit Academy (Google, Tokopedia, Gojek &amp; Traveloka)</span>
+              <span class="tl-item__date">Aug 2023 — Dec 2023</span>
+            </div>
+            <p class="tl-item__desc">Graduated with Distinction (score 94.24/100). Studied ML foundations through deep learning and model deployment. Capstone UPCYCLE: a TensorFlow garbage classifier at 91% accuracy, deployed to Android via TensorFlow Lite.</p>
+          </div>
+          <div class="tl-item reveal">
+            <div class="tl-item__head">
+              <span class="tl-item__role">B.Sc. Statistics</span>
+              <span class="tl-item__co">· Universitas Diponegoro</span>
+              <span class="tl-item__date">Aug 2021 — Mar 2025</span>
+            </div>
+            <p class="tl-item__desc">GPA 3.73/4.00 (147 SKS). Thesis: TrOCR for vehicle license-plate recognition. Teaching assistant for Algorithms &amp; Programming, and a Satria Data finalist three years running (2022–2024).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="wrap contact-grid">
+        <div class="contact-info reveal">
+          <p class="eyebrow">Contact</p>
+          <h2>Let's build intelligent systems together.</h2>
+          <p>Open to AI / ML Engineer and Data Scientist roles. The fastest way to reach me is email.</p>
+          <a class="mail" href="mailto:rachmadiapri@gmail.com">rachmadiapri@gmail.com</a>
+          <div class="socials">
+            <a href="https://github.com/aprirachmadi" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/apri-dwi-rachmadi-3b1a141ba/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="mailto:rachmadiapri@gmail.com">Email</a>
+          </div>
+        </div>
+
+        <form class="form reveal" id="contactForm" novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="jane@company.com" required />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell me about the role or project..." required></textarea>
+          </div>
+          <button class="btn btn--primary form__btn" type="submit">Send message</button>
+          <p class="form__ok" id="formOk">Thanks — message captured. I'll get back to you shortly. (This demo form has no backend yet.)</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span>© 2026 Apri Dwi Rachmadi</span>
+      <span>Designed &amp; built with retro-futurist intent.</span>
+    </div>
+  </footer>
+
+  <!-- PROJECT DETAIL MODAL -->
+  <div class="modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__panel">
+      <div class="modal__header">
+        <div>
+          <span class="modal__tag" id="modalTag"></span>
+          <h3 id="modalTitle"></h3>
+        </div>
+        <button class="modal__close" id="modalClose" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal__body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="vaporwave.js"></script>
+</body>
 </html>
