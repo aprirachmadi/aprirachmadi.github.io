@@ -21,7 +21,7 @@ const PROJECTS = [
     year: "2024",
     methods: "YOLOv8 detection + TrOCR recognition",
     longDescription:
-      "An end-to-end system for reading vote tallies off Indonesia's 2024 SIREKAP election forms. A YOLOv8 detector locates the vote bounding boxes, then a TrOCR model transcribes the handwritten digits. Deployed as an interactive Streamlit demo.",
+      "An end-to-end computer-vision pipeline for reading vote tallies straight off Indonesia's 2024 SIREKAP election forms. A YOLOv8 detector first locates each vote bounding box on the scanned form, then a TrOCR transformer transcribes the handwritten digits inside it into machine-readable numbers. The two stages were trained and tuned separately, chained together, and wrapped in an interactive Streamlit demo so anyone can upload a form image and see the detected boxes alongside the recognised counts. The approach took first place at the Gammafest Data Science Competition 2024.",
     feats: [
       "YOLOv8 detects vote regions at 88.7% mAP50-95",
       "TrOCR reads digits at a 0.8% character error rate",
@@ -50,7 +50,7 @@ const PROJECTS = [
     year: "2023",
     methods: "Fine-tuned IndoBERT (BERT for Indonesian)",
     longDescription:
-      "An NLP model built with PyTorch, Transformers, and a pre-trained IndoBERT language model to detect hoaxes and misinformation in political news articles with 99% accuracy. Trained on a dataset of legitimate and hoax political news, leveraging the state-of-the-art IndoBERT variant of BERT pre-trained on Indonesian text data.",
+      "An NLP system for flagging misinformation in Indonesian political news, built with PyTorch and Hugging Face Transformers on top of a pre-trained IndoBERT language model. IndoBERT — a BERT variant pre-trained on large Indonesian corpora — was fine-tuned on a labelled dataset of legitimate and hoax political articles, letting the model pick up the subtle linguistic cues that separate genuine reporting from fabricated stories. The final classifier reached 99% accuracy, showing how transfer learning from a strong, language-specific model makes hoax detection viable even with a modest labelled dataset.",
     feats: [
       "Fine-tuned IndoBERT on real vs. hoax political news",
       "99% accuracy on Indonesian-language articles",
@@ -73,7 +73,7 @@ const PROJECTS = [
     metric: "90% accuracy",
     methods: "Vision Transformer (ViT)",
     longDescription:
-      "An image-classification model using Vision Transformers (ViT) to classify images into fire, smoke, fire-smoke, and none — trained on a difficult dataset containing low-quality and noise-corrupted images.",
+      "An image-classification model that sorts visual scenes into four classes — fire, smoke, fire-smoke, and none — using a Vision Transformer (ViT) fine-tuned through Hugging Face. The dataset was deliberately difficult: many images were low-resolution, visually ambiguous, class-imbalanced, or corrupted with white noise, conditions that mirror the real surveillance footage where early fire detection matters most. Careful preprocessing and augmentation kept the ViT robust to that noise, and the final model reached 90% accuracy, making it a credible early-warning component for fire-and-smoke monitoring.",
     feats: [
       "ViT classifying fire / smoke / fire-smoke / none",
       "Handled noisy, low-quality, imbalanced images",
@@ -96,7 +96,7 @@ const PROJECTS = [
     year: "2023",
     dataset: "CIC-IDS 2017",
     longDescription:
-      "A machine-learning model for network intrusion detection on the CIC-IDS 2017 dataset. The project involved data preprocessing, exploratory data analysis, and a LightGBM classifier, achieving a macro F1-score of 88.59% — demonstrating effectiveness in detecting network intrusions and cybersecurity threats.",
+      "A machine-learning network intrusion detection system (NIDS) trained on the CIC-IDS 2017 dataset, which captures realistic benign traffic alongside a broad range of modern cyber-attacks. The workflow covered thorough data preprocessing, exploratory data analysis to understand the traffic features, and handling of severe class imbalance before training a LightGBM gradient-boosting classifier across the many attack categories. The resulting model achieved a macro F1-score of 88.59%, showing it can distinguish multiple intrusion types — not just the most common ones — and flag potential cybersecurity threats reliably.",
     feats: [
       "EDA + preprocessing on CIC-IDS 2017",
       "LightGBM classifier across attack types",
@@ -119,7 +119,7 @@ const PROJECTS = [
     featured: false,
     methods: "Pretrained YOLOv8 + Supervision tracking",
     longDescription:
-      "A multi-gate vehicle detection system using YOLOv8. The system tracks and counts vehicles as they pass through predefined gates in a video, leveraging pretrained YOLOv8 weights for object detection and tracking.",
+      "A multi-gate vehicle detection and counting system built on YOLOv8 and the Supervision library. The pipeline detects and tracks vehicles frame by frame in a video, assigns each one a persistent track ID, and increments a counter whenever a vehicle crosses one of several predefined virtual gate lines — so traffic can be measured per lane or per direction. Built on pretrained YOLOv8 weights, it reliably tracked and counted cars and buses through every gate, the kind of analytics useful for traffic monitoring and road-usage studies.",
     feats: [
       "Tracks cars & buses through predefined gates",
       "Counts vehicles crossing each gate line",
@@ -142,7 +142,7 @@ const PROJECTS = [
     year: "2024",
     dataset: "Canada Fuel Consumption 2024",
     longDescription:
-      "Predicting fuel consumption using the Canada Fuel Consumption 2024 dataset. The project involved data preprocessing, exploratory data analysis, and a Random Forest Regressor, achieving a remarkable R-squared value of 0.99.",
+      "A regression project predicting vehicle fuel consumption — and the carbon emissions tied to it — using the Canada Fuel Consumption 2024 dataset. After data cleaning, exploratory data analysis, and feature engineering on attributes such as engine size, cylinder count, and fuel type, a Random Forest Regressor was trained to estimate consumption. The model achieved an R-squared of 0.99, meaning it explains almost all of the variance in fuel use and can serve as a quick proxy for estimating a vehicle's environmental footprint.",
     feats: [
       "Canada Fuel Consumption 2024 dataset",
       "Preprocessing + EDA + feature engineering",
@@ -162,7 +162,7 @@ const PROJECTS = [
     featured: false,
     metric: "88% accuracy",
     longDescription:
-      "Classifies garbage images into organic or anorganic categories and deploys the model into a web app using Streamlit.",
+      "A computer-vision web app that classifies waste images into organic and anorganic categories to support recycling and waste sorting. A convolutional neural network was trained in TensorFlow on a labelled garbage dataset, then served through an interactive Streamlit interface where a user can upload a photo and instantly receive a prediction — no installation or technical knowledge required. Packaging the model as a lightweight web app turns a research notebook into something an everyday user can actually try, and the classifier reached 88% accuracy.",
     feats: [
       "CNN classifier: organic vs. anorganic waste",
       "Served as an interactive Streamlit web app",
@@ -185,7 +185,7 @@ const PROJECTS = [
     categories: ["data science"],
     featured: false,
     longDescription:
-      "Utilizing the Golden Section Search method to optimize the parameters of the Double Exponential Smoothing (Holt) model.",
+      "A numerical-optimization study that applies the Golden Section Search method to tune the smoothing parameters of Holt's Double Exponential Smoothing model for time-series forecasting. Rather than relying on a black-box solver, parameter selection is framed as a one-dimensional search that iteratively narrows the interval containing the optimum, minimising forecast error in a transparent, easy-to-follow way. The search-based optimizer reached forecasting accuracy on par with an existing optimization method while staying simple and interpretable — a clean illustration of classical optimization applied to a practical forecasting task.",
     feats: [
       "Golden Section Search for Holt model parameters",
       "Matches existing optimizers' performance",
@@ -303,14 +303,6 @@ function buildCard(p) {
   card.tabIndex = 0;
   card.setAttribute("role", "button");
 
-  const img = document.createElement("img");
-  img.className = "project__thumb";
-  img.src = p.image;
-  img.alt = p.title;
-  img.loading = "lazy";
-  attachFallback(img, p.title, "project__thumb project__thumb--ph");
-  card.appendChild(img);
-
   const top = document.createElement("div");
   top.className = "project__top";
   const tag = document.createElement("span");
@@ -405,11 +397,7 @@ function openModal(p) {
   modalTitle.textContent = p.title;
   modalBody.innerHTML = "";
 
-  const desc = document.createElement("p");
-  desc.className = "modal__desc";
-  desc.textContent = p.longDescription || p.description;
-  modalBody.appendChild(desc);
-
+  // 1) Hero image first
   const hero = document.createElement("img");
   hero.className = "modal__hero";
   hero.src = p.image;
@@ -417,22 +405,19 @@ function openModal(p) {
   attachFallback(hero, p.title, "modal__hero modal__hero--ph");
   modalBody.appendChild(hero);
 
-  if (p.links && p.links.length) {
-    const actions = document.createElement("div");
-    actions.className = "modal__actions";
-    p.links.forEach((link) => {
-      const a = document.createElement("a");
-      a.className = "btn";
-      a.href = link.url;
-      a.target = "_blank";
-      a.rel = "noopener";
-      a.textContent = LINK_LABELS[link.type] || link.type;
-      actions.appendChild(a);
-    });
-    modalBody.appendChild(actions);
-  }
+  // 2) Project Overview
+  const overview = document.createElement("div");
+  overview.className = "modal__block";
+  const ovH = document.createElement("h4");
+  ovH.textContent = "Project Overview";
+  const ovP = document.createElement("p");
+  ovP.className = "modal__desc";
+  ovP.textContent = p.longDescription || p.description;
+  overview.appendChild(ovH);
+  overview.appendChild(ovP);
+  modalBody.appendChild(overview);
 
-  // Richer meta fields (render only what's present)
+  // 3) Meta facts (render only what's present)
   const metaPairs = [
     ["Role", p.role],
     ["Year", p.year || p.timeline],
@@ -456,9 +441,27 @@ function openModal(p) {
     modalBody.appendChild(meta);
   }
 
+  // 4) Action buttons
+  if (p.links && p.links.length) {
+    const actions = document.createElement("div");
+    actions.className = "modal__actions";
+    p.links.forEach((link) => {
+      const a = document.createElement("a");
+      a.className = "btn";
+      a.href = link.url;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = LINK_LABELS[link.type] || link.type;
+      actions.appendChild(a);
+    });
+    modalBody.appendChild(actions);
+  }
+
+  // 5) Detail blocks (omit empty sections)
   [
+    listBlock("Core Features", p.feats),
     listBlock("Challenges", p.challenges),
-    listBlock("Outcomes", p.outcomes),
+    listBlock("Outcomes & Impact", p.outcomes),
     listBlock("Results", p.results),
   ].forEach((b) => b && modalBody.appendChild(b));
 
