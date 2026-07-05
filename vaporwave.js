@@ -1,10 +1,159 @@
 /* ============================================================
    Refined Vaporwave Portfolio — interactions
+   - Particle network background (canvas)
    - Scroll reveal (IntersectionObserver)
    - Project data array + category filtering + featured default
    - Scrollable detail modal with image fallbacks
    - Front-end-only contact form
    ============================================================ */
+
+/* ---------------- Particle network background ---------------- */
+(function () {
+  const canvas = document.getElementById("particleCanvas");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced) return;
+
+  const COLORS = [
+    "rgba(69, 224, 255, OPACITY)",   // cyan
+    "rgba(192, 97, 255, OPACITY)",   // magenta
+    "rgba(255, 93, 158, OPACITY)",   // pink
+  ];
+
+  const CONNECT_DIST = 150;
+  const MAX_LINE_OPACITY = 0.18;
+  const PARTICLE_COUNT = 300;
+
+  let particles = [];
+  let w, h;
+  let animId;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = document.documentElement.scrollHeight;
+  }
+
+  function createParticles() {
+    particles = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 2 + 0.8,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+
+    // Draw connections first (behind particles)
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CONNECT_DIST) {
+          const opacity = (1 - dist / CONNECT_DIST) * MAX_LINE_OPACITY;
+          ctx.strokeStyle = `rgba(180, 170, 255, ${opacity})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw particles
+    for (const p of particles) {
+      ctx.fillStyle = p.color.replace("OPACITY", "0.55");
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function update() {
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Wrap around edges
+      if (p.x < -10) p.x = w + 10;
+      if (p.x > w + 10) p.x = -10;
+      if (p.y < -10) p.y = h + 10;
+      if (p.y > h + 10) p.y = -10;
+    }
+  }
+
+  function loop() {
+    update();
+    draw();
+    animId = requestAnimationFrame(loop);
+  }
+
+  function handleResize() {
+    resize();
+    createParticles();
+  }
+
+  function handleScroll() {
+    const docH = document.documentElement.scrollHeight;
+    if (docH !== h) {
+      h = canvas.height = docH;
+    }
+  }
+
+  resize();
+  createParticles();
+  loop();
+
+  window.addEventListener("resize", handleResize);
+  window.addEventListener("scroll", handleScroll, { passive: true });
+
+  // Cleanup on page unload
+  window.addEventListener("beforeunload", () => {
+    cancelAnimationFrame(animId);
+  });
+})();
+
+/* ---------------- Typewriter loop ---------------- */
+(function () {
+  const TYPING_SPEED = 70;   // ms per character
+  const HOLD_TIME = 2000;    // ms to hold after typing
+  const BLINK_GAP = 400;     // ms cursor hidden before reset
+
+  document.querySelectorAll(".typewriter").forEach((el) => {
+    const fullText = el.textContent;
+    el.textContent = "";
+    el.classList.add("typewriter--blink");
+
+    function typeOut(i) {
+      if (i <= fullText.length) {
+        el.textContent = fullText.slice(0, i);
+        setTimeout(() => typeOut(i + 1), TYPING_SPEED);
+      } else {
+        // Hold, then blink off, reset, restart
+        setTimeout(() => {
+          el.classList.remove("typewriter--blink");
+          setTimeout(() => {
+            el.textContent = "";
+            el.classList.add("typewriter--blink");
+            setTimeout(() => typeOut(0), 200);
+          }, BLINK_GAP);
+        }, HOLD_TIME);
+      }
+    }
+
+    typeOut(0);
+  });
+})();
 
 /* ---------------- Project data (single configurable source) ---------------- */
 const PROJECTS = [
