@@ -130,7 +130,7 @@
   const BLINK_GAP = 400;     // ms cursor hidden before reset
 
   document.querySelectorAll(".typewriter").forEach((el) => {
-    const fullText = el.textContent;
+    const fullText = el.dataset.text || el.textContent;
     el.textContent = "";
     el.classList.add("typewriter--blink");
 
