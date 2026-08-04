@@ -17,9 +17,9 @@
   if (prefersReduced) return;
 
   const COLORS = [
-    "rgba(69, 224, 255, OPACITY)",   // cyan
-    "rgba(192, 97, 255, OPACITY)",   // magenta
-    "rgba(255, 93, 158, OPACITY)",   // pink
+    "rgba(26, 82, 118, OPACITY)",   // cyan
+    "rgba(192, 57, 43, OPACITY)",   // magenta
+    "rgba(212, 172, 13, OPACITY)",   // pink
   ];
 
   const CONNECT_DIST = 150;
@@ -60,7 +60,7 @@
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < CONNECT_DIST) {
           const opacity = (1 - dist / CONNECT_DIST) * MAX_LINE_OPACITY;
-          ctx.strokeStyle = `rgba(180, 170, 255, ${opacity})`;
+          ctx.strokeStyle = `rgba(44, 62, 80, ${opacity})`;
           ctx.lineWidth = 0.5;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
