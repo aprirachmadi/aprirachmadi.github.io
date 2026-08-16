@@ -1,157 +1,73 @@
 /* ============================================================
-   Refined Vaporwave Portfolio — interactions
-   - Particle network background (canvas)
+   Refined Academic Portfolio — interactions
    - Scroll reveal (IntersectionObserver)
+   - Scroll-spy active nav
+   - Hamburger mobile nav
    - Project data array + category filtering + featured default
-   - Scrollable detail modal with image fallbacks
+   - Scrollable detail modal with focus trap
    - Front-end-only contact form
    ============================================================ */
 
-/* ---------------- Particle network background ---------------- */
-(function () {
-  const canvas = document.getElementById("particleCanvas");
-  if (!canvas) return;
-
-  const ctx = canvas.getContext("2d");
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReduced) return;
-
-  const COLORS = [
-    "rgba(26, 82, 118, OPACITY)",   // cyan
-    "rgba(192, 57, 43, OPACITY)",   // magenta
-    "rgba(212, 172, 13, OPACITY)",   // pink
-  ];
-
-  const CONNECT_DIST = 150;
-  const MAX_LINE_OPACITY = 0.18;
-  const PARTICLE_COUNT = 300;
-
-  let particles = [];
-  let w, h;
-  let animId;
-
-  function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = document.documentElement.scrollHeight;
-  }
-
-  function createParticles() {
-    particles = [];
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 2 + 0.8,
-        color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      });
-    }
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, w, h);
-
-    // Draw connections first (behind particles)
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < CONNECT_DIST) {
-          const opacity = (1 - dist / CONNECT_DIST) * MAX_LINE_OPACITY;
-          ctx.strokeStyle = `rgba(44, 62, 80, ${opacity})`;
-          ctx.lineWidth = 0.5;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
-        }
+/* ---------------- Scroll reveal ---------------- */
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in");
+        revealObserver.unobserve(entry.target);
       }
-    }
-
-    // Draw particles
-    for (const p of particles) {
-      ctx.fillStyle = p.color.replace("OPACITY", "0.55");
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
-  function update() {
-    for (const p of particles) {
-      p.x += p.vx;
-      p.y += p.vy;
-
-      // Wrap around edges
-      if (p.x < -10) p.x = w + 10;
-      if (p.x > w + 10) p.x = -10;
-      if (p.y < -10) p.y = h + 10;
-      if (p.y > h + 10) p.y = -10;
-    }
-  }
-
-  function loop() {
-    update();
-    draw();
-    animId = requestAnimationFrame(loop);
-  }
-
-  function handleResize() {
-    resize();
-    createParticles();
-  }
-
-  function handleScroll() {
-    const docH = document.documentElement.scrollHeight;
-    if (docH !== h) {
-      h = canvas.height = docH;
-    }
-  }
-
-  resize();
-  createParticles();
-  loop();
-
-  window.addEventListener("resize", handleResize);
-  window.addEventListener("scroll", handleScroll, { passive: true });
-
-  // Cleanup on page unload
-  window.addEventListener("beforeunload", () => {
-    cancelAnimationFrame(animId);
+    });
+  },
+  { threshold: 0.12 }
+);
+function observeReveals(els) {
+  els.forEach((el, i) => {
+    el.style.transitionDelay = `${Math.min(i % 6, 5) * 60}ms`;
+    revealObserver.observe(el);
   });
+}
+observeReveals(Array.from(document.querySelectorAll(".reveal")));
+
+/* ---------------- Scroll-spy ---------------- */
+(function () {
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".nav__links a");
+  if (!sections.length || !navLinks.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          navLinks.forEach((link) => {
+            link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+          });
+        }
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" }
+  );
+  sections.forEach((section) => observer.observe(section));
 })();
 
-/* ---------------- Typewriter loop ---------------- */
+/* ---------------- Hamburger menu ---------------- */
 (function () {
-  const TYPING_SPEED = 70;   // ms per character
-  const HOLD_TIME = 2000;    // ms to hold after typing
-  const BLINK_GAP = 400;     // ms cursor hidden before reset
+  const burger = document.getElementById("navBurger");
+  const navLinks = document.getElementById("navLinks");
+  if (!burger || !navLinks) return;
 
-  document.querySelectorAll(".typewriter").forEach((el) => {
-    const fullText = el.dataset.text || el.textContent;
-    el.textContent = "";
-    el.classList.add("typewriter--blink");
+  burger.addEventListener("click", () => {
+    const open = navLinks.classList.toggle("open");
+    burger.classList.toggle("open", open);
+    burger.setAttribute("aria-expanded", String(open));
+  });
 
-    function typeOut(i) {
-      if (i <= fullText.length) {
-        el.textContent = fullText.slice(0, i);
-        setTimeout(() => typeOut(i + 1), TYPING_SPEED);
-      } else {
-        // Hold, then blink off, reset, restart
-        setTimeout(() => {
-          el.classList.remove("typewriter--blink");
-          setTimeout(() => {
-            el.textContent = "";
-            el.classList.add("typewriter--blink");
-            setTimeout(() => typeOut(0), 200);
-          }, BLINK_GAP);
-        }, HOLD_TIME);
-      }
-    }
-
-    typeOut(0);
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      burger.classList.remove("open");
+      burger.setAttribute("aria-expanded", "false");
+    });
   });
 })();
 
@@ -361,26 +277,6 @@ const LINK_LABELS = {
   demo: "Live Demo",
 };
 
-/* ---------------- Scroll reveal ---------------- */
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in");
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.12 }
-);
-function observeReveals(els) {
-  els.forEach((el, i) => {
-    el.style.transitionDelay = `${Math.min(i % 6, 5) * 60}ms`;
-    revealObserver.observe(el);
-  });
-}
-observeReveals(Array.from(document.querySelectorAll(".reveal")));
-
 /* ---------------- Image fallback ---------------- */
 function attachFallback(img, title, phClass) {
   img.addEventListener("error", () => {
@@ -451,6 +347,7 @@ function buildCard(p) {
   card.className = "project reveal";
   card.tabIndex = 0;
   card.setAttribute("role", "button");
+  card.setAttribute("aria-label", p.title);
 
   const top = document.createElement("div");
   top.className = "project__top";
@@ -512,12 +409,13 @@ function buildCard(p) {
   return card;
 }
 
-/* ---------------- Detail modal ---------------- */
+/* ---------------- Detail modal with focus trap ---------------- */
 const modal = document.getElementById("projectModal");
 const modalTag = document.getElementById("modalTag");
 const modalTitle = document.getElementById("modalTitle");
 const modalBody = document.getElementById("modalBody");
 const modalClose = document.getElementById("modalClose");
+let previouslyFocused = null;
 
 function clean(arr) {
   return (arr || []).map((s) => (s || "").trim()).filter(Boolean);
@@ -542,11 +440,11 @@ function listBlock(heading, items) {
 }
 
 function openModal(p) {
+  previouslyFocused = document.activeElement;
   modalTag.textContent = p.categories.map((c) => CATEGORY_LABELS[c] || c).join(" · ");
   modalTitle.textContent = p.title;
   modalBody.innerHTML = "";
 
-  // 1) Hero image first
   const hero = document.createElement("img");
   hero.className = "modal__hero";
   hero.src = p.image;
@@ -554,7 +452,6 @@ function openModal(p) {
   attachFallback(hero, p.title, "modal__hero modal__hero--ph");
   modalBody.appendChild(hero);
 
-  // 2) Project Overview
   const overview = document.createElement("div");
   overview.className = "modal__block";
   const ovH = document.createElement("h4");
@@ -566,7 +463,6 @@ function openModal(p) {
   overview.appendChild(ovP);
   modalBody.appendChild(overview);
 
-  // 3) Meta facts (render only what's present)
   const metaPairs = [
     ["Role", p.role],
     ["Year", p.year || p.timeline],
@@ -590,7 +486,6 @@ function openModal(p) {
     modalBody.appendChild(meta);
   }
 
-  // 4) Action buttons
   if (p.links && p.links.length) {
     const actions = document.createElement("div");
     actions.className = "modal__actions";
@@ -606,7 +501,6 @@ function openModal(p) {
     modalBody.appendChild(actions);
   }
 
-  // 5) Detail blocks (omit empty sections)
   [
     listBlock("Core Features", p.feats),
     listBlock("Challenges", p.challenges),
@@ -635,13 +529,32 @@ function openModal(p) {
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
+
+  // Focus trap: move focus to close button
+  modalClose.focus();
 }
 
 function closeModal() {
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
+  if (previouslyFocused) previouslyFocused.focus();
 }
+
+// Focus trap
+modal.addEventListener("keydown", (e) => {
+  if (e.key !== "Tab" || !modal.classList.contains("open")) return;
+  const focusable = modal.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (e.shiftKey) {
+    if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+  } else {
+    if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
 
 modalClose.addEventListener("click", closeModal);
 modal.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", closeModal));
@@ -656,7 +569,7 @@ viewAllBtn.addEventListener("click", () => {
 buildFilters();
 renderProjects();
 
-/* ---------------- Contact form (front-end only) ---------------- */
+/* ---------------- Contact form ---------------- */
 const form = document.getElementById("contactForm");
 const ok = document.getElementById("formOk");
 if (form) {

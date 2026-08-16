@@ -3,48 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Apri Dwi Rachmadi — AI Engineer & Data Scientist</title>
-  <meta name="description" content="AI/ML engineer and Statistics graduate building production machine-learning systems — LLM evaluation, computer vision, NLP, and tabular ML with Python, TensorFlow & PyTorch." />
+  <title>Apri Dwi Rachmadi — AI Engineer & LLM Evaluator</title>
+  <meta name="description" content="AI/ML engineer specializing in LLM evaluation, computer vision, NLP, and production tabular models. Statistics graduate building end-to-end machine-learning systems with Python, TensorFlow & PyTorch." />
   <link rel="icon" type="image/jpeg" href="assets/site-icon.jpg" />
   <link rel="apple-touch-icon" href="assets/site-icon.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:wght@400;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="site.css" />
 </head>
 <body>
-  <!-- PARTICLE NETWORK BACKGROUND -->
-  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <!-- Skip to content -->
+  <a href="#main" class="skip-link">Skip to content</a>
 
-  <!-- NAV -->
-  <header class="nav">
+  <!-- HEADER -->
+  <header class="nav" role="banner">
     <div class="wrap nav__inner">
       <a class="nav__brand" href="#top">apri<b>.</b>rachmadi</a>
-      <nav class="nav__links">
+      <nav class="nav__links" id="navLinks" aria-label="Main navigation">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
         <a href="#awards">Awards</a>
         <a href="#contact">Contact</a>
       </nav>
       <a class="btn nav__cta" href="#contact">Hire me</a>
+      <button class="nav__burger" id="navBurger" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <main id="top">
+  <main id="main">
     <!-- HERO -->
-    <section class="hero">
-      <div class="hero__glow"></div>
-      <div class="hero__sun"></div>
+    <section class="hero" id="top">
       <div class="wrap">
         <div class="hero__inner reveal">
-          <p class="eyebrow typewriter" data-text="AI Engineer · Data Scientist"></p>
+          <p class="hero__identity">AI Engineer &amp; LLM Evaluator</p>
           <h1>Apri Dwi Rachmadi</h1>
           <p class="hero__tag">
-            AI/ML engineer and <b>Statistics graduate</b> who ships machine-learning
-            systems end-to-end — from <b>LLM evaluation</b> and <b>RAG</b> to
-            <b>computer vision</b> and production <b>tabular models</b>, built with
-            Python, TensorFlow &amp; PyTorch.
+            I build machine-learning systems that ship — from <strong>LLM evaluation pipelines</strong> and
+            <strong>RAG architectures</strong> to <strong>computer vision</strong> and production
+            <strong>tabular models</strong>. Statistics foundation, competition-proven, deployed at scale.
           </p>
           <div class="hero__cta">
             <a class="btn btn--primary" href="#projects">View Projects</a>
@@ -54,53 +55,89 @@
         </div>
 
         <div class="stats reveal">
-          <div class="stat"><div class="stat__num grad-text">3.73</div><div class="stat__label">GPA / 4.00</div></div>
-          <div class="stat"><div class="stat__num grad-text">84%</div><div class="stat__label">LLM-judge alignment</div></div>
-          <div class="stat"><div class="stat__num grad-text">8+</div><div class="stat__label">ML projects shipped</div></div>
-          <div class="stat"><div class="stat__num grad-text">3×</div><div class="stat__label">Satria Data finalist</div></div>
+          <div class="stat">
+            <div class="stat__num">84%</div>
+            <div class="stat__label">LLM-judge alignment with human evaluators</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">8+</div>
+            <div class="stat__label">ML systems shipped to production</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">1st</div>
+            <div class="stat__label">Place — Gammafest Data Science 2024</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT / SKILLS -->
+    <!-- ABOUT -->
     <section id="about">
       <div class="wrap">
         <div class="section-head reveal">
           <p class="eyebrow">About</p>
-          <h2>I turn statistics &amp; research into <span class="grad-text">working ML systems.</span></h2>
+          <h2>I turn research into <em>working ML systems.</em></h2>
           <p>
-            A Statistics graduate of Universitas Diponegoro and a Bangkit Machine
-            Learning Distinction graduate. I build models end-to-end — data work,
-            training and fine-tuning, evaluation, and deployment — across LLMs,
-            computer vision, NLP, and tabular data, with a strong analytical
-            foundation honed through years of national data competitions.
+            A Statistics graduate of Universitas Diponegoro and a Bangkit Machine Learning
+            Distinction graduate. I build models end-to-end — data work, training and fine-tuning,
+            evaluation, and deployment — across LLMs, computer vision, NLP, and tabular data.
+            My LLM-as-a-Judge pipeline at GDP Labs reached 84% alignment with human evaluators,
+            and my competition work has placed first nationally in data science challenges.
           </p>
         </div>
+      </div>
+    </section>
 
-        <div class="skills-grid">
-          <div class="skill-cat reveal">
-            <h3>Languages</h3>
-            <div class="chips"><span class="chip">Python</span><span class="chip">R</span><span class="chip">SQL</span></div>
+    <!-- FEATURED WORK -->
+    <section id="featured" class="featured">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Featured</p>
+          <h2>LLM Evaluation Pipeline</h2>
+          <p class="featured__subtitle">Automated benchmarking that matches human judgment</p>
+        </div>
+        <div class="featured__card reveal">
+          <div class="featured__content">
+            <p class="featured__desc">
+              At GDP Labs, I owned the LLM benchmarking codebase — scoring emerging models against
+              proprietary datasets for RAG and agent use cases. The centerpiece: an automated
+              "LLM-as-a-Judge" pipeline that reached <strong>84% alignment with human evaluators</strong>
+              through robust prompt engineering and continuous performance monitoring.
+            </p>
+            <div class="featured__details">
+              <div class="featured__detail">
+                <span class="featured__detail-label">Role</span>
+                <span class="featured__detail-value">AI Engineer / Data Scientist</span>
+              </div>
+              <div class="featured__detail">
+                <span class="featured__detail-label">Company</span>
+                <span class="featured__detail-value">GDP Labs</span>
+              </div>
+              <div class="featured__detail">
+                <span class="featured__detail-label">Impact</span>
+                <span class="featured__detail-value">84% human alignment on RAG &amp; agent evaluation</span>
+              </div>
+            </div>
+            <ul class="featured__feats">
+              <li>Full ownership of LLM evaluation codebase — scalable, reproducible benchmarking workflows</li>
+              <li>Automated "LLM-as-a-Judge" pipeline for complex RAG and Agent use cases</li>
+              <li>Productionized tabular models with drift monitoring and automated retraining</li>
+              <li>Explainable anomaly detection producing human-readable explanations</li>
+            </ul>
           </div>
-          <div class="skill-cat reveal">
-            <h3>ML / Deep Learning</h3>
-            <div class="chips"><span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">PyTorch</span><span class="chip">scikit-learn</span><span class="chip">LightGBM</span></div>
-          </div>
-          <div class="skill-cat reveal">
-            <h3>LLMs &amp; NLP</h3>
-            <div class="chips"><span class="chip">Transformers</span><span class="chip">IndoBERT</span><span class="chip">Llama</span><span class="chip">LangChain</span><span class="chip">RAG</span><span class="chip">ChromaDB</span></div>
-          </div>
-          <div class="skill-cat reveal">
-            <h3>Computer Vision</h3>
-            <div class="chips"><span class="chip">YOLOv8 / YOLO11</span><span class="chip">TrOCR</span><span class="chip">PaddleOCR</span><span class="chip">MobileNet</span><span class="chip">OpenCV</span></div>
-          </div>
-          <div class="skill-cat reveal">
-            <h3>MLOps &amp; Serving</h3>
-            <div class="chips"><span class="chip">FastAPI</span><span class="chip">Flask</span><span class="chip">Streamlit</span><span class="chip">Groq</span></div>
-          </div>
-          <div class="skill-cat reveal">
-            <h3>Data &amp; Analytics</h3>
-            <div class="chips"><span class="chip">pandas</span><span class="chip">NumPy</span><span class="chip">Matplotlib</span><span class="chip">Tableau</span><span class="chip">EDA</span></div>
+          <div class="featured__metrics">
+            <div class="featured__metric">
+              <div class="featured__metric-num">84%</div>
+              <div class="featured__metric-label">Human alignment</div>
+            </div>
+            <div class="featured__metric">
+              <div class="featured__metric-num">3</div>
+              <div class="featured__metric-label">Tabular models in production</div>
+            </div>
+            <div class="featured__metric">
+              <div class="featured__metric-num">12 mo</div>
+              <div class="featured__metric-label">Full-ownership tenure</div>
+            </div>
           </div>
         </div>
       </div>
@@ -111,7 +148,7 @@
       <div class="wrap">
         <div class="section-head reveal">
           <p class="eyebrow">Projects</p>
-          <h2>Selected work, <span class="grad-text">with the receipts.</span></h2>
+          <h2>Selected work, <em>with the receipts.</em></h2>
           <p>Systems I designed, trained, and shipped — with the metrics that matter. Click any card for the full breakdown.</p>
         </div>
 
@@ -123,132 +160,187 @@
       </div>
     </section>
 
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Skills</p>
+          <h2>Domains &amp; tools</h2>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-cat reveal">
+            <h3>LLM Evaluation &amp; RAG</h3>
+            <p class="skill-cat__desc">Benchmarking, judge pipelines, retrieval-augmented generation</p>
+            <div class="chips">
+              <span class="chip">Transformers</span>
+              <span class="chip">LangChain</span>
+              <span class="chip">ChromaDB</span>
+              <span class="chip">Groq</span>
+              <span class="chip">IndoBERT</span>
+              <span class="chip">Llama</span>
+            </div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>Computer Vision</h3>
+            <p class="skill-cat__desc">Object detection, image classification, OCR</p>
+            <div class="chips">
+              <span class="chip">YOLOv8 / YOLO11</span>
+              <span class="chip">TrOCR</span>
+              <span class="chip">PaddleOCR</span>
+              <span class="chip">MobileNet</span>
+              <span class="chip">OpenCV</span>
+            </div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>NLP &amp; Text Analysis</h3>
+            <p class="skill-cat__desc">Sentiment analysis, topic modeling, classification</p>
+            <div class="chips">
+              <span class="chip">IndoBERT</span>
+              <span class="chip">RoBERTa</span>
+              <span class="chip">BERTopic</span>
+              <span class="chip">LDA</span>
+            </div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>Tabular ML &amp; Forecasting</h3>
+            <p class="skill-cat__desc">Demand forecasting, fraud detection, anomaly detection</p>
+            <div class="chips">
+              <span class="chip">LightGBM</span>
+              <span class="chip">scikit-learn</span>
+              <span class="chip">XGBoost</span>
+              <span class="chip">pandas</span>
+            </div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>MLOps &amp; Deployment</h3>
+            <p class="skill-cat__desc">APIs, model serving, drift monitoring, CI/CD</p>
+            <div class="chips">
+              <span class="chip">FastAPI</span>
+              <span class="chip">Flask</span>
+              <span class="chip">Streamlit</span>
+              <span class="chip">TensorFlow Lite</span>
+            </div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>Languages &amp; Foundations</h3>
+            <p class="skill-cat__desc">Programming, statistics, mathematical optimization</p>
+            <div class="chips">
+              <span class="chip">Python</span>
+              <span class="chip">R</span>
+              <span class="chip">SQL</span>
+              <span class="chip">TensorFlow</span>
+              <span class="chip">PyTorch</span>
+              <span class="chip">Keras</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- EXPERIENCE -->
     <section id="experience">
       <div class="wrap">
         <div class="section-head reveal">
           <p class="eyebrow">Experience</p>
-          <h2>Where I've <span class="grad-text">shipped.</span></h2>
+          <h2>Where I've <em>shipped.</em></h2>
         </div>
 
         <div class="timeline">
           <div class="tl-item reveal">
             <div class="tl-item__head">
               <span class="tl-item__role">AI Engineer / Data Scientist</span>
-              <span class="tl-item__co">· GDP Labs</span>
+              <span class="tl-item__co">GDP Labs</span>
               <span class="tl-item__date">Jun 2025 — May 2026</span>
             </div>
-            <p class="tl-item__desc">Owned the LLM benchmarking codebase, scoring emerging models against proprietary datasets. Built an automated "LLM-as-a-Judge" pipeline reaching 84% alignment with human evaluators on RAG &amp; agent use cases, and productionized tabular models (demand forecasting, loan-fraud and anomaly detection) with drift monitoring, automated retraining, and unit testing. I also favor explainable ML — the attendance-based anomaly-detection system doesn't just flag what's anomalous, it produces human-readable explanations of why each case was predicted as an anomaly.</p>
+            <p class="tl-item__desc">Owned the LLM benchmarking codebase, scoring emerging models against proprietary datasets. Built an automated "LLM-as-a-Judge" pipeline reaching 84% alignment with human evaluators on RAG &amp; agent use cases, and productionized tabular models (demand forecasting, loan-fraud and anomaly detection) with drift monitoring, automated retraining, and unit testing.</p>
           </div>
           <div class="tl-item reveal">
             <div class="tl-item__head">
               <span class="tl-item__role">AI Engineer (Intern)</span>
-              <span class="tl-item__co">· PT Salam Pacific Indonesia Lines</span>
+              <span class="tl-item__co">PT Salam Pacific Indonesia Lines</span>
               <span class="tl-item__date">Oct 2024 — Jan 2025</span>
             </div>
-            <p class="tl-item__desc">Built an end-to-end automated cashier system (YOLO11 detection at 82% mAP, MobileNet classification at 99%, zero-shot segmentation for auto-annotation), a Llama + LangChain + ChromaDB RAG audit assistant, a PaddleOCR receipt-processing pipeline, and a collaborative-filtering training recommender — served via a Flask backend.</p>
+            <p class="tl-item__desc">Built an end-to-end automated cashier system (YOLO11 at 82% mAP, MobileNet at 99%), a Llama + LangChain + ChromaDB RAG audit assistant, a PaddleOCR receipt pipeline, and a collaborative-filtering recommender — served via Flask.</p>
           </div>
           <div class="tl-item reveal">
             <div class="tl-item__head">
               <span class="tl-item__role">Data Scientist (Part-time Intern)</span>
-              <span class="tl-item__co">· Braincore</span>
+              <span class="tl-item__co">Braincore</span>
               <span class="tl-item__date">Apr 2024 — Aug 2024</span>
             </div>
-            <p class="tl-item__desc">Part of the Data Science &amp; Analytics division. Built a comprehensive Tableau dashboard for the KRL commuter line, analyzing schedule busyness and the number of operating stations and trains.</p>
+            <p class="tl-item__desc">Built a Tableau dashboard for the KRL commuter line, analyzing schedule busyness and operating stations.</p>
           </div>
           <div class="tl-item reveal">
             <div class="tl-item__head">
               <span class="tl-item__role">Machine Learning Cohort</span>
-              <span class="tl-item__co">· Bangkit Academy (Google, Tokopedia, Gojek &amp; Traveloka)</span>
+              <span class="tl-item__co">Bangkit Academy (Google, Tokopedia, Gojek &amp; Traveloka)</span>
               <span class="tl-item__date">Aug 2023 — Dec 2023</span>
             </div>
-            <p class="tl-item__desc">Graduated with Distinction (score 94.24/100). Studied ML foundations through deep learning and model deployment. Capstone UPCYCLE: a TensorFlow garbage classifier at 91% accuracy, deployed to Android via TensorFlow Lite.</p>
+            <p class="tl-item__desc">Graduated with Distinction (94.24/100). Capstone UPCYCLE: a TensorFlow garbage classifier at 91% accuracy, deployed to Android via TensorFlow Lite.</p>
           </div>
           <div class="tl-item reveal">
             <div class="tl-item__head">
               <span class="tl-item__role">B.Sc. Statistics</span>
-              <span class="tl-item__co">· Universitas Diponegoro</span>
+              <span class="tl-item__co">Universitas Diponegoro</span>
               <span class="tl-item__date">Aug 2021 — Mar 2025</span>
             </div>
-            <p class="tl-item__desc">GPA 3.73/4.00 (147 SKS). Thesis: TrOCR for vehicle license-plate recognition. Teaching assistant for Algorithms &amp; Programming, and a Satria Data finalist three years running (2022–2024).</p>
+            <p class="tl-item__desc">GPA 3.73/4.00. Thesis: TrOCR for vehicle license-plate recognition. Teaching assistant for Algorithms &amp; Programming.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- AWARDS & HONORS -->
+    <!-- AWARDS -->
     <section id="awards">
       <div class="wrap">
         <div class="section-head reveal">
           <p class="eyebrow">Awards &amp; Honors</p>
-          <h2>Tested in <span class="grad-text">national competitions.</span></h2>
-          <p>Data-science and ML competition results across three years, including three consecutive Satria Data finals.</p>
+          <h2>Tested in <em>national competitions.</em></h2>
         </div>
 
-        <div class="timeline">
-          <div class="tl-item reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Satria Data Big Data Challenge 2024</span>
-              <span class="tl-item__co">· BPTI Kemendikbud-Ristek</span>
-              <span class="tl-item__date">2024</span>
+        <div class="awards-wins reveal">
+          <div class="award-win">
+            <span class="award-win__badge">1st Place</span>
+            <div class="award-win__content">
+              <h3>Gammafest Data Science Competition 2024</h3>
+              <p class="award-win__org">Gamma Sigma Beta, IPB University</p>
+              <p>YOLOv8 detection (99.5% mAP) + EfficientNetV2B0 classification (99.84% F1) to count votes on SIREKAP forms.</p>
             </div>
-            <span class="tl-item__place tl-item__place--gold">Best Metrics Performance</span>
-            <p class="tl-item__desc">LightGBM topic classification on political tweets in the preliminary round; in the finals, LDA topic modeling and RoBERTa sentiment analysis on discussion around the 2024 presidential election.</p>
           </div>
-          <div class="tl-item reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Gammafest Data Science Competition</span>
-              <span class="tl-item__co">· Gamma Sigma Beta, IPB University</span>
-              <span class="tl-item__date">2024</span>
+          <div class="award-win">
+            <span class="award-win__badge award-win__badge--alt">Best Metrics</span>
+            <div class="award-win__content">
+              <h3>Satria Data Big Data Challenge 2024</h3>
+              <p class="award-win__org">BPTI Kemendikbud-Ristek</p>
+              <p>LightGBM topic classification + RoBERTa sentiment analysis on 2024 presidential election discourse.</p>
             </div>
-            <span class="tl-item__place tl-item__place--gold">1st Place</span>
-            <p class="tl-item__desc">A YOLOv8 detection model (99.5% mAP) plus EfficientNetV2B0 number classification (99.84% F1) to automatically count votes on SIREKAP forms.</p>
           </div>
-          <div class="tl-item reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Logika UI Statistics Team Competition</span>
-              <span class="tl-item__co">· HM Departemen Matematika, Universitas Indonesia</span>
-              <span class="tl-item__date">2024</span>
-            </div>
-            <span class="tl-item__place">Semifinalist</span>
-            <p class="tl-item__desc">Data preprocessing, multi-table joins, feature engineering, and EDA to build an ML model for credit-scoring classification.</p>
-          </div>
-          <div class="tl-item reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Pekan Raya Statistika (PRS) ASEAN Data Analysis</span>
-              <span class="tl-item__co">· HM Statistika, ITS</span>
-              <span class="tl-item__date">2023</span>
-            </div>
-            <span class="tl-item__place">Top 15 · Semifinalist</span>
-            <p class="tl-item__desc">Preprocessing, visualization, and a LightGBM classifier predicting network-attack type, reaching a 99.58% F1-score.</p>
-          </div>
-          <div class="tl-item reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Satria Data Big Data Challenge 2023</span>
-              <span class="tl-item__co">· BPTI Kemendikbud-Ristek</span>
-              <span class="tl-item__date">2023</span>
-            </div>
-            <span class="tl-item__place">Finalist</span>
-            <p class="tl-item__desc">A TrOCR model for licence-plate recognition in the preliminary round; in the finals, a Siamese BERT to detect disharmony in capital &amp; taxation laws.</p>
-          </div>
-          <div class="tl-item reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Joints Data Mining Competition</span>
-              <span class="tl-item__co">· HIMAKOM, UGM</span>
-              <span class="tl-item__date">2023</span>
-            </div>
-            <span class="tl-item__place">Finalist</span>
-            <p class="tl-item__desc">Damage-grade classification for earthquakes and image classification for early fire detection using deep learning.</p>
-          </div>
-          <div class="tl-item reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Satria Data Big Data Challenge 2022</span>
-              <span class="tl-item__co">· BPTI Kemendikbud-Ristek</span>
-              <span class="tl-item__date">2022</span>
-            </div>
-            <span class="tl-item__place">Finalist</span>
-            <p class="tl-item__desc">Analysis of patient-return status for BPJS Health participants and public-opinion analysis of BPJS services on Twitter using IndoBERT and BERTopic.</p>
-          </div>
+        </div>
+
+        <div class="awards-additional reveal">
+          <h3>Additional Recognition</h3>
+          <ul>
+            <li>
+              <strong>Logika UI Statistics Team Competition 2024</strong> — Semifinalist
+              <span class="awards-additional__org">Universitas Indonesia</span>
+            </li>
+            <li>
+              <strong>PRS ASEAN Data Analysis 2023</strong> — Top 15, Semifinalist
+              <span class="awards-additional__org">ITS</span>
+            </li>
+            <li>
+              <strong>Satria Data Big Data Challenge 2023</strong> — Finalist
+              <span class="awards-additional__org">BPTI Kemendikbud-Ristek</span>
+            </li>
+            <li>
+              <strong>Joints Data Mining Competition 2023</strong> — Finalist
+              <span class="awards-additional__org">HIMAKOM, UGM</span>
+            </li>
+            <li>
+              <strong>Satria Data Big Data Challenge 2022</strong> — Finalist
+              <span class="awards-additional__org">BPTI Kemendikbud-Ristek</span>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
@@ -260,16 +352,15 @@
           <p class="eyebrow">Contact</p>
           <h2>Let's build intelligent systems together.</h2>
           <p>Open to AI / ML Engineer and Data Scientist roles. The fastest way to reach me is email.</p>
-          <a class="mail" href="mailto:rachmadiapri@gmail.com">rachmadiapri@gmail.com</a>
+          <a class="contact-email" href="mailto:rachmadiapri@gmail.com">rachmadiapri@gmail.com</a>
           <div class="socials">
             <a href="https://github.com/aprirachmadi" target="_blank" rel="noopener">GitHub</a>
             <a href="https://huggingface.co/rachmadiapri" target="_blank" rel="noopener">Hugging Face</a>
             <a href="https://www.linkedin.com/in/apri-dwi-rachmadi-3b1a141ba/" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="mailto:rachmadiapri@gmail.com">Email</a>
           </div>
         </div>
 
-        <form class="form reveal" id="contactForm" novalidate>
+        <form class="form reveal" id="contactForm" action="https://formspree.io/f/xpznkgab" method="POST" novalidate>
           <div class="field">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" placeholder="Jane Doe" required />
@@ -283,7 +374,7 @@
             <textarea id="message" name="message" placeholder="Tell me about the role or project..." required></textarea>
           </div>
           <button class="btn btn--primary form__btn" type="submit">Send message</button>
-          <p class="form__ok" id="formOk">Thanks — message captured. I'll get back to you shortly. (This demo form has no backend yet.)</p>
+          <p class="form__ok" id="formOk">Thanks — I'll get back to you shortly.</p>
         </form>
       </div>
     </section>
@@ -291,8 +382,8 @@
 
   <footer class="footer">
     <div class="wrap footer__inner">
-      <span>© 2026 Apri Dwi Rachmadi</span>
-      <span>Designed &amp; built with retro-futurist intent.</span>
+      <span>&copy; 2026 Apri Dwi Rachmadi</span>
+      <span>Built with care.</span>
     </div>
   </footer>
 
