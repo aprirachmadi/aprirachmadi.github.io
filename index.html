@@ -11,6 +11,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="site.css" />
+  <noscript>
+    <style>
+      .reveal { opacity: 1; transform: none; transition: none; }
+    </style>
+  </noscript>
 </head>
 <body>
   <!-- PARTICLE NETWORK BACKGROUND -->
@@ -21,10 +26,10 @@
     <div class="wrap nav__inner">
       <a class="nav__brand" href="#top">apri<b>.</b>rachmadi</a>
       <nav class="nav__links">
-        <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
         <a href="#awards">Awards</a>
+        <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
       <a class="btn nav__cta" href="#contact">Hire me</a>
@@ -41,14 +46,12 @@
           <p class="eyebrow typewriter" data-text="AI Engineer · Data Scientist"></p>
           <h1>Apri Dwi Rachmadi</h1>
           <p class="hero__tag">
-            AI/ML engineer and <b>Statistics graduate</b> who ships machine-learning
-            systems end-to-end — from <b>LLM evaluation</b> and <b>RAG</b> to
-            <b>computer vision</b> and production <b>tabular models</b>, built with
-            Python, TensorFlow &amp; PyTorch.
+            AI/ML engineer and <b>Statistics graduate</b> who ships ML systems
+            end-to-end — from <b>LLM evaluation</b> and <b>RAG</b> to
+            <b>computer vision</b> and production <b>tabular models</b>.
           </p>
           <div class="hero__cta">
             <a class="btn btn--primary" href="#projects">View Projects</a>
-            <a class="btn" href="#contact">Get in touch</a>
             <a class="btn" href="assets/cv.html" target="_blank" rel="noopener">Download CV</a>
           </div>
         </div>
@@ -62,61 +65,29 @@
       </div>
     </section>
 
-    <!-- ABOUT / SKILLS -->
-    <section id="about">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <p class="eyebrow">About</p>
-          <h2>I turn statistics &amp; research into <span class="grad-text">working ML systems.</span></h2>
-          <p>
-            A Statistics graduate of Universitas Diponegoro and a Bangkit Machine
-            Learning Distinction graduate. I build models end-to-end — data work,
-            training and fine-tuning, evaluation, and deployment — across LLMs,
-            computer vision, NLP, and tabular data, with a strong analytical
-            foundation honed through years of national data competitions.
-          </p>
-        </div>
-
-        <div class="skills-grid">
-          <div class="skill-cat reveal">
-            <h3>Languages</h3>
-            <div class="chips"><span class="chip">Python</span><span class="chip">R</span><span class="chip">SQL</span></div>
-          </div>
-          <div class="skill-cat reveal">
-            <h3>ML / Deep Learning</h3>
-            <div class="chips"><span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">PyTorch</span><span class="chip">scikit-learn</span><span class="chip">LightGBM</span></div>
-          </div>
-          <div class="skill-cat reveal">
-            <h3>LLMs &amp; NLP</h3>
-            <div class="chips"><span class="chip">Transformers</span><span class="chip">IndoBERT</span><span class="chip">Llama</span><span class="chip">LangChain</span><span class="chip">RAG</span><span class="chip">ChromaDB</span></div>
-          </div>
-          <div class="skill-cat reveal">
-            <h3>Computer Vision</h3>
-            <div class="chips"><span class="chip">YOLOv8 / YOLO11</span><span class="chip">TrOCR</span><span class="chip">PaddleOCR</span><span class="chip">MobileNet</span><span class="chip">OpenCV</span></div>
-          </div>
-          <div class="skill-cat reveal">
-            <h3>MLOps &amp; Serving</h3>
-            <div class="chips"><span class="chip">FastAPI</span><span class="chip">Flask</span><span class="chip">Streamlit</span><span class="chip">Groq</span></div>
-          </div>
-          <div class="skill-cat reveal">
-            <h3>Data &amp; Analytics</h3>
-            <div class="chips"><span class="chip">pandas</span><span class="chip">NumPy</span><span class="chip">Matplotlib</span><span class="chip">Tableau</span><span class="chip">EDA</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- PROJECTS -->
     <section id="projects">
       <div class="wrap">
         <div class="section-head reveal">
           <p class="eyebrow">Projects</p>
           <h2>Selected work, <span class="grad-text">with the receipts.</span></h2>
-          <p>Systems I designed, trained, and shipped — with the metrics that matter. Click any card for the full breakdown.</p>
+          <p>Click any card for the full breakdown.</p>
         </div>
 
         <div class="proj-filters reveal" id="projectFilters"></div>
-        <div class="projects" id="projectGrid"></div>
+        <div class="projects" id="projectGrid">
+          <noscript>
+            <div class="projects-noscript">
+              <p><strong>JavaScript is off</strong> — here are the featured projects instead of the interactive grid:</p>
+              <ul>
+                <li><strong>Vote Detection on SIREKAP Forms</strong> — YOLOv8 + TrOCR · 0.8% CER · <a href="https://github.com/aprirachmadi/sirekap-ocr" rel="noopener">GitHub</a> · <a href="https://sirekap-ocr-pemilu2024.streamlit.app/" rel="noopener">Live demo</a></li>
+                <li><strong>Indonesian Political Hoax Detection</strong> — IndoBERT · 99% accuracy · <a href="https://github.com/aprirachmadi/Indonesian-Political-News-Hoax" rel="noopener">GitHub</a></li>
+                <li><strong>Fire &amp; Smoke Classification</strong> — Vision Transformer · 90% accuracy · <a href="https://github.com/aprirachmadi" rel="noopener">GitHub</a></li>
+                <li><strong>Network Intrusion Detection (NIDS)</strong> — LightGBM · 88.6% F1-macro</li>
+              </ul>
+            </div>
+          </noscript>
+        </div>
         <div class="view-all-wrap">
           <button class="btn" id="viewAllBtn" type="button">View all projects</button>
         </div>
@@ -185,8 +156,8 @@
           <p>Data-science and ML competition results across three years, including three consecutive Satria Data finals.</p>
         </div>
 
-        <div class="timeline">
-          <div class="tl-item reveal">
+        <div class="timeline timeline--compact">
+          <div class="tl-item tl-item--featured reveal">
             <div class="tl-item__head">
               <span class="tl-item__role">Satria Data Big Data Challenge 2024</span>
               <span class="tl-item__co">· BPTI Kemendikbud-Ristek</span>
@@ -195,7 +166,7 @@
             <span class="tl-item__place tl-item__place--gold">Best Metrics Performance</span>
             <p class="tl-item__desc">LightGBM topic classification on political tweets in the preliminary round; in the finals, LDA topic modeling and RoBERTa sentiment analysis on discussion around the 2024 presidential election.</p>
           </div>
-          <div class="tl-item reveal">
+          <div class="tl-item tl-item--featured reveal">
             <div class="tl-item__head">
               <span class="tl-item__role">Gammafest Data Science Competition</span>
               <span class="tl-item__co">· Gamma Sigma Beta, IPB University</span>
@@ -253,6 +224,49 @@
       </div>
     </section>
 
+    <!-- ABOUT / SKILLS -->
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">About</p>
+          <h2>I turn statistics &amp; research into <span class="grad-text">working ML systems.</span></h2>
+          <p>
+            Statistics graduate of Universitas Diponegoro and a Bangkit Machine
+            Learning Distinction graduate — I build models end-to-end across
+            LLMs, computer vision, NLP, and tabular data, with a strong
+            analytical foundation honed through national data competitions.
+          </p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-cat reveal">
+            <h3>Languages</h3>
+            <div class="chips"><span class="chip">Python</span><span class="chip">R</span><span class="chip">SQL</span></div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>ML / Deep Learning</h3>
+            <div class="chips"><span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">PyTorch</span><span class="chip">scikit-learn</span><span class="chip">LightGBM</span></div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>LLMs &amp; NLP</h3>
+            <div class="chips"><span class="chip">Transformers</span><span class="chip">IndoBERT</span><span class="chip">Llama</span><span class="chip">LangChain</span><span class="chip">RAG</span><span class="chip">ChromaDB</span></div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>Computer Vision</h3>
+            <div class="chips"><span class="chip">YOLOv8 / YOLO11</span><span class="chip">TrOCR</span><span class="chip">PaddleOCR</span><span class="chip">MobileNet</span><span class="chip">OpenCV</span></div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>MLOps &amp; Serving</h3>
+            <div class="chips"><span class="chip">FastAPI</span><span class="chip">Flask</span><span class="chip">Streamlit</span><span class="chip">Groq</span></div>
+          </div>
+          <div class="skill-cat reveal">
+            <h3>Data &amp; Analytics</h3>
+            <div class="chips"><span class="chip">pandas</span><span class="chip">NumPy</span><span class="chip">Matplotlib</span><span class="chip">Tableau</span><span class="chip">EDA</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- CONTACT -->
     <section id="contact">
       <div class="wrap contact-grid">
@@ -269,7 +283,7 @@
           </div>
         </div>
 
-        <form class="form reveal" id="contactForm" novalidate>
+        <form class="form reveal" id="contactForm" action="https://formspree.io/f/xpznkgab" method="POST">
           <div class="field">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" placeholder="Jane Doe" required />
@@ -283,7 +297,7 @@
             <textarea id="message" name="message" placeholder="Tell me about the role or project..." required></textarea>
           </div>
           <button class="btn btn--primary form__btn" type="submit">Send message</button>
-          <p class="form__ok" id="formOk">Thanks — message captured. I'll get back to you shortly. (This demo form has no backend yet.)</p>
+          <p class="form__ok" id="formOk" role="status" aria-live="polite">Thanks — your message is on its way. I'll get back to you shortly.</p>
         </form>
       </div>
     </section>
