@@ -3,8 +3,8 @@
    - Particle network background (canvas)
    - Scroll reveal (IntersectionObserver)
    - Project data array + category filtering + featured default
-   - Scrollable detail modal with image fallbacks
-   - Front-end-only contact form
+   - Expandable project detail cards with image fallbacks
+   - Formspree contact form
    ============================================================ */
 
 /* ---------------- Particle network background ---------------- */
@@ -158,6 +158,91 @@
 /* ---------------- Project data (single configurable source) ---------------- */
 const PROJECTS = [
   {
+    id: "geo-lens",
+    title: "Geo-Lens",
+    description: "Full-resolution satellite change detection with a Siamese U-Net",
+    sub: "Geospatial computer vision and deployable inference",
+    tech: ["Python", "PyTorch", "CUDA", "FastAPI", "Next.js"],
+    image: "assets/project/geo-lens.svg",
+    categories: ["computer vision"],
+    featured: true,
+    metric: "1024 × 1024 change masks",
+    year: "2026",
+    methods: "Siamese U-Net, PyTorch, deterministic geographic validation",
+    longDescription: "Geo-Lens compares earlier and later satellite observations and produces a pixel-aligned binary mask showing where construction or land-cover change occurred. It operates at the source 1024 × 1024 resolution. The repository includes dataset-contract validation, configurable training, untouched-test evaluation, prediction export, an inference API, a frontend, tests, and deployment documentation.",
+    feats: ["Compares paired A/B satellite observations", "Produces full-resolution binary change masks", "Includes reproducible train, evaluate, predict, and serve workflows"],
+    outcomes: ["1024 × 1024 output masks", "Public demo and sample prediction gallery", "Tests covering the data contract and pipeline components"],
+    links: [{ type: "github", url: "https://github.com/aprirachmadi/geo-lens" }, { type: "demo", url: "https://geo-lens-urban.rachmadiapri.workers.dev/" }],
+  },
+  {
+    id: "ingfo-loker",
+    title: "Ingfo-Loker",
+    description: "AI job discovery, ranking, and proposal drafting on autopilot",
+    sub: "Verified search agent with human-controlled delivery",
+    tech: ["Python", "Pydantic", "FastAPI", "Telegram", "GitHub Actions", "SQLite"],
+    image: "assets/project/ingfo-loker.svg",
+    categories: ["data science"],
+    featured: true,
+    metric: "Twice-daily automated digests",
+    year: "2026",
+    methods: "Search agent, deterministic verification, LLM ranking, evidence-backed proposal drafting",
+    longDescription: "Ingfo-Loker searches the open web for relevant AI/ML opportunities based on a configurable brief. It verifies job pages, removes duplicates, filters for remote roles, ranks new opportunities with an LLM, and drafts tailored proposals using matching GitHub repositories as evidence. Telegram delivery and persistent history keep final submission human-controlled.",
+    feats: ["Fetch ladder with stale-listing checks", "Deterministic remote filtering and deduplication", "Scheduled automation with graceful degradation"],
+    outcomes: ["Complete search-to-digest pipeline with dashboard persistence", "Twice-daily scheduled automation", "Human-in-the-loop proposal workflow"],
+    links: [{ type: "github", url: "https://github.com/aprirachmadi/ingfo-loker" }],
+  },
+  {
+    id: "ai-finance-document-reviewer",
+    title: "AI Finance Document Reviewer",
+    description: "Evidence-first review recommendations for finance documents",
+    sub: "OCR, deterministic rules, and guarded LLM review",
+    tech: ["Python", "RapidOCR", "Pydantic", "pytest", "mypy"],
+    image: "assets/project/ai-finance-document-reviewer.svg",
+    categories: ["data science"],
+    featured: true,
+    metric: "13 deterministic validation rules",
+    year: "2026",
+    methods: "PDF/OCR extraction, structured parsing, rule validation, optional guarded LLM review",
+    longDescription: "AI Finance Document Reviewer processes invoices, receipts, purchase orders, and contracts from PDFs. It chooses native extraction or OCR, parses fields into structured Pydantic models, and runs configurable checks against reference data. Findings include severity, confidence, a human-readable reason, and source evidence; final approval remains with a human reviewer.",
+    feats: ["Processes nested digital and scanned PDFs", "Runs 13 arithmetic, identity, currency, PO, and contract rules", "Writes JSON review artifacts and audit logs"],
+    outcomes: ["Complete local CLI workflow from PDF directory to review artifacts", "Explainable findings with evidence, severity, and confidence", "Unit and integration tests included"],
+    links: [{ type: "github", url: "https://github.com/aprirachmadi/ai-finance-document-reviewer" }],
+  },
+  {
+    id: "recall-learning",
+    title: "Recall",
+    description: "Lecture recordings turned into searchable study material",
+    sub: "Grounded transcription, notes, concepts, and adaptive quizzes",
+    tech: ["TypeScript", "Next.js", "Prisma", "SQLite", "NextAuth", "Vitest"],
+    image: "assets/project/recall-learning.svg",
+    categories: ["nlp"],
+    featured: false,
+    metric: "6 swappable STT providers",
+    year: "2026",
+    methods: "Provider-agnostic speech-to-text plus transcript-grounded LLM analysis",
+    longDescription: "Recall turns an uploaded lecture recording into a searchable transcript, summary, structured study notes, key concepts, and a multiple-choice quiz. Private workspaces isolate each user's courses, lectures, quiz results, and processing state. Generated material is derived from the transcript, and quiz difficulty adapts to learner answers.",
+    feats: ["Authenticated private workspaces", "Six interchangeable speech-to-text providers", "Transcript-grounded summaries and adaptive quizzes"],
+    outcomes: ["Complete v1 upload-to-study workflow", "Study artifacts and results persisted through Prisma", "Tests, linting, type checking, and production build documented"],
+    links: [{ type: "github", url: "https://github.com/aprirachmadi/recall-learning" }],
+  },
+  {
+    id: "satellite-precipitation-nowcasting",
+    title: "Satellite Imagery Precipitation Nowcasting",
+    description: "Precipitation estimates from geostationary satellite imagery",
+    sub: "Satellite-only nowcasting with geographic validation",
+    tech: ["Python", "PyTorch", "CUDA", "rasterio", "scikit-learn"],
+    image: "assets/project/satellite-precipitation-nowcasting.svg",
+    categories: ["data science"],
+    featured: false,
+    metric: "41 × 41 precipitation grid",
+    year: "2026",
+    methods: "Scratch compact U-Net, log-target modeling, GroupKFold, isotonic calibration",
+    longDescription: "This project predicts a 41 × 41 precipitation grid from up to three recent geostationary satellite observations. It uses physically motivated infrared and water-vapor features, a scratch-built compact U-Net, log-target modeling, and competition-aligned RMSE evaluation. Geographic holdout and train-only normalization keep validation leakage-aware.",
+    feats: ["Maps three satellite families to shared channels", "Supports geographic holdout and GroupKFold validation", "Produces calibrated GeoTIFF submission archives"],
+    outcomes: ["Complete train, evaluate, predict, calibrate, and package workflow", "Competition-shaped 41 × 41 float32 GeoTIFF outputs", "Leakage-aware validation and train-only normalization"],
+    links: [{ type: "github", url: "https://github.com/aprirachmadi/satellite-imagery-precipitation-nowcasting" }],
+  },
+  {
     id: "sirekap-ocr",
     title: "Vote Detection on SIREKAP Forms",
     description: "YOLOv8 + TrOCR pipeline reading 2024 election tally forms",
@@ -165,7 +250,7 @@ const PROJECTS = [
     tech: ["Python", "YOLOv8", "PyTorch", "TrOCR", "Transformers"],
     image: "assets/project/sirekap.png",
     categories: ["computer vision"],
-    featured: true,
+    featured: false,
     metric: "0.8% CER",
     year: "2024",
     methods: "YOLOv8 detection + TrOCR recognition",
@@ -194,7 +279,7 @@ const PROJECTS = [
     tech: ["Python", "PyTorch", "Transformers", "IndoBERT"],
     image: "assets/project/hoax.png",
     categories: ["nlp"],
-    featured: true,
+    featured: false,
     metric: "99% accuracy",
     year: "2023",
     methods: "Fine-tuned IndoBERT (BERT for Indonesian)",
@@ -218,7 +303,7 @@ const PROJECTS = [
     tech: ["Python", "Hugging Face", "PyTorch", "cv2"],
     image: "assets/project/fire-smoke.jpg",
     categories: ["computer vision"],
-    featured: true,
+    featured: false,
     metric: "90% accuracy",
     methods: "Vision Transformer (ViT)",
     longDescription:
@@ -240,7 +325,7 @@ const PROJECTS = [
     tech: ["Python", "scikit-learn", "LightGBM", "pandas", "Matplotlib"],
     image: "assets/project/nids.png",
     categories: ["data science"],
-    featured: true,
+    featured: false,
     metric: "88.6% F1-macro",
     year: "2023",
     dataset: "CIC-IDS 2017",
@@ -309,6 +394,7 @@ const PROJECTS = [
     image: "assets/project/garbage.jpg",
     categories: ["computer vision"],
     featured: false,
+    year: "2025",
     metric: "88% accuracy",
     longDescription:
       "A computer-vision web app that classifies waste images into organic and anorganic categories to support recycling and waste sorting. A convolutional neural network was trained in TensorFlow on a labelled garbage dataset, then served through an interactive Streamlit interface where a user can upload a photo and instantly receive a prediction — no installation or technical knowledge required. Packaging the model as a lightweight web app turns a research notebook into something an everyday user can actually try, and the classifier reached 88% accuracy.",
@@ -333,6 +419,7 @@ const PROJECTS = [
     image: "assets/project/golden-section.png",
     categories: ["data science"],
     featured: false,
+    year: "2025",
     longDescription:
       "A numerical-optimization study that applies the Golden Section Search method to tune the smoothing parameters of Holt's Double Exponential Smoothing model for time-series forecasting. Rather than relying on a black-box solver, parameter selection is framed as a one-dimensional search that iteratively narrows the interval containing the optimum, minimising forecast error in a transparent, easy-to-follow way. The search-based optimizer reached forecasting accuracy on par with an existing optimization method while staying simple and interpretable — a clean illustration of classical optimization applied to a practical forecasting task.",
     feats: [
@@ -471,8 +558,6 @@ function renderProjects() {
 function buildCard(p) {
   const card = document.createElement("article");
   card.className = "project reveal";
-  card.tabIndex = 0;
-  card.setAttribute("role", "button");
 
   const top = document.createElement("div");
   top.className = "project__top";
@@ -480,6 +565,12 @@ function buildCard(p) {
   tag.className = "project__tag";
   tag.textContent = CATEGORY_LABELS[p.categories[0]] || p.categories[0];
   top.appendChild(tag);
+  if (p.year) {
+    const year = document.createElement("span");
+    year.className = "project__year";
+    year.textContent = p.year;
+    top.appendChild(year);
+  }
   if (p.metric) {
     const metric = document.createElement("span");
     metric.className = "project__metric";
@@ -489,7 +580,22 @@ function buildCard(p) {
   card.appendChild(top);
 
   const h3 = document.createElement("h3");
-  h3.textContent = p.title;
+  h3.className = "project__title";
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "project__toggle";
+  toggle.id = "pt-" + p.id;
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.setAttribute("aria-controls", "pd-" + p.id);
+  const titleText = document.createElement("span");
+  titleText.className = "project__title-text";
+  titleText.textContent = p.title;
+  toggle.appendChild(titleText);
+  toggle.insertAdjacentHTML(
+    "beforeend",
+    '<svg class="project__chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.5 8 10.5 13 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+  );
+  h3.appendChild(toggle);
   card.appendChild(h3);
 
   if (p.sub) {
@@ -524,23 +630,113 @@ function buildCard(p) {
   });
   card.appendChild(techWrap);
 
-  card.addEventListener("click", () => openModal(p));
-  card.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      openModal(p);
+  card.appendChild(buildDetail(p, toggle.id));
+
+  toggle.addEventListener("click", () => {
+    const opening = !card.classList.contains("open");
+    if (opening) {
+      document.querySelectorAll(".project.open").forEach((c) => {
+        if (c !== card) setOpen(c, false);
+      });
     }
+    setOpen(card, opening);
+  });
+  card.addEventListener("click", (e) => {
+    if (e.target.closest("a, button")) return;
+    if (window.getSelection().toString()) return;
+    toggle.click();
   });
   return card;
 }
 
-/* ---------------- Detail modal ---------------- */
-const modal = document.getElementById("projectModal");
-const modalTag = document.getElementById("modalTag");
-const modalTitle = document.getElementById("modalTitle");
-const modalBody = document.getElementById("modalBody");
-const modalClose = document.getElementById("modalClose");
+function setOpen(card, open) {
+  card.classList.toggle("open", open);
+  card.querySelector(".project__toggle").setAttribute("aria-expanded", String(open));
+  card.querySelector(".project__detail").inert = !open;
+}
 
+function buildDetail(p, labelledBy) {
+  const detail = document.createElement("div");
+  detail.className = "project__detail";
+  detail.id = "pd-" + p.id;
+  detail.setAttribute("role", "region");
+  detail.setAttribute("aria-labelledby", labelledBy);
+  detail.inert = true;
+
+  const clip = document.createElement("div");
+  clip.className = "project__detail-clip";
+  const grid = document.createElement("div");
+  grid.className = "project__detail-grid";
+
+  const main = document.createElement("div");
+  if (p.image) {
+    const img = document.createElement("img");
+    img.className = "project__img";
+    img.src = p.image;
+    img.alt = p.title;
+    img.loading = "lazy";
+    attachFallback(img, p.title, "project__img project__img--ph");
+    main.appendChild(img);
+  }
+  const ovH = document.createElement("h4");
+  ovH.textContent = "Project Overview";
+  main.appendChild(ovH);
+  const ovP = document.createElement("p");
+  ovP.className = "project__detail-desc";
+  ovP.textContent = p.longDescription || p.description;
+  main.appendChild(ovP);
+
+  const metaPairs = [
+    ["Role", p.role],
+    ["Team", p.team],
+    ["Dataset", p.dataset],
+    ["Methods", p.methods],
+  ].filter(([, v]) => v);
+  if (metaPairs.length) {
+    const meta = document.createElement("dl");
+    meta.className = "project__meta";
+    metaPairs.forEach(([k, v]) => {
+      const div = document.createElement("div");
+      const dt = document.createElement("dt");
+      dt.textContent = k;
+      const dd = document.createElement("dd");
+      dd.textContent = v;
+      div.appendChild(dt);
+      div.appendChild(dd);
+      meta.appendChild(div);
+    });
+    main.appendChild(meta);
+  }
+  grid.appendChild(main);
+
+  const side = document.createElement("div");
+  if (p.links && p.links.length) {
+    const actions = document.createElement("div");
+    actions.className = "project__actions";
+    p.links.forEach((link) => {
+      const a = document.createElement("a");
+      a.className = "btn";
+      a.href = link.url;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = LINK_LABELS[link.type] || link.type;
+      actions.appendChild(a);
+    });
+    side.appendChild(actions);
+  }
+  [
+    listBlock("Outcomes & Impact", p.outcomes),
+    listBlock("Challenges", p.challenges),
+    listBlock("Results", p.results),
+  ].forEach((b) => b && side.appendChild(b));
+  grid.appendChild(side);
+
+  clip.appendChild(grid);
+  detail.appendChild(clip);
+  return detail;
+}
+
+/* ---------------- Detail content helpers ---------------- */
 function clean(arr) {
   return (arr || []).map((s) => (s || "").trim()).filter(Boolean);
 }
@@ -549,7 +745,7 @@ function listBlock(heading, items) {
   const cleaned = clean(items);
   if (!cleaned.length) return null;
   const block = document.createElement("div");
-  block.className = "modal__block";
+  block.className = "project__block";
   const h4 = document.createElement("h4");
   h4.textContent = heading;
   block.appendChild(h4);
@@ -563,114 +759,6 @@ function listBlock(heading, items) {
   return block;
 }
 
-function openModal(p) {
-  modalTag.textContent = p.categories.map((c) => CATEGORY_LABELS[c] || c).join(" · ");
-  modalTitle.textContent = p.title;
-  modalBody.innerHTML = "";
-
-  // 1) Hero image first
-  const hero = document.createElement("img");
-  hero.className = "modal__hero";
-  hero.src = p.image;
-  hero.alt = p.title;
-  attachFallback(hero, p.title, "modal__hero modal__hero--ph");
-  modalBody.appendChild(hero);
-
-  // 2) Project Overview
-  const overview = document.createElement("div");
-  overview.className = "modal__block";
-  const ovH = document.createElement("h4");
-  ovH.textContent = "Project Overview";
-  const ovP = document.createElement("p");
-  ovP.className = "modal__desc";
-  ovP.textContent = p.longDescription || p.description;
-  overview.appendChild(ovH);
-  overview.appendChild(ovP);
-  modalBody.appendChild(overview);
-
-  // 3) Meta facts (render only what's present)
-  const metaPairs = [
-    ["Role", p.role],
-    ["Year", p.year || p.timeline],
-    ["Team", p.team],
-    ["Dataset", p.dataset],
-    ["Methods", p.methods],
-  ].filter(([, v]) => v);
-  if (metaPairs.length) {
-    const meta = document.createElement("dl");
-    meta.className = "modal__meta";
-    metaPairs.forEach(([k, v]) => {
-      const div = document.createElement("div");
-      const dt = document.createElement("dt");
-      dt.textContent = k;
-      const dd = document.createElement("dd");
-      dd.textContent = v;
-      div.appendChild(dt);
-      div.appendChild(dd);
-      meta.appendChild(div);
-    });
-    modalBody.appendChild(meta);
-  }
-
-  // 4) Action buttons
-  if (p.links && p.links.length) {
-    const actions = document.createElement("div");
-    actions.className = "modal__actions";
-    p.links.forEach((link) => {
-      const a = document.createElement("a");
-      a.className = "btn";
-      a.href = link.url;
-      a.target = "_blank";
-      a.rel = "noopener";
-      a.textContent = LINK_LABELS[link.type] || link.type;
-      actions.appendChild(a);
-    });
-    modalBody.appendChild(actions);
-  }
-
-  // 5) Detail blocks (omit empty sections)
-  [
-    listBlock("Core Features", p.feats),
-    listBlock("Challenges", p.challenges),
-    listBlock("Outcomes & Impact", p.outcomes),
-    listBlock("Results", p.results),
-  ].forEach((b) => b && modalBody.appendChild(b));
-
-  if (p.tech && p.tech.length) {
-    const block = document.createElement("div");
-    block.className = "modal__block";
-    const h4 = document.createElement("h4");
-    h4.textContent = "Tech Stack";
-    block.appendChild(h4);
-    const wrap = document.createElement("div");
-    wrap.className = "modal__tech";
-    p.tech.forEach((t) => {
-      const span = document.createElement("span");
-      span.textContent = t;
-      wrap.appendChild(span);
-    });
-    block.appendChild(wrap);
-    modalBody.appendChild(block);
-  }
-
-  modalBody.scrollTop = 0;
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-}
-
-function closeModal() {
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
-}
-
-modalClose.addEventListener("click", closeModal);
-modal.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", closeModal));
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
-});
-
 viewAllBtn.addEventListener("click", () => {
   setFilter(activeFilter === "featured" ? "all" : "featured");
 });
@@ -678,18 +766,40 @@ viewAllBtn.addEventListener("click", () => {
 buildFilters();
 renderProjects();
 
-/* ---------------- Contact form (front-end only) ---------------- */
+/* ---------------- Contact form (Formspree) ---------------- */
 const form = document.getElementById("contactForm");
 const ok = document.getElementById("formOk");
 if (form) {
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
-    ok.classList.add("show");
-    form.reset();
-    setTimeout(() => ok.classList.remove("show"), 5000);
+    const btn = form.querySelector("button[type='submit']");
+    const original = btn ? btn.textContent : "";
+    if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+    ok.classList.remove("show", "error");
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        ok.textContent = "Thanks — your message is on its way. I'll get back to you shortly.";
+        ok.classList.add("show");
+        form.reset();
+      } else {
+        ok.textContent = "That didn't go through. Please email me directly at rachmadiapri@gmail.com.";
+        ok.classList.add("show", "error");
+      }
+    } catch (err) {
+      ok.textContent = "Network problem — please email me directly at rachmadiapri@gmail.com.";
+      ok.classList.add("show", "error");
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = original; }
+      setTimeout(() => ok.classList.remove("show"), 8000);
+    }
   });
 }
