@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How Geo-Lens compares paired satellite images with a Siamese U-Net to produce full-resolution predicted-change masks.">
+  <title>Geo-Lens — Satellite change detection case study</title>
+  <link rel="icon" href="../../assets/site-icon.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../site.css">
+  <link rel="stylesheet" href="../story-shell.css">
+  <link rel="stylesheet" href="geo-lens.css">
+  <script src="../story-shell.js" defer></script>
+  <script src="geo-lens.js" defer></script>
+</head>
+<body class="case-study geo-lens">
+  <!--
+  THESIS: Read one landscape twice; replace the portfolio-card pattern with a continuous spatial comparison.
+  OWN-WORLD: The portfolio's warm editorial shell frames a near-black imaging instrument with green reserved for predictions.
+  STORY: Visitors follow paired inputs through alignment, ambiguity, model, prediction, evidence, product, and limits, then try or inspect it.
+  FIRST VIEWPORT: Editorial title and proof lead into a full-width satellite comparison; the primary actions remain beside the verified summary.
+  FORM: A pinned brief-directed scrollytelling extension of the established portfolio, seed key geo-lens-verified-2026.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+  -->
+  <a class="skip-link" href="#story">Skip to the case study</a>
+  <header class="nav story-nav">
+    <div class="wrap nav__inner">
+      <a class="nav__brand" href="../../">apri<b>.</b>rachmadi</a>
+      <nav class="nav__links" aria-label="Case study navigation">
+        <a href="#story">Story</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#product">Product</a>
+        <a href="#limits">Limits</a>
+      </nav>
+      <a class="btn nav__cta" href="../../#contact">Hire me</a>
+    </div>
+  </header>
+
+  <main>
+    <header class="case-hero wrap">
+      <a class="back-link" href="../../#projects">Back to selected work</a>
+      <div class="case-hero__grid">
+        <div>
+          <h1>Read the landscape <em>twice.</em></h1>
+        </div>
+        <div class="case-hero__summary">
+          <p>Geo-Lens compares two spatially corresponding satellite images and produces a full-resolution, pixel-aligned mask showing where built surfaces are predicted to have changed.</p>
+          <dl class="case-facts">
+            <div><dt>Input</dt><dd>Two RGB observations</dd></div>
+            <div><dt>Output</dt><dd>1024 × 1024 binary mask</dd></div>
+            <div><dt>Model</dt><dd>Siamese U-Net · ResNet18</dd></div>
+          </dl>
+          <div class="case-actions">
+            <a class="btn btn--primary" href="https://geo-lens-urban.rachmadiapri.workers.dev/" target="_blank" rel="noopener">Try Geo-Lens</a>
+            <a class="btn" href="https://github.com/aprirachmadi/geo-lens" target="_blank" rel="noopener">View source</a>
+          </div>
+        </div>
+      </div>
+      <p class="case-hero__note">A reproducible change-detection pipeline and public prediction interface. The sample below is a stored prediction from the LEVIR-CD test split.</p>
+    </header>
+
+    <section class="story-shell" id="story" data-story-shell aria-label="Geo-Lens project story">
+      <div class="story-shell__grid wrap">
+        <div class="story-chapters">
+          <section class="story-chapter is-active" id="read-twice" data-story-chapter="comparison" tabindex="0">
+            <div class="story-chapter__copy">
+              <h2>A landscape does not announce what changed.</h2>
+              <p>Satellite images preserve a record of how places evolve. Geo-Lens reads the same place at two moments and turns their differences into spatial evidence.</p>
+            </div>
+            <div class="story-chapter__mobile-scene" data-mobile-scene="comparison"><noscript><figure><img src="../../public/projects/geo-lens/images/later.png" alt="Later satellite observation of the representative test area"><figcaption>Later observation. Compare with the earlier observation in the next chapter.</figcaption></figure></noscript></div>
+          </section>
+
+          <section class="story-chapter" id="alignment" data-story-chapter="alignment" tabindex="0">
+            <div class="story-chapter__copy">
+              <h2>Two observations, one coordinate system.</h2>
+              <p>Each input is an RGB satellite image of the same geographic area. They must correspond spatially because every output pixel refers back to the same location.</p>
+              <p class="chapter-evidence">Source and output resolution: <strong>1024 × 1024 pixels</strong>.</p>
+            </div>
+            <div class="story-chapter__mobile-scene" data-mobile-scene="alignment"><noscript><figure><img src="../../public/projects/geo-lens/images/earlier.png" alt="Earlier satellite observation aligned to the same coordinate system as the later observation"><figcaption>A · Earlier · 1024 × 1024</figcaption></figure></noscript></div>
+          </section>
+
+          <section class="story-chapter" id="ambiguity" data-story-chapter="ambiguity" tabindex="0">
+            <div class="story-chapter__copy">
+              <h2>Appearance is not always change.</h2>
+              <p>Roof tone, vegetation, shadows, illumination, and slight registration differences can create visual movement even where the built surface has not meaningfully changed.</p>
+              <p class="chapter-evidence">Outlined areas are visual differences, not confirmed real-world change.</p>
+            </div>
+            <div class="story-chapter__mobile-scene" data-mobile-scene="ambiguity"><noscript><figure><img src="../../public/projects/geo-lens/images/later.png" alt="Later satellite observation containing differences in roof tone, vegetation, shadow, and illumination"><figcaption>Visible differences must not be assumed to be real-world change.</figcaption></figure></noscript></div>
+          </section>
+
+          <section class="story-chapter" id="model" data-story-chapter="model" tabindex="0">
+            <div class="story-chapter__copy">
+              <h2>Compare features, not raw pixels.</h2>
+              <p>One shared ResNet18 encoder reads both observations. Geo-Lens takes the absolute difference between their features at several scales, then a U-Net-style decoder reconstructs a full-resolution mask.</p>
+              <dl class="inline-facts">
+                <div><dt>Initialization</dt><dd>ImageNet</dd></div>
+                <div><dt>Threshold</dt><dd>0.5</dd></div>
+                <div><dt>Output</dt><dd>Binary</dd></div>
+              </dl>
+            </div>
+            <div class="story-chapter__mobile-scene" data-mobile-scene="model"><noscript><figure><img src="../../public/projects/geo-lens/architecture.svg" alt="Earlier and later images pass through a shared ResNet18 encoder; absolute feature differences feed a U-Net decoder and produce a full-resolution binary mask."></figure></noscript></div>
+          </section>
+
+          <section class="story-chapter" id="prediction" data-story-chapter="prediction" tabindex="0">
+            <div class="story-chapter__copy">
+              <h2>Change becomes a location.</h2>
+              <p>Black pixels mean unchanged; white pixels mean predicted change. Because the mask is spatially aligned, it can be placed directly over the later image.</p>
+              <p class="chapter-evidence"><strong>test_45</strong> · stored test-split prediction · <strong>33.7291%</strong> predicted-change coverage.</p>
+            </div>
+            <div class="story-chapter__mobile-scene" data-mobile-scene="prediction"><noscript><figure><img src="../../public/projects/geo-lens/images/prediction.png" alt="Stored binary predicted-change mask for test sample 45"><figcaption>Stored prediction from the test split; predicted-change coverage 33.7291%.</figcaption></figure></noscript></div>
+          </section>
+
+          <section class="story-chapter" id="evidence" data-story-chapter="metrics" tabindex="0">
+            <div class="story-chapter__copy">
+              <h2>Evaluate once, report honestly.</h2>
+              <p>The selected checkpoint was evaluated across the held-out 128-image test split. Recall is its strongest characteristic; precision shows that false positives remain an important area for improvement.</p>
+              <p class="chapter-evidence">Aggregate metrics below come from the full test split, not the representative sample.</p>
+            </div>
+            <div class="story-chapter__mobile-scene" data-mobile-scene="metrics"><noscript><p class="static-evidence">Held-out test split (128 pairs): F1/Dice 0.8451 · IoU 0.7317 · precision 0.7811 · recall 0.9204 · pixel accuracy 0.9828 · evaluation loss 0.9742.</p></noscript></div>
+          </section>
+
+          <section class="story-chapter" id="product" data-story-chapter="product" tabindex="0">
+            <div class="story-chapter__copy">
+              <h2>From experiment to usable instrument.</h2>
+              <p>A FastAPI inference service and Next.js interface let visitors load a curated example or submit PNG, JPEG, or WebP pairs, inspect the mask on the same canvas, and read model, device, inference time, and coverage alongside the result.</p>
+              <p class="chapter-evidence">Uploads are held in memory only and are not persisted. One process serves the API and static frontend.</p>
+            </div>
+            <div class="story-chapter__mobile-scene" data-mobile-scene="product"><noscript><p class="static-evidence">The interface supports curated examples and in-memory PNG, JPEG, or WebP uploads, with mask, model, device, inference time, and coverage shown together.</p></noscript></div>
+          </section>
+
+          <section class="story-chapter" id="limits" data-story-chapter="limits" tabindex="0">
+            <div class="story-chapter__copy">
+              <h2>A useful baseline, not a finished answer.</h2>
+              <p>Geo-Lens demonstrates credible full-resolution change detection and strong sensitivity to changed areas. Remaining work is to reduce false positives while preserving recall for small buildings.</p>
+            </div>
+            <div class="story-chapter__mobile-scene" data-mobile-scene="limits"><noscript><p class="static-evidence">Known false-positive sources: boundaries, illumination, shadows, roof tone, parallax, and other appearance changes.</p></noscript></div>
+          </section>
+        </div>
+
+        <aside class="story-stage" aria-label="Visualization corresponding to the current chapter">
+          <div class="story-stage__frame" data-story-stage aria-live="polite"></div>
+          <div class="story-progress" aria-hidden="true"><span data-story-progress></span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="case-close">
+      <div class="wrap case-close__grid">
+        <h2>Inspect the prediction.<br>Interrogate the limits.</h2>
+        <div>
+          <p>The public frontend can remain available while its inference backend is temporarily offline.</p>
+          <div class="case-actions">
+            <a class="btn btn--primary" href="https://geo-lens-urban.rachmadiapri.workers.dev/" target="_blank" rel="noopener">Open the interface</a>
+            <a class="btn" href="https://github.com/aprirachmadi/geo-lens" target="_blank" rel="noopener">Read the repository</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span>© 2026 Apri Dwi Rachmadi</span>
+      <a href="../../#projects">More selected work</a>
+    </div>
+  </footer>
+</body>
+</html>

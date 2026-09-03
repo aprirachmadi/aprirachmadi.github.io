@@ -172,7 +172,7 @@ const PROJECTS = [
     longDescription: "Geo-Lens compares earlier and later satellite observations and produces a pixel-aligned binary mask showing where construction or land-cover change occurred. It operates at the source 1024 × 1024 resolution. The repository includes dataset-contract validation, configurable training, untouched-test evaluation, prediction export, an inference API, a frontend, tests, and deployment documentation.",
     feats: ["Compares paired A/B satellite observations", "Produces full-resolution binary change masks", "Includes reproducible train, evaluate, predict, and serve workflows"],
     outcomes: ["1024 × 1024 output masks", "Public demo and sample prediction gallery", "Tests covering the data contract and pipeline components"],
-    links: [{ type: "github", url: "https://github.com/aprirachmadi/geo-lens" }, { type: "demo", url: "https://geo-lens-urban.rachmadiapri.workers.dev/" }],
+    links: [{ type: "case-study", url: "projects/geo-lens/" }, { type: "github", url: "https://github.com/aprirachmadi/geo-lens" }, { type: "demo", url: "https://geo-lens-urban.rachmadiapri.workers.dev/" }],
   },
   {
     id: "ingfo-loker",
@@ -442,6 +442,7 @@ const CATEGORY_LABELS = {
 };
 
 const LINK_LABELS = {
+  "case-study": "Read case study",
   github: "GitHub Repository",
   ppt: "Presentation",
   streamlit: "Live Demo",
@@ -717,8 +718,10 @@ function buildDetail(p, labelledBy) {
       const a = document.createElement("a");
       a.className = "btn";
       a.href = link.url;
-      a.target = "_blank";
-      a.rel = "noopener";
+      if (!link.url.startsWith("projects/")) {
+        a.target = "_blank";
+        a.rel = "noopener";
+      }
       a.textContent = LINK_LABELS[link.type] || link.type;
       actions.appendChild(a);
     });
