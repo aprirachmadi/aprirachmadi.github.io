@@ -163,7 +163,7 @@ const PROJECTS = [
     description: "Full-resolution satellite change detection with a Siamese U-Net",
     sub: "Geospatial computer vision and deployable inference",
     tech: ["Python", "PyTorch", "CUDA", "FastAPI", "Next.js"],
-    image: "assets/project/geo-lens.svg",
+    image: "public/projects/geo-lens/images/geo-lens-app.png",
     categories: ["computer vision"],
     featured: true,
     metric: "1024 × 1024 change masks",
