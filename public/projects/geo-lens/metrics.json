@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "project": "Geo-Lens",
+  "task": "binary satellite-image change detection",
+  "dataset": {
+    "name": "LEVIR-CD",
+    "testPairs": 128,
+    "imageWidth": 1024,
+    "imageHeight": 1024
+  },
+  "evaluation": {
+    "split": "test",
+    "checkpointSelection": "best validation checkpoint",
+    "loss": 0.9742201243777231,
+    "f1Dice": 0.8450608511262252,
+    "iou": 0.7316929657725052,
+    "precision": 0.7810882989703261,
+    "recall": 0.9204471463145955,
+    "pixelAccuracy": 0.9828057438135147,
+    "source": "runs/notebook-evaluation/test_run.json"
+  },
+  "model": {
+    "architecture": "resnet18_siameseunet",
+    "encoder": "ResNet18",
+    "encoderSharing": "shared between earlier and later observations",
+    "pretrained": true,
+    "pretrainingSource": "ImageNet",
+    "output": "single-channel binary change mask",
+    "threshold": 0.5
+  },
+  "representativeSample": {
+    "id": "test_45",
+    "kind": "stored prediction",
+    "split": "test",
+    "predictedChangeCoverage": 0.337291,
+    "isAggregateEvaluationEvidence": false,
+    "source": "bundle/gallery/samples/test_45"
+  },
+  "links": {
+    "liveApplication": "https://geo-lens-urban.rachmadiapri.workers.dev/",
+    "sourceRepository": "https://github.com/aprirachmadi/geo-lens"
+  }
+}

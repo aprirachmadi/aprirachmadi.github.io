@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+  <title id="title">Geo-Lens inference architecture</title>
+  <desc id="desc">Earlier and later satellite images pass through one shared ResNet18 encoder. Absolute feature differences at multiple scales are combined by a U-Net decoder to produce a full-resolution binary change mask.</desc>
+  <defs>
+    <style>
+      .canvas { fill: #0a0c0b; }
+      .panel { fill: #101312; stroke: #35413a; stroke-width: 2; }
+      .active { fill: #123423; stroke: #31e981; stroke-width: 2; }
+      .line { fill: none; stroke: #8b968f; stroke-width: 2; }
+      .flow { fill: none; stroke: #31e981; stroke-width: 3; }
+      .label { fill: #8b968f; font: 500 16px ui-monospace, monospace; letter-spacing: 2px; }
+      .title { fill: #e8ece9; font: 600 25px system-ui, sans-serif; }
+      .body { fill: #e8ece9; font: 400 18px system-ui, sans-serif; }
+      .small { fill: #8b968f; font: 400 15px system-ui, sans-serif; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#31e981"/>
+    </marker>
+  </defs>
+
+  <rect class="canvas" width="1440" height="760" rx="24"/>
+  <text class="label" x="72" y="72">GEO//LENS · INFERENCE PATH</text>
+  <text class="title" x="72" y="112">One shared visual encoder, two moments in time</text>
+
+  <rect class="panel" x="72" y="188" width="220" height="132" rx="14"/>
+  <text class="label" x="96" y="226">A · EARLIER</text>
+  <text class="body" x="96" y="268">RGB observation</text>
+  <text class="small" x="96" y="296">1024 × 1024</text>
+
+  <rect class="panel" x="72" y="442" width="220" height="132" rx="14"/>
+  <text class="label" x="96" y="480">B · LATER</text>
+  <text class="body" x="96" y="522">RGB observation</text>
+  <text class="small" x="96" y="550">1024 × 1024</text>
+
+  <rect class="panel" x="402" y="252" width="266" height="258" rx="14"/>
+  <text class="label" x="426" y="292">SHARED ENCODER</text>
+  <text class="title" x="426" y="336">ResNet18</text>
+  <text class="small" x="426" y="374">The same learned weights</text>
+  <text class="small" x="426" y="398">read both observations.</text>
+  <path class="line" d="M438 432 H632"/>
+  <text class="small" x="426" y="466">Multi-scale feature maps</text>
+
+  <rect class="active" x="786" y="252" width="248" height="258" rx="14"/>
+  <text class="label" x="810" y="292">FEATURE COMPARISON</text>
+  <text class="title" x="810" y="336">Absolute difference</text>
+  <text class="small" x="810" y="374">Changes that persist across</text>
+  <text class="small" x="810" y="398">feature scales are retained.</text>
+  <text class="body" x="810" y="466">| fA − fB |</text>
+
+  <rect class="panel" x="1146" y="188" width="222" height="132" rx="14"/>
+  <text class="label" x="1170" y="226">U-NET DECODER</text>
+  <text class="body" x="1170" y="268">Reconstructs detail</text>
+  <text class="small" x="1170" y="296">across skip scales</text>
+
+  <rect class="active" x="1146" y="442" width="222" height="132" rx="14"/>
+  <text class="label" x="1170" y="480">PREDICTION</text>
+  <text class="body" x="1170" y="522">Binary change mask</text>
+  <text class="small" x="1170" y="550">1024 × 1024</text>
+
+  <path class="flow" marker-end="url(#arrow)" d="M292 254 C350 254 350 316 402 316"/>
+  <path class="flow" marker-end="url(#arrow)" d="M292 508 C350 508 350 446 402 446"/>
+  <path class="flow" marker-end="url(#arrow)" d="M668 381 H786"/>
+  <path class="flow" marker-end="url(#arrow)" d="M1034 320 C1092 320 1092 254 1146 254"/>
+  <path class="flow" marker-end="url(#arrow)" d="M1257 320 V442"/>
+
+  <text class="small" x="72" y="680">Black = unchanged · White / green overlay = predicted change</text>
+  <text class="small" x="72" y="710">Diagram reflects the evaluated resnet18_siameseunet checkpoint.</text>
+</svg>
