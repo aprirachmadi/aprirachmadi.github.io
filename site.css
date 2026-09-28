@@ -272,6 +272,9 @@ section { padding: clamp(64px, 11vh, 130px) 0; position: relative; }
 .tl-item__co { color: var(--cyan); font-size: 0.95rem; }
 .tl-item__date { font-family: var(--font-mono); font-size: 0.76rem; color: var(--faint); margin-left: auto; }
 .tl-item__desc { color: var(--muted); margin-top: 8px; font-size: 0.94rem; }
+.tl-item__list { list-style: none; display: grid; gap: 8px; margin-top: 10px; max-width: 78ch; }
+.tl-item__list li { position: relative; padding-left: 18px; color: var(--muted); font-size: 0.94rem; line-height: 1.65; }
+.tl-item__list li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 8px; height: 1px; background: var(--pink); }
 .tl-item__place {
   display: inline-block; margin-top: 9px; font-family: var(--font-mono);
   font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gold-text);
