@@ -12,8 +12,34 @@
       "src/tilik_agent/evals/datasets/demografi_sosial_questions.json",
       "src/tilik_agent/evals/datasets/demografi_sosial_conversations.json"
     ],
-    "publishedAggregateScores": null,
-    "note": "Benchmark definitions are available; no authoritative saved aggregate run was found. Counts describe test inputs, not accuracy."
+    "publishedAggregateScores": {
+      "task_completion": 0.88,
+      "argument_correctness": 0.8655
+    },
+    "note": "Historical owner-confirmed judge scores are shown with an asterisk. They have not been retested on the newest evaluation sets. Other metrics have not been tested yet; pipeline_status is operational, not an LLM judge score.",
+    "scoreProvenance": {
+      "kind": "historical owner-reported results",
+      "source": [
+        "portfolio site.js Tilik results",
+        "project owner confirmation on 2026-10-09"
+      ],
+      "savedRunArtifactAvailable": false,
+      "testedAgainstNewestEvaluationSets": false
+    },
+    "untestedMetrics": [
+      "goal_accuracy",
+      "tool_use",
+      "conversation_completeness",
+      "turn_relevancy",
+      "pipeline_status"
+    ],
+    "tracking": "Langfuse",
+    "judgeMetrics": "DeepEval",
+    "implementationSource": [
+      "src/tilik_agent/evals/metrics.py",
+      "src/tilik_agent/evals/runner.py",
+      "src/tilik_agent/evals/langfuse_dataset.py"
+    ]
   },
   "architecture": {
     "orchestration": "LangGraph",
