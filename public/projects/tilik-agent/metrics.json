@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "project": "Tilik",
+  "task": "Source-grounded questions and statistical analysis over BPS data",
+  "snapshotDate": "2026-10-09",
+  "evaluation": {
+    "questionCount": 19,
+    "questionDatasetVersion": "2026-10-04",
+    "conversationCount": 4,
+    "conversationDatasetVersion": "2026-10-02",
+    "source": [
+      "src/tilik_agent/evals/datasets/demografi_sosial_questions.json",
+      "src/tilik_agent/evals/datasets/demografi_sosial_conversations.json"
+    ],
+    "publishedAggregateScores": null,
+    "note": "Benchmark definitions are available; no authoritative saved aggregate run was found. Counts describe test inputs, not accuracy."
+  },
+  "architecture": {
+    "orchestration": "LangGraph",
+    "observations": "PostgreSQL with read-only dataset tools",
+    "publicationRetrieval": "pgvector over the configured SP2020 collection",
+    "statisticalOperations": [
+      "correlation",
+      "ols",
+      "dispersion",
+      "convergence",
+      "paired_compare"
+    ],
+    "source": [
+      "src/tilik_agent/agent/graph.py",
+      "src/tilik_agent/agent/sql.py",
+      "src/tilik_agent/agent/statistics.py"
+    ]
+  },
+  "stack": [
+    "Python",
+    "FastAPI",
+    "LangGraph",
+    "PostgreSQL",
+    "pgvector",
+    "React",
+    "Vite"
+  ],
+  "representativeExample": {
+    "questionId": "3",
+    "question": "Berapa selisih TPT Provinsi Jawa Barat antara Februari dan Agustus 2025, dan pada bulan mana nilainya lebih tinggi?",
+    "kind": "benchmark question; explanatory walkthrough, not a recorded response",
+    "source": "src/tilik_agent/evals/datasets/demografi_sosial_questions.json"
+  },
+  "assets": {
+    "workspace": "images/workspace.png",
+    "kind": "existing portfolio screenshot of the Tilik interface; includes prior conversation titles",
+    "source": "portfolio assets/project/tilik-agent.png"
+  },
+  "links": {
+    "sourceRepository": "https://github.com/aprirachmadi/tilik-agent",
+    "liveApplication": null
+  },
+  "guardrails": [
+    "Source identifiers are validated; final prose is not fully mechanically fact-checked.",
+    "The agent uses loaded data and the configured publication collection, not live web search.",
+    "Deterministic statistical operations are distinct from ordinary model-written arithmetic.",
+    "LLM judge scores are referenceless and are not factual-accuracy measurements."
+  ],
+  "stackSource": [
+    "pyproject.toml",
+    "frontend/package.json"
+  ]
+}

@@ -173,7 +173,7 @@ const PROJECTS = [
     feats: ["Plans SQL, retrieval, and calculation steps", "Uses read-only BPS observation tools and SP2020 retrieval", "Returns cited answers and chart specifications"],
     outcomes: ["Answers carry observation and document IDs", "Arithmetic is checked against stored observations", "Pipeline status and bounded retrieval failures remain explicit"],
     results: ["Task completion: 0.8800", "Argument correctness: 0.8655"],
-    links: [{ type: "github", url: "https://github.com/aprirachmadi/tilik-agent" }],
+    links: [{ type: "case-study", url: "projects/tilik-agent/" }, { type: "github", url: "https://github.com/aprirachmadi/tilik-agent" }],
   },
   {
     id: "rottom-chat",
