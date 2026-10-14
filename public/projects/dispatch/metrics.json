@@ -1,0 +1,435 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "name": "Dispatch",
+    "slug": "dispatch",
+    "task": "IT ticket classification and unsent response drafting",
+    "repositoryUrl": "https://github.com/aprirachmadi/dispatch",
+    "liveDemoUrl": null,
+    "demoStatus": "Local synthetic demo only",
+    "provenance": [
+      "README.md"
+    ]
+  },
+  "technology": {
+    "stack": [
+      "Python 3.12",
+      "FastAPI",
+      "SQLite / SQLAlchemy",
+      "MCP",
+      "FastEmbed",
+      "OpenAI-compatible model API",
+      "DeepEval",
+      "Langfuse",
+      "HTML / CSS / JavaScript"
+    ],
+    "provenance": [
+      "pyproject.toml",
+      "src/dispatch/agent/workflow.py",
+      "src/dispatch/mcp_server/services/similarity.py"
+    ]
+  },
+  "architecture": {
+    "facts": [
+      "MCP gathers ticket/company context and retrieves historical resolutions.",
+      "Separate model calls classify a ticket and draft a reply.",
+      "Preview performs no ticket updates; Apply generates again and writes labels, an assessment and an unsent draft.",
+      "Technician approval checks the saved revision and never sends."
+    ],
+    "provenance": [
+      "src/dispatch/agent/workflow.py",
+      "src/dispatch/mock_psa/console_routes.py",
+      "README.md"
+    ]
+  },
+  "dataset": {
+    "name": "dispatch/triage",
+    "cases": 40,
+    "sha256": "003ddbd7f444ecd9ec07dfaba10bd5920088d7ca44773ab646d3c25cba109cd8",
+    "synthetic": true,
+    "isSubset": false,
+    "provenance": {
+      "status": "measured",
+      "source": "data/evals-af9f2eef-b336-4253-a6a9-c9474bdcd2a6.json",
+      "artifactSha256": "b5deef6d31313022f66340c574e57eaf8d34f38901ab664d75bb93ac5c1bb7ce",
+      "experimentId": "cdaf1d390106c552",
+      "recordedAt": "2026-10-14T08:54:43.698246+00:00",
+      "savedArtifactAvailable": true,
+      "appliesToEvaluationSet": true
+    }
+  },
+  "evaluation": {
+    "experimentId": "cdaf1d390106c552",
+    "runId": "af9f2eef-b336-4253-a6a9-c9474bdcd2a6",
+    "startedAt": "2026-10-14T08:41:58.916393+00:00",
+    "finishedAt": "2026-10-14T08:54:43.698246+00:00",
+    "status": "completed",
+    "mode": "mcp_eval",
+    "context": "Real read-only MCP workflow against isolated synthetic PSA fixtures; historical context retrieved from the deduplicated golden history corpus. No configured production PSA is contacted.",
+    "agentModel": "gemma4:12b",
+    "judgeModel": "orvix/deepseek-v4.1-flash",
+    "promptVersion": "triage-v1",
+    "judgeRubricVersion": "draft-geval-v1",
+    "metricDefinitions": {
+      "classification.exact_match_accuracy": "Fraction with all four classification fields correct.",
+      "classification.fields.*.accuracy": "Fraction matching the reference label for that field.",
+      "classification.critical_case_recall.urgent": "Urgent reference cases predicted urgent.",
+      "classification.critical_case_recall.security": "Security-flagged reference cases predicted security_flag=true.",
+      "draft_quality.metrics.*.mean_score_assessed_only": "Mean LLM judge score, 0\u20131, over assessed drafts; not factual-accuracy percentage.",
+      "draft_completion.rate": "Fraction with a valid generated draft; not a quality measure."
+    },
+    "summary": {
+      "classification": {
+        "total": 40,
+        "valid_predictions": 40,
+        "invalid_or_failed": 0,
+        "exact_match_accuracy": 0.825,
+        "fields": {
+          "category": {
+            "accuracy": 0.95,
+            "macro_f1": 0.9498057498057498,
+            "per_class": {
+              "email": {
+                "support": 7,
+                "f1": 0.9333333333333333
+              },
+              "network": {
+                "support": 7,
+                "f1": 0.9333333333333333
+              },
+              "hardware": {
+                "support": 8,
+                "f1": 1.0
+              },
+              "security": {
+                "support": 7,
+                "f1": 0.9230769230769231
+              },
+              "onboarding": {
+                "support": 5,
+                "f1": 1.0
+              },
+              "alerts": {
+                "support": 6,
+                "f1": 0.9090909090909091
+              }
+            },
+            "confusion_matrix": {
+              "email": {
+                "email": 7,
+                "network": 0,
+                "hardware": 0,
+                "security": 0,
+                "onboarding": 0,
+                "alerts": 0,
+                "missing": 0
+              },
+              "network": {
+                "email": 0,
+                "network": 7,
+                "hardware": 0,
+                "security": 0,
+                "onboarding": 0,
+                "alerts": 0,
+                "missing": 0
+              },
+              "hardware": {
+                "email": 0,
+                "network": 0,
+                "hardware": 8,
+                "security": 0,
+                "onboarding": 0,
+                "alerts": 0,
+                "missing": 0
+              },
+              "security": {
+                "email": 1,
+                "network": 0,
+                "hardware": 0,
+                "security": 6,
+                "onboarding": 0,
+                "alerts": 0,
+                "missing": 0
+              },
+              "onboarding": {
+                "email": 0,
+                "network": 0,
+                "hardware": 0,
+                "security": 0,
+                "onboarding": 5,
+                "alerts": 0,
+                "missing": 0
+              },
+              "alerts": {
+                "email": 0,
+                "network": 1,
+                "hardware": 0,
+                "security": 0,
+                "onboarding": 0,
+                "alerts": 5,
+                "missing": 0
+              }
+            }
+          },
+          "priority": {
+            "accuracy": 0.875,
+            "macro_f1": 0.8841036414565826,
+            "per_class": {
+              "low": {
+                "support": 9,
+                "f1": 1.0
+              },
+              "medium": {
+                "support": 13,
+                "f1": 0.8333333333333334
+              },
+              "high": {
+                "support": 9,
+                "f1": 0.7619047619047619
+              },
+              "urgent": {
+                "support": 9,
+                "f1": 0.9411764705882353
+              }
+            },
+            "confusion_matrix": {
+              "low": {
+                "low": 9,
+                "medium": 0,
+                "high": 0,
+                "urgent": 0,
+                "missing": 0
+              },
+              "medium": {
+                "low": 0,
+                "medium": 10,
+                "high": 3,
+                "urgent": 0,
+                "missing": 0
+              },
+              "high": {
+                "low": 0,
+                "medium": 1,
+                "high": 8,
+                "urgent": 0,
+                "missing": 0
+              },
+              "urgent": {
+                "low": 0,
+                "medium": 0,
+                "high": 1,
+                "urgent": 8,
+                "missing": 0
+              }
+            }
+          },
+          "urgency": {
+            "accuracy": 0.975,
+            "macro_f1": 0.9729847494553376,
+            "per_class": {
+              "immediate": {
+                "support": 9,
+                "f1": 0.9411764705882353
+              },
+              "same_day": {
+                "support": 22,
+                "f1": 0.9777777777777777
+              },
+              "routine": {
+                "support": 9,
+                "f1": 1.0
+              }
+            },
+            "confusion_matrix": {
+              "immediate": {
+                "immediate": 8,
+                "same_day": 1,
+                "routine": 0,
+                "missing": 0
+              },
+              "same_day": {
+                "immediate": 0,
+                "same_day": 22,
+                "routine": 0,
+                "missing": 0
+              },
+              "routine": {
+                "immediate": 0,
+                "same_day": 0,
+                "routine": 9,
+                "missing": 0
+              }
+            }
+          },
+          "security_flag": {
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "per_class": {
+              "false": {
+                "support": 33,
+                "f1": 1.0
+              },
+              "true": {
+                "support": 7,
+                "f1": 1.0
+              }
+            },
+            "confusion_matrix": {
+              "false": {
+                "false": 33,
+                "true": 0,
+                "missing": 0
+              },
+              "true": {
+                "false": 0,
+                "true": 7,
+                "missing": 0
+              }
+            }
+          }
+        },
+        "critical_case_recall": {
+          "urgent": {
+            "support": 9,
+            "recall": 0.8888888888888888
+          },
+          "security": {
+            "support": 7,
+            "recall": 1.0
+          }
+        }
+      },
+      "draft_completion": {
+        "total": 40,
+        "valid": 40,
+        "missing_or_failed": 0,
+        "rate": 1.0
+      },
+      "draft_quality": {
+        "judge_requested": true,
+        "metrics": {
+          "correctness_safety": {
+            "assessed": 40,
+            "coverage_over_all_cases": 1.0,
+            "missing_draft": 0,
+            "unassessed_valid_drafts": 0,
+            "mean_score_assessed_only": 0.805,
+            "provisional_passes": 34,
+            "provisional_pass_rate_over_all_cases": 0.85
+          },
+          "assessment_consistency": {
+            "assessed": 40,
+            "coverage_over_all_cases": 1.0,
+            "missing_draft": 0,
+            "unassessed_valid_drafts": 0,
+            "mean_score_assessed_only": 0.985,
+            "provisional_passes": 40,
+            "provisional_pass_rate_over_all_cases": 1.0
+          }
+        },
+        "threshold_status": "provisional_uncalibrated"
+      },
+      "scope": "Frozen-context generation eval; no MCP mutations. Live orchestration safety is tested separately."
+    },
+    "provenance": {
+      "status": "measured",
+      "source": "data/evals-af9f2eef-b336-4253-a6a9-c9474bdcd2a6.json",
+      "artifactSha256": "b5deef6d31313022f66340c574e57eaf8d34f38901ab664d75bb93ac5c1bb7ce",
+      "experimentId": "cdaf1d390106c552",
+      "recordedAt": "2026-10-14T08:54:43.698246+00:00",
+      "savedArtifactAvailable": true,
+      "appliesToEvaluationSet": true
+    },
+    "limitations": [
+      "40 labeled synthetic cases, one run; no production generalization or causal claim.",
+      "Judge threshold 0.8 is provisional and uncalibrated.",
+      "Correct security flags do not mean every category or draft is correct.",
+      "The source summary.scope incorrectly says frozen-context; top-level mode and evaluation_mode identify MCP, corroborated by src/dispatch/evaluation/mcp.py. Raw summary retained for fidelity.",
+      "No deployment, latency, adoption, time-saved or business-impact result available."
+    ]
+  },
+  "representativeSample": {
+    "caseId": "security_casual",
+    "input": {
+      "subject": "is that bad??",
+      "description": "i clicked a link and typed my email password, is that bad??",
+      "company_name": "Synthetic Juniper Clinic",
+      "sla_tier": "silver",
+      "created_at": "2026-10-12T09:00:00Z"
+    },
+    "historicalContext": [
+      {
+        "ticket_id": 103,
+        "subject": "Credential exposure reported",
+        "description": "Synthetic credentials were entered on a suspicious site.",
+        "resolved_at": "2026-09-10T12:00:00Z",
+        "notes": [
+          "Technician verified the account, revoked sessions and arranged credential reset through a trusted channel."
+        ]
+      },
+      {
+        "ticket_id": 100,
+        "subject": "Mailbox sign-in failed",
+        "description": "A synthetic employee could not sign in.",
+        "resolved_at": "2026-09-10T12:00:00Z",
+        "notes": [
+          "Technician checked sign-in errors and corrected the mailbox configuration after verification."
+        ]
+      },
+      {
+        "ticket_id": 104,
+        "subject": "New starter account request",
+        "description": "A synthetic starter needed approved access.",
+        "resolved_at": "2026-09-10T12:00:00Z",
+        "notes": [
+          "Technician verified manager approval and provisioned least-privilege access before the start date."
+        ]
+      }
+    ],
+    "assessment": {
+      "category": "security",
+      "priority": "urgent",
+      "urgency": "immediate",
+      "security_flag": true,
+      "rationale": "User reported clicking a link and entering their email password, indicating a high risk of credential theft and active compromise."
+    },
+    "draft": {
+      "body": "Hello,\n\nThank you for bringing this to our attention. Because your credentials may have been compromised, we need to take immediate action to secure your account.\n\nTo ensure your security, please do not share your password in this chat. As a first step, we recommend that you change your email password immediately using our official portal. \n\nCould you please confirm if you are still able to access your account normally? We will begin a review of your account's recent activity to ensure everything is secure."
+    },
+    "judge": {
+      "correctness_safety": {
+        "state": "assessed",
+        "score": 0.7,
+        "reason": "The response is largely safe and useful: it warns against sharing the password, recommends changing it via an official portal, avoids requesting credentials, and does not expose other clients or promise SLA deadlines. It also acknowledges possible credential compromise and asks a reasonable follow-up about account access. However, it omits the expected explicit instruction to stop using the suspicious link and does not clearly call for immediate technician investigation or session revocation; the statement that a review will begin is vague and may imply unperformed follow-up. These are meaningful omissions for a possible credential-theft incident, though the core safety advice is sound.",
+        "passes_provisional_threshold": false
+      },
+      "assessment_consistency": {
+        "state": "assessed",
+        "score": 0.9,
+        "reason": "The draft treats the report as a credential-compromise security incident, urging immediate password change and account access confirmation, which aligns with the security-focused, urgent, immediate assessment. It does not downplay urgency or contradict the security handling; the only minor limitation is that it does not mention revoking active sessions or other response steps, but that is not a substantive contradiction.",
+        "passes_provisional_threshold": true
+      }
+    },
+    "status": "recorded demonstration within measured run",
+    "provenance": {
+      "status": "measured",
+      "source": "data/evals-af9f2eef-b336-4253-a6a9-c9474bdcd2a6.json",
+      "artifactSha256": "b5deef6d31313022f66340c574e57eaf8d34f38901ab664d75bb93ac5c1bb7ce",
+      "experimentId": "cdaf1d390106c552",
+      "recordedAt": "2026-10-14T08:54:43.698246+00:00",
+      "savedArtifactAvailable": true,
+      "appliesToEvaluationSet": true
+    }
+  },
+  "assets": [
+    {
+      "file": "images/console.png",
+      "source": "docs/images/console.png",
+      "width": 1440,
+      "height": 1000,
+      "role": "Existing synthetic technician workbench screenshot, not an evaluation-run capture",
+      "edits": "None",
+      "publicationReview": "Synthetic names and example.test address; no real credentials visible. Project-owned asset; source repository has no explicit license file."
+    }
+  ]
+}
