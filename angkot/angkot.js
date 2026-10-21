@@ -51,6 +51,16 @@
     el._raf = requestAnimationFrame(step);
   }
 
+  /* ---------------- Name letters ---------------- */
+  const nameEl = $(".ride__name");
+  let letterIdx = 0;
+  $$(".line > span", nameEl).forEach((span) => {
+    const txt = span.textContent;
+    span.textContent = "";
+    [...txt].forEach((ch) => { const s = document.createElement("span"); s.className = "ch"; s.style.setProperty("--i", letterIdx++); s.setAttribute("aria-hidden", "true"); s.textContent = ch; span.appendChild(s); });
+  });
+  setTimeout(() => nameEl.classList.add("is-landed"), 3200);
+
   /* ---------------- Loader ---------------- */
   const loader = $("#loader");
   const fontsReady = Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise((r) => setTimeout(r, 2500))]);
@@ -58,7 +68,7 @@
     loader.classList.add("is-done");
     root.classList.add("is-ready");
     setTimeout(() => loader.remove(), 1400);
-    ledSet($("#busLed"), "APRI RACHMADI", 900);
+    ledSet($("#busLed"), "RUTE 07 / INDONESIA", 900);
   });
 
   /* ---------------- Jakarta clock ---------------- */
@@ -87,6 +97,45 @@
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${parts.join("")}</svg>`;
     return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
   }
+  function landmarkTile() {
+    const W = 2800, H = 420, P = [], f = "#8d3a5e", lit = "#ffd45e";
+    let seed = 5; const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+    const windows = (x, y, w, h) => { for (let wy = y + 12; wy < y + h - 8; wy += 15) for (let wx = x + 7; wx < x + w - 8; wx += 12) if (rnd() < 0.34) P.push(`<rect x="${wx}" y="${wy}" width="5" height="7" fill="${lit}" opacity=".7"/>`); };
+    const wisma = (x) => { const w = 72, h = 300, y = H - h; P.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}"/><rect x="${x + 10}" y="${y - 26}" width="${w - 20}" height="26" fill="${f}"/><rect x="${x + 22}" y="${y - 46}" width="${w - 44}" height="20" fill="${f}"/><path d="M${x + w / 2 - 6} ${y - 46}L${x + w / 2} ${y - 118}L${x + w / 2 + 6} ${y - 46}Z" fill="${f}"/>`); windows(x, y, w, h); };
+    const glass = (x) => { const w = 60, h = 350, y = H - h; P.push(`<path d="M${x} ${H}V${y + 34}L${x + w} ${y}V${H}Z" fill="${f}"/><rect x="${x + w / 2 - 2}" y="${y - 40}" width="4" height="48" fill="${f}"/>`); windows(x, y + 30, w, h - 30); };
+    const twin = (x) => { P.push(`<rect x="${x}" y="${H - 270}" width="46" height="270" fill="${f}"/><rect x="${x + 70}" y="${H - 236}" width="46" height="236" fill="${f}"/><rect x="${x + 46}" y="${H - 176}" width="24" height="16" fill="${f}"/><rect x="${x - 2}" y="${H - 276}" width="50" height="8" fill="${f}"/><rect x="${x + 68}" y="${H - 242}" width="50" height="8" fill="${f}"/>`); windows(x, H - 270, 46, 270); windows(x + 70, H - 236, 46, 236); };
+    const stepped = (x) => { P.push(`<rect x="${x}" y="${H - 210}" width="100" height="210" fill="${f}"/><rect x="${x + 16}" y="${H - 262}" width="68" height="52" fill="${f}"/><rect x="${x + 32}" y="${H - 304}" width="36" height="42" fill="${f}"/><rect x="${x + 48}" y="${H - 350}" width="4" height="46" fill="${f}"/>`); windows(x, H - 210, 100, 210); };
+    const monas = (cx) => {
+      P.push(`<circle cx="${cx}" cy="${H - 360}" r="58" fill="#ffc61a" opacity=".28"/>`);
+      P.push(`<rect x="${cx - 160}" y="${H - 12}" width="320" height="12" fill="${f}"/><rect x="${cx - 108}" y="${H - 34}" width="216" height="22" fill="${f}"/><rect x="${cx - 80}" y="${H - 70}" width="160" height="36" fill="${f}"/>`);
+      P.push(`<path d="M${cx - 24} ${H - 70}L${cx + 24} ${H - 70}L${cx + 11} ${H - 300}L${cx - 11} ${H - 300}Z" fill="${f}"/>`);
+      P.push(`<path d="M${cx - 38} ${H - 316}L${cx + 38} ${H - 316}L${cx + 22} ${H - 294}L${cx - 22} ${H - 294}Z" fill="${f}"/>`);
+      P.push(`<path d="M${cx} ${H - 398}C${cx + 17} ${H - 372} ${cx + 22} ${H - 350} ${cx + 14} ${H - 332}C${cx + 8} ${H - 320} ${cx - 8} ${H - 320} ${cx - 14} ${H - 332}C${cx - 22} ${H - 350} ${cx - 17} ${H - 372} ${cx} ${H - 398}Z" fill="#ffc61a"/><path d="M${cx} ${H - 372}C${cx + 8} ${H - 358} ${cx + 9} ${H - 346} ${cx + 5} ${H - 338}C${cx + 2} ${H - 332} ${cx - 2} ${H - 332} ${cx - 5} ${H - 338}C${cx - 9} ${H - 346} ${cx - 8} ${H - 358} ${cx} ${H - 372}Z" fill="#fff3a8"/>`);
+    };
+    // low filler blocks so the landmarks stand in a skyline
+    for (let x = 0; x < W;) { const w = 50 + rnd() * 80, h = 70 + rnd() * 110; P.push(`<rect x="${x}" y="${H - h}" width="${w}" height="${h}" fill="${f}"/>`); x += w + rnd() * 10; }
+    wisma(200); glass(520); twin(820); stepped(1960); monas(1400); glass(2300); wisma(2560);
+    return `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${P.join("")}</svg>`)}")`;
+  }
+  function roadsideTile() {
+    const f = "#1f1319", W = 1600, H = 220, P = [];
+    const lamp = (x) => P.push(`<rect x="${x}" y="40" width="7" height="${H - 40}" fill="${f}"/><path d="M${x + 3} 44h46v7h-46z" fill="${f}"/><rect x="${x + 40}" y="50" width="22" height="9" rx="3" fill="${f}"/><circle cx="${x + 51}" cy="66" r="15" fill="#ffd45e" opacity=".55"/>`);
+    const palm = (x, h) => P.push(`<path d="M${x} ${H}C${x + 6} ${H - h * .5} ${x - 4} ${H - h * .8} ${x + 8} ${H - h}" stroke="${f}" stroke-width="8" fill="none"/><path d="M${x + 8} ${H - h}c-36-8-60 6-74 28 24-10 46-14 74-8zM${x + 8} ${H - h}c32-14 60-4 76 18-24-8-50-8-76-2zM${x + 8} ${H - h}c-8-28 6-52 28-62-4 26-12 44-28 62zM${x + 8} ${H - h}c10-30-2-54-24-66 2 28 8 46 24 66z" fill="${f}"/>`);
+    const warung = (x) => {
+      let st = ""; for (let i = 0; i < 8; i++) st += `<path d="M${x + i * 22} 96h22l-3 22h-22z" fill="${i % 2 ? "#f4f1e6" : "#ff4122"}"/>`;
+      P.push(`<rect x="${x + 6}" y="118" width="164" height="${H - 118}" fill="${f}"/>${st}<rect x="${x + 6}" y="92" width="170" height="8" fill="${f}"/><rect x="${x + 22}" y="132" width="60" height="34" fill="#ffd45e" opacity=".75"/><rect x="${x + 96}" y="140" width="56" height="${H - 140}" fill="#3a2630"/><circle cx="${x + 150}" cy="86" r="5" fill="#ffd45e"/>`);
+    };
+    const halte = (x) => P.push(`<rect x="${x}" y="80" width="150" height="8" fill="${f}"/><rect x="${x + 6}" y="86" width="6" height="${H - 86}" fill="${f}"/><rect x="${x + 138}" y="86" width="6" height="${H - 86}" fill="${f}"/><rect x="${x + 30}" y="150" width="90" height="10" fill="${f}"/><rect x="${x + 40}" y="50" width="70" height="26" rx="4" fill="#2457ff"/><rect x="${x + 56}" y="58" width="38" height="10" fill="#f4f1e6"/>`);
+    lamp(130); palm(380, 190); warung(520); lamp(880); palm(1050, 170); palm(1480, 150); lamp(1300);
+    return `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${P.join("")}</svg>`)}")`;
+  }
+  const skyLm = $("#skyLm");
+  skyLm.style.backgroundImage = landmarkTile();
+  skyLm.style.backgroundSize = "auto 100%";
+  const starsEl = $("#stars");
+  { const r = mulberry(77); for (let i = 0; i < 46; i++) { const s = document.createElement("i"); s.style.left = (r() * 100).toFixed(1) + "%"; s.style.top = (r() * 100).toFixed(1) + "%"; s.style.animationDelay = (-r() * 3).toFixed(2) + "s"; if (r() > .7) { s.style.width = s.style.height = "4px"; } starsEl.appendChild(s); } }
+  const roadside = $("#roadside");
+  roadside.style.backgroundImage = roadsideTile();
   const skyFar = $("#skyFar"), skyNear = $("#skyNear");
   skyFar.style.backgroundImage = skyline(7, { min: 90, max: 240, fill: "#9a3d63", windows: false, deco: false });
   skyNear.style.backgroundImage = skyline(21, { min: 50, max: 170, fill: "#2a1822", windows: true, deco: true });
@@ -239,7 +288,7 @@
     if (o) { openSheet(o.dataset.open); return; }
     if (e.target.closest("[data-close]") || e.target === sheet) sheet.close();
   });
-  sheet.addEventListener("close", () => { if (lastFocus && lastFocus.focus) lastFocus.focus(); });
+  sheet.addEventListener("close", () => { if (lastFocus && lastFocus.focus && $("#palette").hidden) lastFocus.focus(); });
 
   /* ---------------- Words fill (about) ---------------- */
   const fillEl = $("#fill");
@@ -255,8 +304,10 @@
   const stopLinks = $$(".route__stop");
   const lineRoute = $("#lineRoute");
   const cards = $$(".card", stack);
+  const BAND = ["#ff4122", "#ff4122", "#ffc61a", "#0fb5a6", "#ff8fb8", "#ffc61a"];
   let ledState = "";
   let ticking = false;
+  let heroP = 0;
 
   function update() {
     ticking = false;
@@ -268,11 +319,8 @@
     const span = ride.offsetHeight - vh;
     const p = plain ? 0 : clamp(span > 0 ? y / span : 0);
     stage.style.setProperty("--p", p.toFixed(4));
-    skyFar.style.setProperty("--sx", (-p * 380).toFixed(1));
-    skyNear.style.setProperty("--sx", (-p * 1100).toFixed(1));
-    stage.style.setProperty("--wheel", (0.7 - p * 0.42).toFixed(2) + "s");
-    stage.style.setProperty("--road-speed", (1.1 - p * 0.7).toFixed(2) + "s");
-    const want = p > 0.18 ? "RUTE 07 > WORK" : "APRI RACHMADI";
+    heroP = p;
+    const want = p > 0.18 ? "NEXT STOP: WORK" : "RUTE 07 / INDONESIA";
     if (want !== ledState && root.classList.contains("is-ready")) { ledState = want; ledSet(busLed, want); }
 
     // route progress + active stop
@@ -284,6 +332,7 @@
     else if (ref > tops[0]) { const i = tops.findIndex((t, k) => ref >= t && ref < tops[k + 1]); rp = (i + (ref - tops[i]) / (tops[i + 1] - tops[i])) / (tops.length - 1); }
     routeEl.style.setProperty("--rp", rp.toFixed(4));
     stopLinks.forEach((a, i) => a.classList.toggle("is-active", i === active));
+    root.style.setProperty("--band", BAND[active + 1]);
 
     // experience rail
     const lr = lineRoute.getBoundingClientRect();
@@ -294,6 +343,8 @@
     const fp = plain ? 1 : clamp((vh * 0.86 - fr.top) / (fr.height + vh * 0.42));
     const on = Math.round(fp * words.length);
     words.forEach((w, i) => w.classList.toggle("on", i < on));
+
+    updateDeco();
 
     // stacked cards
     const wide = innerWidth > 920 && !plain;
@@ -307,10 +358,184 @@
       c.style.filter = `brightness(${(1 - 0.12 * t).toFixed(3)})`;
     });
   }
+  /* ---------------- Floating shapes (generated per stop) ---------------- */
+  const SHAPES = ["star", "ring", "dot", "plus", "wave", "star", "ring", "dot"];
+  const SYM = { star: "✺", plus: "+" };
+  const WAVE = '<svg viewBox="0 0 80 20"><path d="M2 12q9-14 19 0t19 0 19 0 19 0" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>';
+  const decos = [];
+  $$(".stop").forEach((sec, si) => {
+    const wrap = document.createElement("div"); wrap.className = "deco"; wrap.setAttribute("aria-hidden", "true");
+    const rng = mulberry(100 + si * 17);
+    SHAPES.forEach((type, k) => {
+      const i = document.createElement("i");
+      i.className = type; i.style.setProperty("--x", (rng() * 94).toFixed(1) + "%"); i.style.setProperty("--y", (rng() * 92).toFixed(1) + "%");
+      i.style.setProperty("--sz", (type === "star" ? 30 + rng() * 40 : 22 + rng() * 42).toFixed(0) + "px"); i.style.setProperty("--ft", (4 + rng() * 5).toFixed(1) + "s");
+      if (k % 3 === 1) i.style.color = "var(--red)"; if (k % 4 === 2) i.style.color = "var(--cream)";
+      if (type === "wave") i.innerHTML = WAVE; else if (SYM[type]) i.textContent = SYM[type];
+      wrap.appendChild(i); decos.push({ el: i, sec, speed: (rng() - 0.5) * 0.5 });
+    });
+    sec.prepend(wrap);
+  });
+  function updateDeco() {
+    if (isPlain()) return;
+    const vh = innerHeight;
+    const cache = new Map();
+    decos.forEach((d) => {
+      let off = cache.get(d.sec);
+      if (off === undefined) { const r = d.sec.getBoundingClientRect(); off = r.top + r.height / 2 - vh / 2; cache.set(d.sec, off); }
+      d.el.style.transform = `translateY(${(off * d.speed).toFixed(1)}px)`;
+    });
+  }
+
   const queue = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
   addEventListener("scroll", queue, { passive: true });
   addEventListener("resize", queue);
   update();
+
+  /* ---------------- Live scene: exhaust, traffic, velocity ---------------- */
+  const halteEl = $("#halte");
+  const smokeEl = $("#smoke"), traffic = $("#traffic"), honk = $("#honk"), busBody = $("#busBody");
+  const pick = (a) => a[(Math.random() * a.length) | 0];
+  let vel = 0, lastY = scrollY, drift = 0, accum = 0, heroVisible = true, lastT = performance.now();
+  function puff() {
+    const s = document.createElement("span");
+    s.className = "puff"; s.dataset.dark = vel > 0.22 ? "1" : "0";
+    s.style.cssText = `--s:${(10 + Math.random() * 10).toFixed(0)}px;--dx:${(-70 - Math.random() * 110).toFixed(0)}px;--dy:${(-26 - Math.random() * 54).toFixed(0)}px`;
+    s.addEventListener("animationend", () => s.remove(), { once: true });
+    smokeEl.appendChild(s);
+  }
+  function lifeLoop(now) {
+    requestAnimationFrame(lifeLoop);
+    const dt = Math.min(0.05, ((now || performance.now()) - lastT) / 1000); lastT = now || performance.now();
+    const dy = Math.abs(scrollY - lastY); lastY = scrollY;
+    vel += (Math.min(dy, 90) / 90 - vel) * 0.1;
+    root.style.setProperty("--v", isPlain() ? "0" : vel.toFixed(3));
+    if (isPlain()) return;
+    const r = stage.getBoundingClientRect();
+    heroVisible = r.bottom > 0 && r.top < innerHeight;
+    if (!heroVisible) return;
+    const roadSec = Math.max(0.16, 1.1 - heroP * 0.5 - vel * 0.9);
+    drift += (150 / roadSec) * dt;                 // ground speed in px/s: the road dashes cover 150px per cycle
+    skyFar.style.setProperty("--sx", (-heroP * 380 - drift * 0.14).toFixed(1));
+    skyNear.style.setProperty("--sx", (-heroP * 1100 - drift * 0.5).toFixed(1));
+    const lmBase = -1400 * (skyLm.offsetHeight / 420) + innerWidth * 0.405;
+    skyLm.style.setProperty("--sx", (lmBase - heroP * 700 - drift * 0.28).toFixed(1));
+    const ground = heroP * 1700 + drift;
+    roadside.style.setProperty("--sx", (-ground).toFixed(1));
+    { const hw = halteEl.offsetWidth, period = Math.max(2300, innerWidth + hw + 700); halteEl.style.transform = `translateX(${(((((560 - ground + hw) % period) + period) % period) - hw).toFixed(1)}px)`; }
+    stage.style.setProperty("--wheel", Math.max(0.2, 0.7 - heroP * 0.3 - vel * 0.4).toFixed(2) + "s");
+    stage.style.setProperty("--road-speed", Math.max(0.16, 1.1 - heroP * 0.5 - vel * 0.9).toFixed(2) + "s");
+    if (heroP < 0.85) { accum = Math.min(accum + 0.06 + vel * 0.9, 3); while (accum > 1 && smokeEl.childElementCount < 36) { accum -= 1; puff(); } }
+  }
+  requestAnimationFrame(lifeLoop);
+
+  const bikeSVG = (c, h, pax) => {
+    const ink = "#151412", jeans = "#27408f", skin = "#c98f5e", jacket = "#2fae5b";
+    const limb = (d, w, col) => `<path d="${d}" fill="none" stroke="${ink}" stroke-width="${w + 4}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+    const passenger = pax ? `<path d="M26 50Q26 28 40 22L50 28Q44 36 44 50Z" fill="#ff8fb8" stroke="${ink}" stroke-width="3"/><circle cx="38" cy="14" r="9" fill="#e0457b" stroke="${ink}" stroke-width="3"/><circle cx="41" cy="15" r="5.2" fill="${skin}"/>` : `<path d="M32 22H58V46H32Z" fill="${jacket}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/><path d="M32 32H58" stroke="#f4f1e6" stroke-width="4"/>`;
+    return `<svg viewBox="0 -6 150 106" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="76" cy="91" rx="64" ry="4" fill="rgba(21,20,18,.25)"/>
+    <g class="bw"><circle cx="30" cy="74" r="16" fill="${ink}"/><circle cx="30" cy="74" r="6.5" fill="#d9d4c7"/><path d="M30 62V86M18 74H42" stroke="#8d887c" stroke-width="2"/></g>
+    <g class="bw"><circle cx="122" cy="74" r="16" fill="${ink}"/><circle cx="122" cy="74" r="6.5" fill="#d9d4c7"/><path d="M122 62V86M110 74H134" stroke="#8d887c" stroke-width="2"/></g>
+    ${passenger}
+    <path d="M108 36L124 74" stroke="${ink}" stroke-width="6" stroke-linecap="round"/>
+    <path d="M10 70C8 52 22 46 38 46H60L68 60L60 70L40 74H24C16 74 11 73 10 70Z" fill="${c}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M22 45Q46 35 72 45L70 50H24Z" fill="#2b1d17" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M62 62H100L104 70L60 73Z" fill="${c}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M96 70L100 34L112 30L117 54L110 72Z" fill="${c}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M111 66Q124 52 141 66L137 70Q124 60 115 70Z" fill="${c}" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M102 32L119 27M106 29L102 19" stroke="${ink}" stroke-width="5" stroke-linecap="round"/>
+    <ellipse cx="100" cy="15" rx="5" ry="3.5" fill="#bfe6fa" stroke="${ink}" stroke-width="2"/>
+    <circle cx="117" cy="41" r="6.5" fill="#fff6bf" stroke="${ink}" stroke-width="2.5"/>
+    <rect x="5" y="52" width="6" height="11" rx="2" fill="#ff2e2e" stroke="${ink}" stroke-width="2"/>
+    <g class="rider">
+      ${limb("M54 49L83 55", 9, jeans)}${limb("M83 55L85 69", 8, jeans)}<ellipse cx="90" cy="71" rx="9" ry="4.2" fill="${ink}"/>
+      <path d="M44 50Q46 24 64 18L77 25Q69 33 67 50Z" fill="${jacket}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>
+      ${limb("M68 26L104 33", 7, jacket)}<circle cx="106" cy="33" r="4.5" fill="${skin}" stroke="${ink}" stroke-width="2"/>
+      <circle cx="72" cy="11" r="10.5" fill="${h}" stroke="${ink}" stroke-width="3"/>
+      <path d="M77 6Q89 6 89 15L77 16Z" fill="${ink}"/><path d="M78 8Q85 8 86 12" stroke="#7fd0f5" stroke-width="2" fill="none"/>
+    </g>
+  </svg>`;
+  };
+  const vanSVG = (c) => `<svg viewBox="0 0 120 60"><path d="M6 46V16Q6 10 12 10H80Q86 10 90 16L98 28H108Q114 28 114 36V46Z" fill="${c}" stroke="#151412" stroke-width="3"/><rect x="12" y="16" width="16" height="12" rx="2" fill="#dff1fa" stroke="#151412" stroke-width="2"/><rect x="32" y="16" width="16" height="12" rx="2" fill="#dff1fa" stroke="#151412" stroke-width="2"/><rect x="52" y="16" width="16" height="12" rx="2" fill="#dff1fa" stroke="#151412" stroke-width="2"/><path d="M72 16H82L90 28H72Z" fill="#dff1fa" stroke="#151412" stroke-width="2"/><rect x="6" y="34" width="108" height="6" fill="#f4f1e6"/><circle cx="28" cy="48" r="9" fill="#151412"/><circle cx="92" cy="48" r="9" fill="#151412"/><circle cx="28" cy="48" r="3.5" fill="#d9d4c7"/><circle cx="92" cy="48" r="3.5" fill="#d9d4c7"/></svg>`;
+  const HELMETS = ["#ff4122", "#ffc61a", "#0fb5a6", "#ff8fb8", "#7f9bff"];
+  const VANS = ["#2fae5b", "#ffc61a", "#ff8fb8", "#f4f1e6", "#ff7a2f"];
+  function spawn() {
+    if (!isPlain() && !document.hidden && heroVisible && heroP < 0.9 && traffic.childElementCount < 2) {
+      const nearCount = traffic.querySelectorAll(".veh--near").length, farCount = traffic.querySelectorAll(".veh--far").length;
+      let near = Math.random() < 0.62; if (near && nearCount >= 1) near = false; if (!near && farCount >= 1) near = nearCount < 1;
+      const el = document.createElement("div");
+      el.className = "veh " + (near ? "veh--near" : "veh--far");
+      el.innerHTML = near ? bikeSVG(pick(HELMETS), pick(HELMETS), Math.random() < 0.38) : vanSVG(pick(VANS));
+      el.style.animationDuration = (near ? 7 + Math.random() * 4 : 12 + Math.random() * 5).toFixed(1) + "s";
+      el.addEventListener("animationend", () => el.remove(), { once: true });
+      traffic.appendChild(el);
+    }
+    setTimeout(spawn, 1500 + Math.random() * 3500);
+  }
+  setTimeout(spawn, 1800);
+
+  /* honk the horn: dual-tone disc horn (~355 + 430 Hz, the flat-diaphragm pair most cars and angkot use) */
+  let actx;
+  function horn(t0, dur, f1, f2) {
+    [f1, f2].forEach((f) => ["sawtooth", "square"].forEach((type, k) => {
+      const o = actx.createOscillator(), g = actx.createGain(), lp = actx.createBiquadFilter();
+      o.type = type; o.frequency.setValueAtTime(f * 0.97, t0); o.frequency.exponentialRampToValueAtTime(f * (k ? 1.004 : 1), t0 + 0.035);
+      lp.type = "lowpass"; lp.frequency.value = 2400; lp.Q.value = 1.5;
+      const peak = k ? 0.018 : 0.032;
+      g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(peak, t0 + 0.012); g.gain.setValueAtTime(peak, t0 + dur - 0.025); g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      o.connect(lp).connect(g).connect(actx.destination); o.start(t0); o.stop(t0 + dur + 0.03);
+    }));
+  }
+  function telolet(t0) {
+    // "Om Telolet Om": the musical air horn on Indonesian buses, here as a quick brassy phrase
+    [[392, 0.13], [494, 0.13], [587, 0.13], [494, 0.13], [587, 0.5]].reduce((t, [f, d]) => {
+      [f, f * 1.5].forEach((ff) => {
+        const o = actx.createOscillator(), g = actx.createGain(), lp = actx.createBiquadFilter();
+        o.type = "sawtooth"; o.frequency.value = ff; lp.type = "lowpass"; lp.frequency.value = 1700;
+        g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.035, t + 0.02); g.gain.setValueAtTime(0.035, t + d - 0.03); g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+        o.connect(lp).connect(g).connect(actx.destination); o.start(t); o.stop(t + d + 0.02);
+      });
+      return t + d + 0.02;
+    }, t0);
+  }
+  function beep(special) {
+    if (isPlain()) return;
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      const t = actx.currentTime;
+      if (special) telolet(t); else { horn(t, 0.17, 355, 430); horn(t + 0.26, 0.17, 355, 430); }
+    } catch { /* audio unavailable */ }
+  }
+  const clicks = [];
+  busBody.addEventListener("click", () => {
+    const now = performance.now(); clicks.push(now); while (clicks.length && now - clicks[0] > 1400) clicks.shift();
+    const special = clicks.length >= 3; if (special) clicks.length = 0;
+    honk.textContent = special ? "OM TELOLET OM!" : "TIN TIN!";
+    honk.classList.remove("on"); busBody.classList.remove("hop"); void honk.offsetWidth;
+    honk.classList.add("on"); busBody.classList.add("hop"); beep(special);
+    for (let i = 0; i < (special ? 12 : 6); i++) setTimeout(puff, i * 40);
+  });
+
+  /* click sparks + ticket tilt */
+  const SPARK = ["#ff4122", "#ffc61a", "#0fb5a6", "#ff8fb8", "#f4f1e6"];
+  addEventListener("pointerdown", (e) => {
+    if (isPlain() || e.target.closest("input, textarea, dialog, .palette")) return;
+    for (let i = 0; i < 9; i++) {
+      const s = document.createElement("i"), a = (Math.PI * 2 * i) / 9 + Math.random() * 0.4, d = 34 + Math.random() * 36;
+      s.className = "spark"; s.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;--x:${(Math.cos(a) * d).toFixed(0)}px;--y:${(Math.sin(a) * d).toFixed(0)}px;background:${pick(SPARK)}`;
+      s.addEventListener("animationend", () => s.remove(), { once: true });
+      document.body.appendChild(s);
+    }
+  });
+  document.addEventListener("pointermove", (e) => {
+    const t = e.target.closest && e.target.closest(".tk");
+    if (!t || isPlain() || e.pointerType === "touch") return;
+    const r = t.getBoundingClientRect();
+    t.style.setProperty("--rx", (((e.clientY - r.top) / r.height - 0.5) * -9).toFixed(1) + "deg");
+    t.style.setProperty("--ry", (((e.clientX - r.left) / r.width - 0.5) * 11).toFixed(1) + "deg");
+  });
+  document.addEventListener("pointerout", (e) => { const t = e.target.closest && e.target.closest(".tk"); if (t) { t.style.removeProperty("--rx"); t.style.removeProperty("--ry"); } });
 
   /* ---------------- Cursor ---------------- */
   if (finePointer) {

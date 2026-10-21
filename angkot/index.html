@@ -47,13 +47,26 @@
     <section class="ride" id="ride" aria-label="Introduction">
       <div class="ride__stage" id="rideStage">
         <div class="sky">
+          <div class="stars" id="stars" aria-hidden="true"></div>
           <div class="sun" aria-hidden="true"></div>
+          <div class="clouds" aria-hidden="true">
+            <svg class="cloud c1" viewBox="0 -4 120 56"><path d="M20 44a16 16 0 0 1 2-32 22 22 0 0 1 42-4 18 18 0 0 1 30 10 14 14 0 0 1 8 26z" fill="#fff8e6" stroke="#151412" stroke-width="3" stroke-linejoin="round"/></svg>
+            <svg class="cloud c2" viewBox="0 -4 120 56"><path d="M20 44a16 16 0 0 1 2-32 22 22 0 0 1 42-4 18 18 0 0 1 30 10 14 14 0 0 1 8 26z" fill="#fff8e6" stroke="#151412" stroke-width="3" stroke-linejoin="round"/></svg>
+            <svg class="cloud c3" viewBox="0 -4 120 56"><path d="M20 44a16 16 0 0 1 2-32 22 22 0 0 1 42-4 18 18 0 0 1 30 10 14 14 0 0 1 8 26z" fill="#fff8e6" stroke="#151412" stroke-width="3" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="birds" aria-hidden="true">
+            <i style="--t:19s;--d:-2s;--y:15%"><svg viewBox="0 0 34 14"><path d="M1 12Q9-2 17 10Q25-2 33 12" fill="none" stroke="#151412" stroke-width="3" stroke-linecap="round"/></svg></i>
+            <i style="--t:25s;--d:-11s;--y:22%"><svg viewBox="0 0 34 14"><path d="M1 12Q9-2 17 10Q25-2 33 12" fill="none" stroke="#151412" stroke-width="3" stroke-linecap="round"/></svg></i>
+            <i style="--t:22s;--d:-17s;--y:12%"><svg viewBox="0 0 34 14"><path d="M1 12Q9-2 17 10Q25-2 33 12" fill="none" stroke="#151412" stroke-width="3" stroke-linecap="round"/></svg></i>
+          </div>
         </div>
         <div class="skyline skyline--far" id="skyFar" aria-hidden="true"></div>
+        <div class="skyline skyline--lm" id="skyLm" aria-hidden="true"></div>
         <div class="skyline skyline--near" id="skyNear" aria-hidden="true"></div>
+        <div class="roadside" id="roadside" aria-hidden="true"></div>
 
         <div class="ride__top">
-          <span class="tag">Rute 07 · Indonesia</span>
+          <span class="led led--tag" id="busLed">RUTE 07 / INDONESIA</span>
           <span class="tag tag--clock">Jakarta <b id="clock">--:--:--</b> WIB</span>
         </div>
 
@@ -70,71 +83,111 @@
           </div>
         </div>
 
+        <div class="halte" id="halte" aria-hidden="true">
+          <div class="halte__sign"><div class="halte__plate"><svg viewBox="0 0 40 40"><rect x="7" y="8" width="26" height="22" rx="5" fill="#f4f1e6"/><rect x="10" y="11" width="20" height="9" rx="2" fill="#2457ff"/><circle cx="14" cy="30" r="3.2" fill="#f4f1e6" stroke="#2457ff" stroke-width="2"/><circle cx="26" cy="30" r="3.2" fill="#f4f1e6" stroke="#2457ff" stroke-width="2"/><rect x="11" y="23" width="18" height="2.5" rx="1" fill="#2457ff"/></svg></div><span class="halte__tag">HALTE</span><i class="halte__pole"></i></div>
+          <div class="halte__shelter">
+            <div class="halte__roof"><b>HALTE</b><span>RUTE 07</span></div>
+            <div class="halte__wall"></div>
+            <svg class="halte__people" viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="96" y="92" width="136" height="9" rx="3" fill="#151412"/><rect x="104" y="100" width="6" height="26" fill="#151412"/><rect x="218" y="100" width="6" height="26" fill="#151412"/>
+              <!-- standing person waving -->
+              <g class="hp hp1">
+                <rect x="40" y="82" width="11" height="42" rx="4" fill="#27408f" stroke="#151412" stroke-width="3"/><rect x="55" y="82" width="11" height="42" rx="4" fill="#27408f" stroke="#151412" stroke-width="3"/>
+                <path d="M34 84V50Q34 38 46 38H60Q72 38 72 50V84Z" fill="#ff4122" stroke="#151412" stroke-width="3" stroke-linejoin="round"/>
+                <circle cx="53" cy="24" r="12" fill="#c98f5e" stroke="#151412" stroke-width="3"/><path d="M41 22Q42 10 54 11Q65 12 65 22Q58 17 41 22Z" fill="#151412"/>
+                <path d="M34 52L26 70" stroke="#151412" stroke-width="11" stroke-linecap="round"/><path d="M34 52L26 70" stroke="#ff4122" stroke-width="6" stroke-linecap="round"/>
+                <g class="wave"><path d="M72 50L88 22" stroke="#151412" stroke-width="11" stroke-linecap="round"/><path d="M72 50L88 22" stroke="#ff4122" stroke-width="6" stroke-linecap="round"/><circle cx="89" cy="19" r="6" fill="#c98f5e" stroke="#151412" stroke-width="2.5"/></g>
+              </g>
+              <!-- seated person with phone -->
+              <g class="hp hp2">
+                <path d="M138 90V60Q138 50 148 50H166Q176 50 176 60V90Z" fill="#0fb5a6" stroke="#151412" stroke-width="3" stroke-linejoin="round"/>
+                <circle cx="158" cy="38" r="11" fill="#c98f5e" stroke="#151412" stroke-width="3"/><path d="M146 38Q146 22 158 22Q172 22 171 38L168 42Q158 30 146 42Z" fill="#ffc61a" stroke="#151412" stroke-width="2.5"/>
+                <path d="M146 92H184V104H146Z" fill="#27408f" stroke="#151412" stroke-width="3"/><path d="M184 92L194 118" stroke="#151412" stroke-width="10" stroke-linecap="round"/><path d="M184 92L194 118" stroke="#27408f" stroke-width="5" stroke-linecap="round"/>
+                <path d="M170 60L188 74" stroke="#151412" stroke-width="9" stroke-linecap="round"/><path d="M170 60L188 74" stroke="#0fb5a6" stroke-width="5" stroke-linecap="round"/><rect x="186" y="66" width="9" height="15" rx="2" fill="#151412"/><rect x="188" y="68" width="5" height="10" fill="#7fd0f5"/>
+              </g>
+              <!-- child on the bench end -->
+              <g class="hp hp3"><circle cx="212" cy="62" r="8" fill="#c98f5e" stroke="#151412" stroke-width="2.5"/><path d="M200 92V76Q200 70 206 70H218Q224 70 224 76V92Z" fill="#ff8fb8" stroke="#151412" stroke-width="2.5"/></g>
+            </svg>
+            <div class="halte__posts"><i></i><i></i></div>
+          </div>
+        </div>
         <div class="bus" id="bus" aria-hidden="true">
-          <div class="bus__body" id="busBody">
-            <div class="led led--bus" id="busLed">APRI RACHMADI</div>
+          <div class="bus__lean">
+          <div class="bus__body" id="busBody" data-cursor="HONK">
+            <div class="speedlines"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="smoke" id="smoke"></div>
+            <div class="honk" id="honk">TIN TIN!</div>
             <svg class="bus__svg" viewBox="0 0 660 300" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="gBody" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#ff5a36"/><stop offset="1" stop-color="#e5251a"/>
-                </linearGradient>
-                <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#bfe9ff"/><stop offset="1" stop-color="#5fb4e6"/>
-                </linearGradient>
-                <radialGradient id="gAir" cx=".25" cy=".2" r=".9">
-                  <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/>
-                </radialGradient>
-                <clipPath id="cBody"><path d="M30 238V112Q30 94 52 94H462Q482 94 494 110L552 170Q570 174 592 180Q618 188 620 212V238Z"/></clipPath>
+                <linearGradient id="gBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9dcf7"/><stop offset="1" stop-color="#6fb5e3"/></linearGradient>
+                <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e3f3fb"/><stop offset="1" stop-color="#8db6cc"/></linearGradient>
+                <clipPath id="cWin"><rect x="50" y="110" width="76" height="50" rx="7"/><rect x="134" y="110" width="76" height="50" rx="7"/><rect x="218" y="110" width="76" height="50" rx="7"/><path d="M346 110H436Q446 110 452 118L478 152H346Z"/></clipPath>
+                <clipPath id="cBody"><path d="M30 236V108Q30 94 46 94H436Q452 94 460 106L498 152Q502 158 510 158H580Q604 158 608 180V236Z"/></clipPath>
               </defs>
-              <ellipse cx="325" cy="286" rx="300" ry="9" fill="rgba(21,20,18,.28)"/>
+              <ellipse cx="325" cy="288" rx="300" ry="8" fill="rgba(21,20,18,.28)"/>
               <!-- roof rack -->
-              <g stroke="#151412" stroke-width="4" stroke-linecap="round">
-                <path d="M90 94V82M410 94V82"/><path d="M80 82H420"/><path d="M120 82V76M200 82V76M280 82V76M360 82V76" stroke-width="3"/>
-              </g>
-              <!-- body -->
-              <path d="M30 238V112Q30 94 52 94H462Q482 94 494 110L552 170Q570 174 592 180Q618 188 620 212V238Z" fill="url(#gBody)" stroke="#151412" stroke-width="4"/>
+              <g stroke="#151412" stroke-width="4" stroke-linecap="round"><path d="M96 94V80M388 94V80"/><path d="M80 80H404"/></g>
+              <!-- body: boxy Colt/Carry-style minibus, flat roof, short nose -->
+              <path d="M30 236V108Q30 94 46 94H436Q452 94 460 106L498 152Q502 158 510 158H580Q604 158 608 180V236Z" fill="url(#gBody)" stroke="#151412" stroke-width="4"/>
               <g clip-path="url(#cBody)">
-                <path d="M20 190C80 170 120 210 190 190S300 170 360 192 480 212 540 190 620 176 640 188V204C600 192 560 214 500 212S400 192 350 208 250 220 190 206 80 188 20 208Z" fill="#ffc61a"/>
-                <path d="M20 212C80 192 120 232 190 212S300 192 360 214 480 234 540 212 620 198 640 210V224C600 214 560 236 500 234S400 214 350 230 250 242 190 228 80 210 20 230Z" fill="#0fb5a6"/>
-                <rect x="20" y="230" width="620" height="12" fill="#151412"/>
-                <circle cx="150" cy="150" r="150" fill="url(#gAir)"/>
+                <rect x="20" y="192" width="620" height="12" fill="#f4f1e6"/>
+                <rect x="20" y="204" width="620" height="40" style="fill:var(--band,#ff4122)"/>
+                <rect x="20" y="190" width="620" height="3" fill="#151412"/>
+                <rect x="20" y="203" width="620" height="3" fill="#151412"/>
+                <path d="M498 152H590" stroke="#151412" stroke-opacity=".35" stroke-width="3"/>
               </g>
               <!-- windows -->
               <g fill="url(#gGlass)" stroke="#151412" stroke-width="4">
-                <rect x="56" y="110" width="86" height="54" rx="9"/>
-                <rect x="152" y="110" width="86" height="54" rx="9"/>
-                <rect x="248" y="110" width="86" height="54" rx="9"/>
-                <path d="M350 110H452Q464 110 472 120L512 164H350Z"/>
+                <rect x="50" y="110" width="76" height="50" rx="7"/>
+                <rect x="134" y="110" width="76" height="50" rx="7"/>
+                <rect x="218" y="110" width="76" height="50" rx="7"/>
+                <path d="M346 110H436Q446 110 452 118L478 152H346Z"/>
               </g>
-              <g stroke="#fff" stroke-opacity=".7" stroke-width="3" stroke-linecap="round"><path d="M70 150L92 122M166 150L188 122M262 150L284 122M366 150L392 122"/></g>
-              <!-- door + route badge -->
-              <path d="M350 168V232" stroke="#151412" stroke-width="3"/>
-              <circle cx="396" cy="204" r="25" fill="#f3e9d2" stroke="#151412" stroke-width="4"/>
-              <text x="396" y="214" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="30" fill="#151412">07</text>
-              <rect x="338" y="196" width="18" height="6" rx="3" fill="#151412"/>
-              <!-- slogan -->
-              <text x="196" y="221" font-family="Instrument Serif, serif" font-style="italic" font-size="29" fill="#151412">terus jalan</text>
-              <!-- stickers -->
-              <circle cx="238" cy="132" r="0" fill="none"/>
-              <g transform="rotate(-10 478 206)"><rect x="452" y="194" width="58" height="24" rx="12" fill="#ff8fb8" stroke="#151412" stroke-width="3"/><text x="481" y="211" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="13" fill="#151412">KIRI!</text></g>
-              <!-- lights + bumpers -->
-              <path d="M590 186Q606 190 610 204L596 206Z" fill="#fff6bf" stroke="#151412" stroke-width="3"/>
-              <rect x="22" y="196" width="10" height="22" rx="4" fill="#ff2e2e" stroke="#151412" stroke-width="3"/>
-              <rect x="590" y="226" width="40" height="14" rx="7" fill="#d9d4c7" stroke="#151412" stroke-width="3"/>
-              <rect x="14" y="226" width="40" height="14" rx="7" fill="#d9d4c7" stroke="#151412" stroke-width="3"/>
-              <!-- wheels -->
-              <g class="wheel" style="transform-origin:142px 244px">
-                <circle cx="142" cy="244" r="38" fill="#151412"/><circle cx="142" cy="244" r="19" fill="#d9d4c7" stroke="#151412" stroke-width="3"/>
-                <path d="M142 228V260M126 244H158M131 233L153 255M153 233L131 255" stroke="#151412" stroke-width="3" stroke-linecap="round"/>
+              <g stroke="#151412" stroke-width="3" stroke-linecap="round"><path d="M130 110V160M214 110V160"/><path d="M122 132v8M206 132v8M290 132v8" stroke-width="4"/></g>
+              <!-- people inside -->
+              <g clip-path="url(#cWin)">
+                <g class="pax pax1"><path d="M60 162Q88 124 116 162Z" fill="#e8b04a"/><path d="M73 150Q88 118 103 150L101 162H75Z" fill="#ff8fb8" stroke="#151412" stroke-width="2.5"/><circle cx="88" cy="143" r="8" fill="#c98f5e" stroke="#151412" stroke-width="2"/></g>
+                <g class="pax pax2"><path d="M146 162Q172 126 198 162Z" fill="#2457ff"/><circle cx="172" cy="144" r="10" fill="#c98f5e" stroke="#151412" stroke-width="2.5"/><path d="M161 140Q172 128 183 140Z" fill="#151412"/></g>
+                <g class="pax pax3"><path d="M244 162Q256 140 268 162Z" fill="#0fb5a6"/><circle cx="256" cy="150" r="8" fill="#c98f5e" stroke="#151412" stroke-width="2.5"/><path d="M249 148Q256 140 263 148Z" fill="#151412"/></g>
+                <g class="pax pax4"><path d="M392 156Q420 134 448 156V160H392Z" fill="#f4f1e6"/><circle cx="424" cy="132" r="12" fill="#c98f5e" stroke="#151412" stroke-width="2.5"/><rect x="411" y="116" width="26" height="10" rx="4" fill="#151412"/></g>
+                <rect class="shine" x="-90" y="100" width="34" height="80" fill="#fff" opacity=".4" transform="skewX(-18)"/>
               </g>
-              <g class="wheel" style="transform-origin:498px 244px">
-                <circle cx="498" cy="244" r="38" fill="#151412"/><circle cx="498" cy="244" r="19" fill="#d9d4c7" stroke="#151412" stroke-width="3"/>
-                <path d="M498 228V260M482 244H514M487 233L509 255M509 233L487 255" stroke="#151412" stroke-width="3" stroke-linecap="round"/>
+              <g fill="none" stroke="#151412" stroke-width="4"><rect x="50" y="110" width="76" height="50" rx="7"/><rect x="134" y="110" width="76" height="50" rx="7"/><rect x="218" y="110" width="76" height="50" rx="7"/><path d="M346 110H436Q446 110 452 118L478 152H346Z"/></g>
+              <rect x="440" y="143" width="44" height="10" rx="5" fill="#c98f5e" stroke="#151412" stroke-width="2.5"/>
+              <!-- door seam + handle -->
+              <path d="M338 106V190M470 160V190" stroke="#151412" stroke-width="3"/>
+              <rect x="350" y="170" width="20" height="6" rx="3" fill="#151412"/>
+              <!-- green route placard behind the door glass -->
+              <rect x="352" y="114" width="40" height="18" rx="3" fill="#0b2e18" stroke="#151412" stroke-width="2"/>
+              <text x="372" y="128" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="14" fill="#7dff6a">07</text>
+              <!-- band lettering + sticker -->
+              <text x="236" y="230" font-family="DM Sans, sans-serif" font-weight="700" font-size="15" letter-spacing="2.5" fill="#151412">TRAYEK 07</text>
+              <g transform="rotate(-6 80 224)"><rect x="52" y="212" width="56" height="22" rx="11" fill="#f4f1e6" stroke="#151412" stroke-width="3"/><text x="80" y="228" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="800" font-size="12" fill="#151412">KIRI!</text></g>
+              <!-- mirror, lights, grille, bumpers -->
+              <rect x="486" y="138" width="9" height="18" rx="3" fill="#151412"/>
+              <circle cx="596" cy="176" r="10" fill="#fff6bf" stroke="#151412" stroke-width="3"/>
+              <rect x="600" y="192" width="6" height="14" rx="2" fill="#151412"/>
+              <rect x="24" y="168" width="10" height="26" rx="4" fill="#ff2e2e" stroke="#151412" stroke-width="3"/>
+              <rect x="584" y="228" width="46" height="14" rx="7" fill="#d9d4c7" stroke="#151412" stroke-width="3"/>
+              <rect x="12" y="228" width="46" height="14" rx="7" fill="#d9d4c7" stroke="#151412" stroke-width="3"/>
+              <rect x="-4" y="242" width="30" height="8" rx="3.5" fill="#6b665c" stroke="#151412" stroke-width="2.5"/>
+              <!-- wheel arches + wheels -->
+              <path d="M96 240a44 44 0 0 1 88 0z" fill="#151412"/><path d="M466 240a44 44 0 0 1 88 0z" fill="#151412"/>
+              <g class="wheel" style="transform-origin:140px 246px">
+                <circle cx="140" cy="246" r="36" fill="#151412"/><circle cx="140" cy="246" r="18" fill="#d9d4c7" stroke="#151412" stroke-width="3"/>
+                <path d="M140 231V261M125 246H155M130 236L150 256M150 236L130 256" stroke="#151412" stroke-width="3" stroke-linecap="round"/>
+              </g>
+              <g class="wheel" style="transform-origin:510px 246px">
+                <circle cx="510" cy="246" r="36" fill="#151412"/><circle cx="510" cy="246" r="18" fill="#d9d4c7" stroke="#151412" stroke-width="3"/>
+                <path d="M510 231V261M495 246H525M500 236L520 256M520 236L500 256" stroke="#151412" stroke-width="3" stroke-linecap="round"/>
               </g>
             </svg>
           </div>
+          </div>
         </div>
-        <div class="road" aria-hidden="true"><div class="road__dash"></div></div>
+        <div class="traffic" id="traffic" aria-hidden="true"></div>
+        <div class="walk" aria-hidden="true"></div>
+        <div class="road" aria-hidden="true"><div class="road__dash road__dash--far"></div><div class="road__dash"></div></div>
         <a class="scrollhint" href="#work" aria-label="Scroll to the work"><span>Scroll to ride</span><i></i></a>
       </div>
     </section>
