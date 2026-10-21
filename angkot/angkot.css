@@ -262,7 +262,10 @@ kbd { font: 600 11px/1 var(--f-body); border: 2px solid currentColor; border-rad
 .wave { transform-box: view-box; transform-origin: 72px 50px; animation: wave .5s ease-in-out infinite alternate; }
 @keyframes wave { from { transform: rotate(-14deg); } to { transform: rotate(16deg); } }
 .traffic { position: absolute; inset: 0; pointer-events: none; }
-.veh--near .bw { transform-box: fill-box; transform-origin: center; animation: spin .28s linear infinite; }
+.veh .bw { transform-box: fill-box; transform-origin: center; animation: spin .28s linear infinite; }
+.veh--far .bw { animation-duration: .5s; }
+.veh--far svg { animation: rumbleT .2s linear infinite alternate; }
+@keyframes rumbleT { to { translate: 0 -1.6px; } }
 .veh--near .rider { animation: rumble .22s linear infinite alternate; }
 .veh { position: absolute; left: 0; will-change: translate; animation-timing-function: linear; animation-fill-mode: forwards; }
 .veh svg { display: block; width: 100%; height: auto; }
