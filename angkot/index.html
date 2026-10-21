@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apri Rachmadi — Rute 07</title>
+  <meta name="description" content="An alternate, hand-painted take on the portfolio of Apri Dwi Rachmadi: ride one angkot route through the work, the roles, and the wins." />
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://aprirachmadi.github.io/" />
+  <link rel="icon" type="image/jpeg" href="../assets/site-icon.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=DM+Sans:opsz,wght@9..40,400..700&family=Doto:wght@400..900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="angkot.css" />
+  <noscript><style>.reveal,.line>span{opacity:1!important;transform:none!important}.loader{display:none!important}</style></noscript>
+</head>
+<body>
+  <a class="skip" href="#work">Skip to the work</a>
+
+  <!-- LOADER: waiting at the stop -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="led led--xl" data-led-static>RUTE 07</div>
+    <p class="loader__sub">Waiting for the angkot<span class="loader__dots"></span></p>
+  </div>
+
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+  <!-- NAV: the route line -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top" aria-label="Apri Rachmadi, back to top">apri<i>.</i>rachmadi</a>
+    <nav class="route" aria-label="Sections">
+      <div class="route__line"><div class="route__fill" id="routeFill"></div><div class="route__bus" id="routeBus" aria-hidden="true"></div></div>
+      <a class="route__stop" href="#work" data-stop="work"><b>1</b><span>Work</span></a>
+      <a class="route__stop" href="#experience" data-stop="experience"><b>2</b><span>Roles</span></a>
+      <a class="route__stop" href="#awards" data-stop="awards"><b>3</b><span>Wins</span></a>
+      <a class="route__stop" href="#about" data-stop="about"><b>4</b><span>About</span></a>
+      <a class="route__stop" href="#contact" data-stop="contact"><b>5</b><span>Say hi</span></a>
+    </nav>
+    <div class="nav__tools">
+      <button class="chip-btn" id="paletteBtn" type="button" aria-label="Open command palette"><kbd>Ctrl</kbd><kbd>K</kbd></button>
+      <button class="chip-btn" id="plainBtn" data-plain type="button" aria-pressed="false">Plain mode</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO: the ride -->
+    <section class="ride" id="ride" aria-label="Introduction">
+      <div class="ride__stage" id="rideStage">
+        <div class="sky">
+          <div class="sun" aria-hidden="true"></div>
+        </div>
+        <div class="skyline skyline--far" id="skyFar" aria-hidden="true"></div>
+        <div class="skyline skyline--near" id="skyNear" aria-hidden="true"></div>
+
+        <div class="ride__top">
+          <span class="tag">Rute 07 · Indonesia</span>
+          <span class="tag tag--clock">Jakarta <b id="clock">--:--:--</b> WIB</span>
+        </div>
+
+        <h1 class="ride__name" aria-label="Apri Dwi Rachmadi">
+          <span class="line"><span>Apri</span></span>
+          <span class="line"><span>Rachmadi</span></span>
+        </h1>
+
+        <div class="ride__intro">
+          <p>AI/ML engineer and <b>Statistics graduate</b> who ships ML systems end to end: from LLM evaluation and RAG to computer vision and production tabular models.</p>
+          <div class="ride__cta">
+            <a class="pill pill--ink" href="#work" data-cursor="RIDE">Ride the route <span aria-hidden="true">→</span></a>
+            <a class="pill" href="#contact" data-cursor="HI">Hire me</a>
+          </div>
+        </div>
+
+        <div class="bus" id="bus" aria-hidden="true">
+          <div class="bus__body" id="busBody">
+            <div class="led led--bus" id="busLed">APRI RACHMADI</div>
+            <svg class="bus__svg" viewBox="0 0 660 300" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="gBody" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ff5a36"/><stop offset="1" stop-color="#e5251a"/>
+                </linearGradient>
+                <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#bfe9ff"/><stop offset="1" stop-color="#5fb4e6"/>
+                </linearGradient>
+                <radialGradient id="gAir" cx=".25" cy=".2" r=".9">
+                  <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/>
+                </radialGradient>
+                <clipPath id="cBody"><path d="M30 238V112Q30 94 52 94H462Q482 94 494 110L552 170Q570 174 592 180Q618 188 620 212V238Z"/></clipPath>
+              </defs>
+              <ellipse cx="325" cy="286" rx="300" ry="9" fill="rgba(21,20,18,.28)"/>
+              <!-- roof rack -->
+              <g stroke="#151412" stroke-width="4" stroke-linecap="round">
+                <path d="M90 94V82M410 94V82"/><path d="M80 82H420"/><path d="M120 82V76M200 82V76M280 82V76M360 82V76" stroke-width="3"/>
+              </g>
+              <!-- body -->
+              <path d="M30 238V112Q30 94 52 94H462Q482 94 494 110L552 170Q570 174 592 180Q618 188 620 212V238Z" fill="url(#gBody)" stroke="#151412" stroke-width="4"/>
+              <g clip-path="url(#cBody)">
+                <path d="M20 190C80 170 120 210 190 190S300 170 360 192 480 212 540 190 620 176 640 188V204C600 192 560 214 500 212S400 192 350 208 250 220 190 206 80 188 20 208Z" fill="#ffc61a"/>
+                <path d="M20 212C80 192 120 232 190 212S300 192 360 214 480 234 540 212 620 198 640 210V224C600 214 560 236 500 234S400 214 350 230 250 242 190 228 80 210 20 230Z" fill="#0fb5a6"/>
+                <rect x="20" y="230" width="620" height="12" fill="#151412"/>
+                <circle cx="150" cy="150" r="150" fill="url(#gAir)"/>
+              </g>
+              <!-- windows -->
+              <g fill="url(#gGlass)" stroke="#151412" stroke-width="4">
+                <rect x="56" y="110" width="86" height="54" rx="9"/>
+                <rect x="152" y="110" width="86" height="54" rx="9"/>
+                <rect x="248" y="110" width="86" height="54" rx="9"/>
+                <path d="M350 110H452Q464 110 472 120L512 164H350Z"/>
+              </g>
+              <g stroke="#fff" stroke-opacity=".7" stroke-width="3" stroke-linecap="round"><path d="M70 150L92 122M166 150L188 122M262 150L284 122M366 150L392 122"/></g>
+              <!-- door + route badge -->
+              <path d="M350 168V232" stroke="#151412" stroke-width="3"/>
+              <circle cx="396" cy="204" r="25" fill="#f3e9d2" stroke="#151412" stroke-width="4"/>
+              <text x="396" y="214" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="30" fill="#151412">07</text>
+              <rect x="338" y="196" width="18" height="6" rx="3" fill="#151412"/>
+              <!-- slogan -->
+              <text x="196" y="221" font-family="Instrument Serif, serif" font-style="italic" font-size="29" fill="#151412">terus jalan</text>
+              <!-- stickers -->
+              <circle cx="238" cy="132" r="0" fill="none"/>
+              <g transform="rotate(-10 478 206)"><rect x="452" y="194" width="58" height="24" rx="12" fill="#ff8fb8" stroke="#151412" stroke-width="3"/><text x="481" y="211" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="13" fill="#151412">KIRI!</text></g>
+              <!-- lights + bumpers -->
+              <path d="M590 186Q606 190 610 204L596 206Z" fill="#fff6bf" stroke="#151412" stroke-width="3"/>
+              <rect x="22" y="196" width="10" height="22" rx="4" fill="#ff2e2e" stroke="#151412" stroke-width="3"/>
+              <rect x="590" y="226" width="40" height="14" rx="7" fill="#d9d4c7" stroke="#151412" stroke-width="3"/>
+              <rect x="14" y="226" width="40" height="14" rx="7" fill="#d9d4c7" stroke="#151412" stroke-width="3"/>
+              <!-- wheels -->
+              <g class="wheel" style="transform-origin:142px 244px">
+                <circle cx="142" cy="244" r="38" fill="#151412"/><circle cx="142" cy="244" r="19" fill="#d9d4c7" stroke="#151412" stroke-width="3"/>
+                <path d="M142 228V260M126 244H158M131 233L153 255M153 233L131 255" stroke="#151412" stroke-width="3" stroke-linecap="round"/>
+              </g>
+              <g class="wheel" style="transform-origin:498px 244px">
+                <circle cx="498" cy="244" r="38" fill="#151412"/><circle cx="498" cy="244" r="19" fill="#d9d4c7" stroke="#151412" stroke-width="3"/>
+                <path d="M498 228V260M482 244H514M487 233L509 255M509 233L487 255" stroke="#151412" stroke-width="3" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="road" aria-hidden="true"><div class="road__dash"></div></div>
+        <a class="scrollhint" href="#work" aria-label="Scroll to the work"><span>Scroll to ride</span><i></i></a>
+      </div>
+    </section>
+
+    <!-- STOP 1: WORK -->
+    <section class="stop stop--work" id="work" data-stop-id="work" aria-labelledby="workTitle">
+      <div class="wrap">
+        <header class="stop__head">
+          <div class="sign"><b>01</b><span>Work</span></div>
+          <h2 id="workTitle" class="reveal">Selected <em>work</em>, with the numbers.</h2>
+          <p class="stop__sub reveal">Systems I designed, trained and built, and the one figure that matters for each. Tap a ticket for the full breakdown.</p>
+        </header>
+        <div class="stack" id="stack"></div>
+        <div class="more-head reveal">
+          <h3>More rides</h3>
+          <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
+        </div>
+        <div class="tickets" id="tickets"></div>
+        <noscript>
+          <ul class="ns-list">
+            <li><strong>Tilik</strong>: source-grounded BPS statistical agent · <a href="../projects/tilik-agent/">Case study</a> · <a href="https://tilikagent.frhvn.my.id/">Live demo</a> · <a href="https://github.com/aprirachmadi/tilik-agent">GitHub</a></li>
+            <li><strong>Dispatch</strong>: AI-assisted IT triage · <a href="../projects/dispatch/">Case study</a> · <a href="https://github.com/aprirachmadi/dispatch">GitHub</a></li>
+            <li><strong>Rottom-Chat</strong>: <a href="https://github.com/aprirachmadi/rottom-chat">GitHub</a></li>
+            <li><strong>Geo-Lens</strong>: <a href="https://github.com/aprirachmadi/geo-lens">GitHub</a> · <a href="https://geo-lens-urban.rachmadiapri.workers.dev/">Demo</a></li>
+          </ul>
+        </noscript>
+      </div>
+    </section>
+
+    <!-- STOP 2: EXPERIENCE -->
+    <section class="stop stop--exp" id="experience" data-stop-id="experience" aria-labelledby="expTitle">
+      <div class="wrap">
+        <header class="stop__head">
+          <div class="sign"><b>02</b><span>Roles</span></div>
+          <h2 id="expTitle" class="reveal">Where I've <em>been</em>.</h2>
+        </header>
+        <div class="line-route" id="lineRoute">
+          <div class="line-route__rail" aria-hidden="true"><div class="line-route__fill" id="lineFill"></div></div>
+          <ol>
+          <li class="leg reveal">
+            <div class="leg__dot" aria-hidden="true"></div>
+            <div class="leg__card">
+              <p class="leg__date">Jun 2025 — May 2026</p>
+              <h3>AI Engineer / Data Scientist</h3>
+              <p class="leg__co">GDP Labs</p>
+              <ul>
+                <li>Maintained the Benchmark Team's evaluation codebase for scalable, reproducible testing of emerging LLMs on proprietary datasets.</li>
+                <li>Built an automated LLM-as-a-Judge pipeline with <b>84%</b> human alignment across RAG and agent use cases; a multiple-LLM-as-a-Judge setup reached <b>89%</b> on RAG-specific cases.</li>
+                <li>Productionized vending-machine demand forecasting with stock-aware out-of-stock risk, scheduled retraining, drift monitoring, and ongoing migrations.</li>
+                <li>Built a loan-fraud screening pipeline with scheduled batch predictions, reaching <b>79%</b> recall.</li>
+                <li>Developed hybrid attendance anomaly detection across 10+ anomaly types, with an XAI rationale for every flagged case.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="leg reveal">
+            <div class="leg__dot" aria-hidden="true"></div>
+            <div class="leg__card">
+              <p class="leg__date">Oct 2024 — Jan 2025</p>
+              <h3>AI Engineer (Intern)</h3>
+              <p class="leg__co">PT Salam Pacific Indonesia Lines</p>
+              <ul>
+                <li>Built an automated cashier system with YOLO11 detection at <b>82%</b> mAP, MobileNet classification at <b>99%</b>, and zero-shot segmentation for annotation.</li>
+                <li>Developed a Llama, LangChain, and ChromaDB audit assistant, a PaddleOCR receipt pipeline, and a collaborative-filtering recommender served through Flask.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="leg reveal">
+            <div class="leg__dot" aria-hidden="true"></div>
+            <div class="leg__card">
+              <p class="leg__date">Apr 2024 — Aug 2024</p>
+              <h3>Data Scientist (Part-time Intern)</h3>
+              <p class="leg__co">Braincore</p>
+              <ul>
+                <li>Built a Tableau dashboard for the KRL commuter line, analyzing schedule busyness and operating stations and trains.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="leg reveal">
+            <div class="leg__dot" aria-hidden="true"></div>
+            <div class="leg__card">
+              <p class="leg__date">Aug 2023 — Dec 2023</p>
+              <h3>Machine Learning Cohort</h3>
+              <p class="leg__co">Bangkit Academy (Google, Tokopedia, Gojek &amp; Traveloka)</p>
+              <ul>
+                <li>Graduated with Distinction, earning <b>94.24</b>/100 across machine-learning foundations, deep learning, and deployment.</li>
+                <li>Developed UPCYCLE, a TensorFlow garbage classifier reaching <b>91%</b> accuracy and deployed to Android with TensorFlow Lite.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="leg reveal">
+            <div class="leg__dot" aria-hidden="true"></div>
+            <div class="leg__card">
+              <p class="leg__date">Aug 2021 — Mar 2025</p>
+              <h3>B.Sc. Statistics</h3>
+              <p class="leg__co">Universitas Diponegoro</p>
+              <ul>
+                <li>Graduated with a <b>3.73</b>/4.00 GPA across 147 SKS; completed a TrOCR license-plate recognition thesis and served as an Algorithms &amp; Programming teaching assistant.</li>
+                <li>Reached the Satria Data finals for three consecutive years, from 2022 through 2024.</li>
+              </ul>
+            </div>
+          </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- STOP 3: AWARDS -->
+    <section class="stop stop--awards" id="awards" data-stop-id="awards" aria-labelledby="awTitle">
+      <div class="wrap">
+        <header class="stop__head">
+          <div class="sign"><b>03</b><span>Wins</span></div>
+          <h2 id="awTitle" class="reveal">Tested in <em>national</em> competitions.</h2>
+          <p class="stop__sub reveal">Data-science and ML competition results across three years, including three consecutive Satria Data finals.</p>
+        </header>
+        <ul class="medals">
+          <li class="medal medal--gold reveal">
+            <div class="medal__place">Best Metrics<br>Performance</div>
+            <div class="medal__body"><h3>Satria Data Big Data Challenge 2024</h3><p class="medal__org">BPTI Kemendikbud-Ristek · 2024</p><p>LightGBM topic classification on political tweets in the preliminary round; in the finals, LDA topic modeling and RoBERTa sentiment analysis on discussion around the 2024 presidential election.</p></div>
+          </li>
+          <li class="medal medal--gold reveal">
+            <div class="medal__place">1st<br>Place</div>
+            <div class="medal__body"><h3>Gammafest Data Science Competition</h3><p class="medal__org">Gamma Sigma Beta, IPB University · 2024</p><p>A YOLOv8 detection model (<b>99.5%</b> mAP) plus EfficientNetV2B0 number classification (<b>99.84%</b> F1) to automatically count votes on SIREKAP forms.</p></div>
+          </li>
+          <li class="medal reveal">
+            <div class="medal__place">Semi-<br>finalist</div>
+            <div class="medal__body"><h3>Logika UI Statistics Team Competition</h3><p class="medal__org">HM Departemen Matematika, Universitas Indonesia · 2024</p><p>Data preprocessing, multi-table joins, feature engineering, and EDA to build an ML model for credit-scoring classification.</p></div>
+          </li>
+          <li class="medal reveal">
+            <div class="medal__place">Top 15<br>Semi-finalist</div>
+            <div class="medal__body"><h3>Pekan Raya Statistika (PRS) ASEAN Data Analysis</h3><p class="medal__org">HM Statistika, ITS · 2023</p><p>Preprocessing, visualization, and a LightGBM classifier predicting network-attack type, reaching a <b>99.58%</b> F1-score.</p></div>
+          </li>
+          <li class="medal reveal">
+            <div class="medal__place">Finalist</div>
+            <div class="medal__body"><h3>Satria Data Big Data Challenge 2023</h3><p class="medal__org">BPTI Kemendikbud-Ristek · 2023</p><p>A TrOCR model for licence-plate recognition in the preliminary round; in the finals, a Siamese BERT to detect disharmony in capital &amp; taxation laws.</p></div>
+          </li>
+          <li class="medal reveal">
+            <div class="medal__place">Finalist</div>
+            <div class="medal__body"><h3>Joints Data Mining Competition</h3><p class="medal__org">HIMAKOM, UGM · 2023</p><p>Damage-grade classification for earthquakes and image classification for early fire detection using deep learning.</p></div>
+          </li>
+          <li class="medal reveal">
+            <div class="medal__place">Finalist</div>
+            <div class="medal__body"><h3>Satria Data Big Data Challenge 2022</h3><p class="medal__org">BPTI Kemendikbud-Ristek · 2022</p><p>Analysis of patient-return status for BPJS Health participants and public-opinion analysis of BPJS services on Twitter using IndoBERT and BERTopic.</p></div>
+          </li>
+        </ul>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track"><span>Satria Data finalist ×3</span><i>✺</i><span>Gammafest 1st place</span><i>✺</i><span>Best metrics performance</span><i>✺</i><span>Bangkit Distinction</span><i>✺</i><span>Satria Data finalist ×3</span><i>✺</i><span>Gammafest 1st place</span><i>✺</i><span>Best metrics performance</span><i>✺</i><span>Bangkit Distinction</span><i>✺</i></div>
+      </div>
+    </section>
+
+    <!-- STOP 4: ABOUT -->
+    <section class="stop stop--about" id="about" data-stop-id="about" aria-labelledby="abTitle">
+      <div class="wrap">
+        <header class="stop__head">
+          <div class="sign"><b>04</b><span>About</span></div>
+          <h2 id="abTitle" class="visually-hidden">About</h2>
+        </header>
+        <p class="fill" id="fill">Statistics graduate of Universitas Diponegoro and a Bangkit Machine Learning Distinction graduate. I build models end to end across LLMs, computer vision, NLP and tabular data, with an analytical foundation honed in national data competitions.</p>
+        <div class="gear">
+          <div class="gear__col reveal"><h3>Languages</h3><div class="stickers"><span>Python</span><span>TypeScript</span><span>SQL</span><span>R</span></div></div>
+          <div class="gear__col reveal"><h3>AI Agents &amp; LLMs</h3><div class="stickers"><span>LangGraph</span><span>LangChain</span><span>Tool Calling</span><span>RAG</span><span>LLM Evaluation</span><span>Langfuse</span></div></div>
+          <div class="gear__col reveal"><h3>ML / Deep Learning</h3><div class="stickers"><span>PyTorch</span><span>TensorFlow</span><span>Transformers</span><span>scikit-learn</span><span>LightGBM</span></div></div>
+          <div class="gear__col reveal"><h3>Computer Vision</h3><div class="stickers"><span>YOLOv8 / YOLO11</span><span>TrOCR</span><span>PaddleOCR</span><span>MobileNet</span><span>OpenCV</span></div></div>
+          <div class="gear__col reveal"><h3>Data &amp; Retrieval</h3><div class="stickers"><span>PostgreSQL</span><span>pgvector</span><span>SQLite</span><span>ChromaDB</span><span>pandas</span><span>NumPy</span></div></div>
+          <div class="gear__col reveal"><h3>Serving &amp; Apps</h3><div class="stickers"><span>FastAPI</span><span>Flask</span><span>React</span><span>Node.js</span><span>Streamlit</span><span>Docker</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STOP 5: CONTACT -->
+    <section class="stop stop--contact" id="contact" data-stop-id="contact" aria-labelledby="ctTitle">
+      <div class="wrap contact">
+        <div class="contact__lead">
+          <div class="sign sign--light"><b>05</b><span>Terminal</span></div>
+          <h2 id="ctTitle" class="reveal">Kiri, <em>bang.</em></h2>
+          <p class="stop__sub reveal">That's how you stop an angkot in Indonesia. This is the stop: I'm open to AI / ML Engineer and Data Scientist roles, and email is the fastest way to reach me.</p>
+          <a class="mail reveal" href="mailto:rachmadiapri@gmail.com" data-cursor="MAIL" id="mailLink">rachmadiapri@gmail.com</a>
+          <div class="socials reveal">
+            <a class="pill pill--light" href="https://github.com/aprirachmadi" target="_blank" rel="noopener" data-cursor="OPEN">GitHub</a>
+            <a class="pill pill--light" href="https://huggingface.co/rachmadiapri" target="_blank" rel="noopener" data-cursor="OPEN">Hugging Face</a>
+            <a class="pill pill--light" href="https://www.linkedin.com/in/apri-rachmadi/" target="_blank" rel="noopener" data-cursor="OPEN">LinkedIn</a>
+          </div>
+        </div>
+        <form class="ticket-form reveal" id="contactForm" action="https://formspree.io/f/xpznkgab" method="POST">
+          <div class="ticket-form__head"><span>TIKET</span><b>07</b><span>1 pesan</span></div>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Jane Doe" required autocomplete="name" />
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="jane@company.com" required autocomplete="email" />
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell me about the role or project…" required></textarea>
+          <button class="pill pill--hot" type="submit" data-cursor="SEND">Send message <span aria-hidden="true">→</span></button>
+          <p class="form__ok" id="formOk" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <footer class="foot">
+        <div class="marquee marquee--foot" aria-hidden="true"><div class="marquee__track"><span>Terus jalan</span><i>✺</i><span>Terus jalan</span><i>✺</i><span>Terus jalan</span><i>✺</i><span>Terus jalan</span><i>✺</i><span>Terus jalan</span><i>✺</i><span>Terus jalan</span><i>✺</i></div></div>
+        <div class="wrap foot__row"><span>© 2026 Apri Dwi Rachmadi</span><button class="chip-btn" data-plain type="button" aria-pressed="false">Plain mode</button><a href="../" data-cursor="BACK">← Back to the main site</a></div>
+      </footer>
+    </section>
+  </main>
+
+  <!-- PROJECT DIALOG -->
+  <dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
+    <div class="sheet__inner" id="sheetInner"></div>
+  </dialog>
+
+  <!-- COMMAND PALETTE -->
+  <div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="Command palette" hidden>
+    <div class="palette__box">
+      <input id="paletteInput" type="text" placeholder="Jump to a stop, a project, or an action…" autocomplete="off" aria-label="Search commands" />
+      <ul id="paletteList" role="listbox"></ul>
+      <p class="palette__hint"><kbd>↑</kbd><kbd>↓</kbd> move · <kbd>Enter</kbd> go · <kbd>Esc</kbd> close</p>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="angkot.js"></script>
+</body>
+</html>
