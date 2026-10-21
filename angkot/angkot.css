@@ -178,7 +178,7 @@ kbd { font: 600 11px/1 var(--f-body); border: 2px solid currentColor; border-rad
 .ride__intro p { font-size: clamp(15px, 1.35vw, 18px); background: var(--cream); border: var(--bw) solid var(--ink); border-radius: 18px; padding: 14px 16px; box-shadow: var(--shadow); }
 .ride__cta { display: flex; gap: 12px; flex-wrap: wrap; }
 
-.bus { position: absolute; left: 50%; bottom: 6.2svh; width: var(--busw); z-index: 4; transform: translateX(calc(-50% + 4vw + var(--p) * 120vw)); will-change: transform; }
+.bus { position: absolute; left: 50%; bottom: calc(var(--road) * .66 - var(--busw) * .04); width: var(--busw); z-index: 4; transform: translateX(calc(-50% + 4vw + var(--p) * 120vw)); will-change: transform; }
 .bus { pointer-events: none; }
 .bus__lean { transform: rotate(calc(var(--v, 0) * -3deg)); transform-origin: 18% 100%; }
 .bus__body { position: relative; pointer-events: auto; cursor: pointer; animation: bounce .55s ease-in-out infinite alternate; }
@@ -207,14 +207,14 @@ kbd { font: 600 11px/1 var(--f-body); border: 2px solid currentColor; border-rad
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .road { position: absolute; inset: auto 0 0 0; height: var(--road); background: #2b2824; border-top: 5px solid var(--ink); z-index: 2; overflow: hidden; }
-.road::before { content: ""; position: absolute; inset: 0 0 auto; height: 10px; background: repeating-linear-gradient(90deg, var(--ink) 0 22px, var(--sun) 22px 44px); opacity: .9; }
-.walk { position: absolute; left: 0; right: 0; bottom: calc(var(--road) - 3px); height: 2.2svh; z-index: 2; background: repeating-linear-gradient(90deg, rgba(21, 20, 18, .22) 0 2px, transparent 2px 46px), #d9cdb4; border-top: 4px solid var(--ink); }
+.road::before { content: ""; position: absolute; inset: 0 0 auto; height: 10px; background: linear-gradient(90deg, var(--ink) 50%, var(--sun) 50%) calc(var(--g44, 0) * -1px) 0 / 44px 100% repeat-x; opacity: .9; }
+.walk { position: absolute; left: 0; right: 0; bottom: calc(var(--road) - 3px); height: 2.2svh; z-index: 2; background: linear-gradient(90deg, rgba(21, 20, 18, .22) 0 2px, transparent 2px) calc(var(--g46, 0) * -1px) 0 / 46px 100% repeat-x, #d9cdb4; border-top: 4px solid var(--ink); }
 .road::after { content: ""; position: absolute; inset: 0; pointer-events: none; background:
   linear-gradient(#f4f1e6, #f4f1e6) 0 13% / 100% 4px no-repeat,
-  linear-gradient(var(--sun), var(--sun)) 0 45% / 100% 4px no-repeat,
-  linear-gradient(var(--sun), var(--sun)) 0 calc(45% + 9px) / 100% 4px no-repeat; }
-.road__dash--far { top: 31% !important; height: 5px !important; opacity: .9; }
-.road__dash { position: absolute; left: 0; right: 0; top: 70%; height: 7px; background: repeating-linear-gradient(90deg, var(--cream) 0 70px, transparent 70px 150px); animation: road var(--road-speed, 1.1s) linear infinite; }
+  linear-gradient(var(--sun), var(--sun)) 0 56% / 100% 4px no-repeat,
+  linear-gradient(var(--sun), var(--sun)) 0 calc(56% + 9px) / 100% 4px no-repeat; }
+.road__dash--far { top: 40% !important; height: 5px !important; opacity: .9; }
+.road__dash { position: absolute; left: 0; right: 0; top: 76%; height: 7px; background: linear-gradient(90deg, var(--cream) 0 70px, transparent 70px) calc(var(--g150, 0) * -1px) 0 / 150px 100% repeat-x; }
 @keyframes road { to { background-position-x: -150px; } }
 
 .scrollhint { position: absolute; right: var(--pad); bottom: calc(var(--road) + 3svh); z-index: 1; display: grid; justify-items: center; gap: 8px; font: 700 11px/1 var(--f-body); letter-spacing: .14em; text-transform: uppercase; opacity: calc(1 - var(--p) * 4); }
@@ -227,12 +227,12 @@ kbd { font: 600 11px/1 var(--f-body); border: 2px solid currentColor; border-rad
   .ride__intro p { font-size: 14px; padding: 10px 12px; }
   .scrollhint { display: none; }
   .ride__stage { --busw: 98vw; }
-  .bus { bottom: 8svh; transform: translateX(calc(-50% + var(--p) * 140vw)); }
+  .bus { transform: translateX(calc(-50% + var(--p) * 140vw)); }
   .tag--clock { display: none; }
   .ride__stage .halte { display: none; }
 }
 
-.clouds .cloud { position: absolute; left: 0; width: var(--w); animation: drift var(--dur) linear infinite; animation-delay: var(--del); }
+.clouds .cloud { overflow: visible; position: absolute; left: 0; width: var(--w); animation: drift var(--dur) linear infinite; animation-delay: var(--del); }
 .cloud.c1 { --w: clamp(90px, 13vmin, 190px); --dur: 70s; --del: -20s; top: 17%; }
 .cloud.c2 { --w: clamp(120px, 18vmin, 260px); --dur: 95s; --del: -60s; top: 26%; opacity: .92; }
 .cloud.c3 { --w: clamp(70px, 10vmin, 150px); --dur: 58s; --del: -5s; top: 11%; }
@@ -241,7 +241,7 @@ kbd { font: 600 11px/1 var(--f-body); border: 2px solid currentColor; border-rad
 .birds svg { display: block; animation: flap .32s ease-in-out infinite alternate; transform-origin: 50% 100%; }
 @keyframes fly { from { translate: -10vw 0; } 50% { translate: 55vw -3vh; } to { translate: 112vw 2vh; } }
 @keyframes flap { from { transform: scaleY(1); } to { transform: scaleY(.35); } }
-.roadside { position: absolute; left: 0; right: 0; bottom: calc(var(--road) + 2svh); height: clamp(130px, 25svh, 250px); z-index: 1; background-repeat: repeat-x; background-position: calc(var(--sx, 0) * 1px) 100%; background-size: auto 100%; }
+.roadside { position: absolute; left: 0; right: 0; bottom: calc(var(--road) + 2svh); height: clamp(180px, 33svh, 340px); z-index: 1; background-repeat: repeat-x; background-position: calc(var(--sx, 0) * 1px) 100%; background-size: auto 100%; }
 .halte { position: absolute; left: 0; bottom: calc(var(--road) + 2svh); z-index: 2; width: calc(var(--busw) * .35); display: flex; align-items: flex-end; gap: 3%; will-change: transform; }
 .halte__sign { display: grid; justify-items: center; width: 15%; }
 .halte__tag { margin-top: 8px; font: 800 clamp(9px, calc(var(--busw) * .014), 14px)/1 var(--f-body); letter-spacing: .16em; background: var(--ink); color: var(--paper); padding: 4px 6px; border-radius: 4px; }
@@ -266,8 +266,8 @@ kbd { font: 600 11px/1 var(--f-body); border: 2px solid currentColor; border-rad
 .veh--near .rider { animation: rumble .22s linear infinite alternate; }
 .veh { position: absolute; left: 0; will-change: translate; animation-timing-function: linear; animation-fill-mode: forwards; }
 .veh svg { display: block; width: 100%; height: auto; }
-.veh--near { z-index: 5; bottom: -.4svh; width: calc(var(--busw) * .34); animation-name: driveR; }
-.veh--far { z-index: 3; bottom: calc(var(--road) - 9.3svh); width: calc(var(--busw) * .54); animation-name: driveL; }
+.veh--near { z-index: 5; bottom: calc(var(--road) * .48 - var(--busw) * .036); width: calc(var(--busw) * .34); animation-name: driveR; }
+.veh--far { z-index: 6; bottom: calc(var(--road) * .08 - var(--busw) * .015); width: calc(var(--busw) * .56); animation-name: driveL; }
 .veh--far svg { transform: scaleX(-1); }
 @keyframes driveR { from { translate: -14vw 0; } to { translate: 112vw 0; } }
 @keyframes driveL { from { translate: 112vw 0; } to { translate: -18vw 0; } }

@@ -79,6 +79,49 @@
 
   /* ---------------- Skyline art (generated) ---------------- */
   function mulberry(a) { return () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  /* ---------------- Trees (shared by the skyline and roadside tiles) ---------------- */
+  function palmTree(x, base, h, lean, fill, hi) {
+    const P0 = [x, base], P1 = [x + lean * h * 0.15, base - h * 0.55], P2 = [x + lean * h, base - h];
+    const pt = (t) => { const a = (1 - t) * (1 - t), b = 2 * (1 - t) * t, c = t * t; return [a * P0[0] + b * P1[0] + c * P2[0], a * P0[1] + b * P1[1] + c * P2[1]]; };
+    const tn = (t) => { const dx = 2 * (1 - t) * (P1[0] - P0[0]) + 2 * t * (P2[0] - P1[0]), dy = 2 * (1 - t) * (P1[1] - P0[1]) + 2 * t * (P2[1] - P1[1]), l = Math.hypot(dx, dy); return [dx / l, dy / l]; };
+    const f1 = (n) => n.toFixed(1), out = [];
+    const L = [], R = [], rings = [];
+    for (let i = 0; i <= 14; i++) {
+      const t = i / 14, [px, py] = pt(t), [tx, ty] = tn(t), w = h * (0.046 - 0.022 * t);
+      L.push(`${f1(px - ty * w)} ${f1(py + tx * w)}`); R.unshift(`${f1(px + ty * w)} ${f1(py - tx * w)}`);
+      if (i > 0 && i < 14) rings.push(`M${f1(px + ty * w)} ${f1(py - tx * w + w * 0.3)}L${f1(px - ty * w)} ${f1(py + tx * w + w * 0.3)}`);
+    }
+    out.push(`<path d="M${L.join("L")}L${R.join("L")}Z" fill="${fill}"/><path d="${rings.join("")}" stroke="${hi}" stroke-width="${f1(h * 0.009)}" fill="none" stroke-linecap="round"/>`);
+    const [tx0, ty0] = P2;
+    const fronds = [[-174, .52, .8], [-152, .56, .66], [-130, .5, .52], [-110, .36, .35], [-66, .38, .38], [-48, .5, .54], [-24, .56, .68], [2, .52, .82], [166, .46, .95], [28, .42, .98]];
+    const frond = (a, len, drp) => {
+      const ang = a * Math.PI / 180, Lf = h * len, ca = Math.cos(ang), sa = Math.sin(ang), rib = [], leaf = [];
+      for (let k = 0; k <= 12; k++) { const t = k / 12; rib.push(`${f1(tx0 + ca * Lf * t)} ${f1(ty0 + sa * Lf * t + drp * Lf * t * t * 0.9)}`); }
+      for (let t = 0.12; t <= 1.001; t += 0.052 + 0.075 * (1 - Math.abs(Math.cos(ang)))) {
+        const px = tx0 + ca * Lf * t, py = ty0 + sa * Lf * t + drp * Lf * t * t * 0.9, dx = ca * Lf, dy = sa * Lf + 1.8 * drp * Lf * t * 0.9, dl = Math.hypot(dx, dy), ux = dx / dl, uy = dy / dl, nx = -uy, ny = ux, ll = Lf * 0.2 * (1 - 0.5 * t) * (0.5 + 0.5 * Math.abs(ca)), steep = 1 - Math.abs(ca);
+        [1, -1].forEach((s) => leaf.push(`M${f1(px)} ${f1(py)}L${f1(px + s * nx * ll + ux * ll * 0.6)} ${f1(py + s * ny * ll + uy * ll * 0.6 + ll * (0.5 + 0.9 * steep))}`));
+      }
+      return { rib: `M${rib.join("L")}`, leaf: leaf.join("") };
+    };
+    const built = fronds.map(([a, l, d]) => frond(a, l, d));
+    const draw = (items, col) => items.forEach((fr) => out.push(`<path d="${fr.leaf}" stroke="${col}" stroke-width="${f1(h * 0.011)}" stroke-linecap="round" fill="none"/><path d="${fr.rib}" stroke="${col}" stroke-width="${f1(h * 0.016)}" stroke-linecap="round" fill="none"/>`));
+    draw(built.filter((_, i) => i % 2 === 0), fill);
+    draw(built.filter((_, i) => i % 2 === 1), hi);
+    [[-4, 7], [5, 9], [0, 13]].forEach(([dx, dy]) => out.push(`<circle cx="${f1(tx0 + dx * h / 150)}" cy="${f1(ty0 + dy * h / 150)}" r="${f1(h * 0.024)}" fill="${fill}" stroke="${hi}" stroke-width="${f1(h * 0.006)}"/>`));
+    return out.join("");
+  }
+  function rainTree(x, base, h, fill, hi) {
+    const f1 = (n) => n.toFixed(1), out = [], tw = h * 0.055, cy = base - h * 0.74, W = h * 1.2;
+    out.push(`<path d="M${f1(x - tw)} ${base}Q${f1(x - tw * 0.8)} ${f1(base - h * 0.4)} ${f1(x - tw * 0.55)} ${f1(base - h * 0.55)}L${f1(x + tw * 0.55)} ${f1(base - h * 0.55)}Q${f1(x + tw * 0.8)} ${f1(base - h * 0.4)} ${f1(x + tw)} ${base}Z" fill="${fill}"/>`);
+    out.push(`<path d="M${x} ${f1(base - h * 0.5)}Q${f1(x - h * 0.2)} ${f1(base - h * 0.58)} ${f1(x - W * 0.52)} ${f1(cy + h * 0.08)}M${x} ${f1(base - h * 0.5)}Q${f1(x + h * 0.22)} ${f1(base - h * 0.6)} ${f1(x + W * 0.54)} ${f1(cy + h * 0.08)}M${x} ${f1(base - h * 0.52)}Q${f1(x - h * 0.06)} ${f1(base - h * 0.66)} ${f1(x - W * 0.2)} ${f1(cy + h * 0.1)}M${x} ${f1(base - h * 0.52)}Q${f1(x + h * 0.08)} ${f1(base - h * 0.66)} ${f1(x + W * 0.22)} ${f1(cy + h * 0.1)}" stroke="${fill}" stroke-width="${f1(h * 0.03)}" stroke-linecap="round" fill="none"/>`);
+    const blobs = [[-0.62, 0.06, 0.13], [-0.48, -0.02, 0.16], [-0.3, -0.08, 0.18], [-0.1, -0.12, 0.19], [0.1, -0.12, 0.19], [0.3, -0.08, 0.18], [0.48, -0.02, 0.16], [0.62, 0.06, 0.13], [-0.36, 0.08, 0.14], [-0.05, 0.07, 0.16], [0.26, 0.08, 0.15]];
+    blobs.forEach(([dx, dy, r]) => out.push(`<circle cx="${f1(x + dx * W)}" cy="${f1(cy + dy * h)}" r="${f1(r * h)}" fill="${fill}"/>`));
+    let sd = 7; const rd = () => { sd = (sd * 16807) % 2147483647; return sd / 2147483647; };
+    for (let i = 0; i < 70; i++) { const a = Math.PI * (0.04 + 0.92 * rd()), rr = rd(); out.push(`<circle cx="${f1(x - W * 0.62 * Math.cos(a) * (0.35 + 0.65 * rr))}" cy="${f1(cy - h * 0.2 * Math.sin(a) * (0.3 + 0.7 * rr) - h * 0.02)}" r="${f1(h * (0.016 + 0.026 * rd()))}" fill="${hi}"/>`); }
+    for (let i = 0; i < 20; i++) { const a = Math.PI * (0.06 + 0.88 * i / 19); out.push(`<circle cx="${f1(x - W * 0.66 * Math.cos(a))}" cy="${f1(cy - h * 0.2 * Math.sin(a) - h * 0.045)}" r="${f1(h * 0.026)}" fill="${hi}"/>`); }
+    for (let i = 0; i < 9; i++) { const dx = -0.55 + i * 0.14; out.push(`<circle cx="${f1(x + dx * W)}" cy="${f1(cy + h * (0.14 + 0.02 * (i % 2)))}" r="${f1(h * 0.032)}" fill="${fill}"/>`); }
+    return out.join("");
+  }
   function skyline(seed, { min, max, fill, windows, deco }) {
     const rng = mulberry(seed), W = 1400, H = 320, parts = [];
     for (let x = 0; x < W;) {
@@ -91,8 +134,8 @@
     if (deco) {
       // mosque: dome, crescent, minaret
       parts.push(`<rect x="610" y="190" width="150" height="130" fill="${fill}"/><path d="M620 190a65 65 0 0 1 130 0z" fill="${fill}"/><rect x="683" y="100" width="4" height="26" fill="${fill}"/><circle cx="685" cy="96" r="7" fill="${fill}"/><rect x="780" y="120" width="22" height="200" fill="${fill}"/><path d="M776 120l15-34 15 34z" fill="${fill}"/>`);
-      // palms
-      [180, 980, 1290].forEach((px) => parts.push(`<path d="M${px} 320C${px + 6} 250 ${px - 4} 200 ${px + 8} 150" stroke="${fill}" stroke-width="7" fill="none"/><path d="M${px + 8} 150c-34-8-56 6-70 26 22-10 44-14 70-8zM${px + 8} 150c30-14 56-4 72 16-22-8-46-8-72-2zM${px + 8} 150c-8-26 6-48 26-58-4 24-12 40-26 58zM${px + 8} 150c10-28-2-50-22-62 2 26 8 42 22 62z" fill="${fill}"/>`));
+      // coconut palms
+      parts.push(palmTree(180, H, 175, 0.2, fill, "#432839"), palmTree(990, H, 160, -0.16, fill, "#432839"), palmTree(1290, H, 185, 0.12, fill, "#432839"));
     }
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${parts.join("")}</svg>`;
     return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
@@ -118,15 +161,14 @@
     return `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${P.join("")}</svg>`)}")`;
   }
   function roadsideTile() {
-    const f = "#1f1319", W = 1600, H = 220, P = [];
-    const lamp = (x) => P.push(`<rect x="${x}" y="40" width="7" height="${H - 40}" fill="${f}"/><path d="M${x + 3} 44h46v7h-46z" fill="${f}"/><rect x="${x + 40}" y="50" width="22" height="9" rx="3" fill="${f}"/><circle cx="${x + 51}" cy="66" r="15" fill="#ffd45e" opacity=".55"/>`);
-    const palm = (x, h) => P.push(`<path d="M${x} ${H}C${x + 6} ${H - h * .5} ${x - 4} ${H - h * .8} ${x + 8} ${H - h}" stroke="${f}" stroke-width="8" fill="none"/><path d="M${x + 8} ${H - h}c-36-8-60 6-74 28 24-10 46-14 74-8zM${x + 8} ${H - h}c32-14 60-4 76 18-24-8-50-8-76-2zM${x + 8} ${H - h}c-8-28 6-52 28-62-4 26-12 44-28 62zM${x + 8} ${H - h}c10-30-2-54-24-66 2 28 8 46 24 66z" fill="${f}"/>`);
+    const f = "#1f1319", hi = "#3c2536", W = 1600, H = 300, dy = H - 220, P = [];
+    const g = (s) => `<g transform="translate(0,${dy})">${s}</g>`;
+    const lamp = (x) => P.push(g(`<rect x="${x}" y="40" width="7" height="${220 - 40}" fill="${f}"/><path d="M${x + 3} 44h46v7h-46z" fill="${f}"/><rect x="${x + 40}" y="50" width="22" height="9" rx="3" fill="${f}"/><circle cx="${x + 51}" cy="66" r="15" fill="#ffd45e" opacity=".55"/>`));
     const warung = (x) => {
       let st = ""; for (let i = 0; i < 8; i++) st += `<path d="M${x + i * 22} 96h22l-3 22h-22z" fill="${i % 2 ? "#f4f1e6" : "#ff4122"}"/>`;
-      P.push(`<rect x="${x + 6}" y="118" width="164" height="${H - 118}" fill="${f}"/>${st}<rect x="${x + 6}" y="92" width="170" height="8" fill="${f}"/><rect x="${x + 22}" y="132" width="60" height="34" fill="#ffd45e" opacity=".75"/><rect x="${x + 96}" y="140" width="56" height="${H - 140}" fill="#3a2630"/><circle cx="${x + 150}" cy="86" r="5" fill="#ffd45e"/>`);
+      P.push(g(`<rect x="${x + 6}" y="118" width="164" height="102" fill="${f}"/>${st}<rect x="${x + 6}" y="92" width="170" height="8" fill="${f}"/><rect x="${x + 22}" y="132" width="60" height="34" fill="#ffd45e" opacity=".75"/><rect x="${x + 96}" y="140" width="56" height="80" fill="#3a2630"/><circle cx="${x + 150}" cy="86" r="5" fill="#ffd45e"/>`));
     };
-    const halte = (x) => P.push(`<rect x="${x}" y="80" width="150" height="8" fill="${f}"/><rect x="${x + 6}" y="86" width="6" height="${H - 86}" fill="${f}"/><rect x="${x + 138}" y="86" width="6" height="${H - 86}" fill="${f}"/><rect x="${x + 30}" y="150" width="90" height="10" fill="${f}"/><rect x="${x + 40}" y="50" width="70" height="26" rx="4" fill="#2457ff"/><rect x="${x + 56}" y="58" width="38" height="10" fill="#f4f1e6"/>`);
-    lamp(130); palm(380, 190); warung(520); lamp(880); palm(1050, 170); palm(1480, 150); lamp(1300);
+    P.push(palmTree(330, H, 185, 0.18, f, hi)); warung(520); lamp(880); P.push(rainTree(1090, H, 150, f, hi)); lamp(1320); P.push(palmTree(1500, H, 170, -0.14, f, hi));
     return `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${P.join("")}</svg>`)}")`;
   }
   const skyLm = $("#skyLm");
@@ -421,6 +463,7 @@
     const lmBase = -1400 * (skyLm.offsetHeight / 420) + innerWidth * 0.405;
     skyLm.style.setProperty("--sx", (lmBase - heroP * 700 - drift * 0.28).toFixed(1));
     const ground = heroP * 1700 + drift;
+    stage.style.setProperty("--g150", (ground % 150).toFixed(2)); stage.style.setProperty("--g46", (ground % 46).toFixed(2)); stage.style.setProperty("--g44", (ground % 44).toFixed(2));
     roadside.style.setProperty("--sx", (-ground).toFixed(1));
     { const hw = halteEl.offsetWidth, period = Math.max(2300, innerWidth + hw + 700); halteEl.style.transform = `translateX(${(((((560 - ground + hw) % period) + period) % period) - hw).toFixed(1)}px)`; }
     stage.style.setProperty("--wheel", Math.max(0.2, 0.7 - heroP * 0.3 - vel * 0.4).toFixed(2) + "s");
