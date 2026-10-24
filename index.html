@@ -4,7 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apri Dwi Rachmadi — AI Engineer & Data Scientist</title>
-  <meta name="description" content="AI/ML engineer and Statistics graduate building production machine-learning systems — LLM evaluation, computer vision, NLP, and tabular ML with Python, TensorFlow & PyTorch." />
+  <meta name="description" content="AI engineer shipping agents and the evaluation pipelines that prove they work — LLM-as-a-Judge, RAG, and production ML." />
+  <link rel="canonical" href="https://aprirachmadi.github.io/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Apri Dwi Rachmadi" />
+  <meta property="og:url" content="https://aprirachmadi.github.io/" />
+  <meta property="og:title" content="Apri Dwi Rachmadi — AI Engineer" />
+  <meta property="og:description" content="AI engineer shipping agents and the evaluation pipelines that prove they work — LLM-as-a-Judge, RAG, and production ML." />
+  <meta property="og:image" content="https://aprirachmadi.github.io/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Apri Dwi Rachmadi — AI Engineer portfolio" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Apri Dwi Rachmadi — AI Engineer" />
+  <meta name="twitter:description" content="AI engineer shipping agents and the evaluation pipelines that prove they work — LLM-as-a-Judge, RAG, and production ML." />
+  <meta name="twitter:image" content="https://aprirachmadi.github.io/assets/og-image.png" />
   <link rel="icon" type="image/jpeg" href="assets/site-icon.jpg" />
   <link rel="apple-touch-icon" href="assets/site-icon.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,6 +28,7 @@
   <noscript>
     <style>
       .reveal { opacity: 1; transform: none; transition: none; }
+      .proj-filters, .view-all-wrap { display: none; }
     </style>
   </noscript>
 </head>
@@ -28,8 +43,8 @@
       <nav class="nav__links">
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
-        <a href="#awards">Awards</a>
         <a href="#about">About</a>
+        <a href="#awards">Awards</a>
         <a href="#contact">Contact</a>
       </nav>
       <a class="btn nav__cta" href="#contact">Hire me</a>
@@ -43,12 +58,12 @@
       <div class="hero__sun"></div>
       <div class="wrap">
         <div class="hero__inner reveal">
-          <p class="eyebrow typewriter" data-text="AI Engineer · Data Scientist"></p>
+          <p class="eyebrow typewriter" data-text="AI Engineer · Data Scientist">AI Engineer · Data Scientist</p>
           <h1>Apri Dwi Rachmadi</h1>
           <p class="hero__tag">
-            AI/ML engineer and <b>Statistics graduate</b> who ships ML systems
-            end-to-end — from <b>LLM evaluation</b> and <b>RAG</b> to
-            <b>computer vision</b> and production <b>tabular models</b>.
+            <b>AI engineer</b> shipping agents and the evaluation pipelines
+            that prove they work — <b>LLM-as-a-Judge</b>, <b>RAG</b>, and
+            production <b>ML</b>.
           </p>
           <div class="hero__cta">
             <a class="btn btn--primary" href="#projects">View Projects</a>
@@ -70,10 +85,10 @@
         </div>
 
         <div class="stats reveal">
-          <div class="stat"><div class="stat__num grad-text">3.73</div><div class="stat__label">GPA / 4.00</div></div>
-          <div class="stat"><div class="stat__num grad-text">84%</div><div class="stat__label">LLM-judge alignment</div></div>
-          <div class="stat"><div class="stat__num grad-text">13</div><div class="stat__label">ML projects documented</div></div>
-          <div class="stat"><div class="stat__num grad-text">3×</div><div class="stat__label">Satria Data finalist</div></div>
+          <div class="stat"><div class="stat__num grad-text">84%</div><div class="stat__label">LLM-judge human alignment</div></div>
+          <div class="stat"><div class="stat__num grad-text">89%</div><div class="stat__label">Multi-judge RAG alignment</div></div>
+          <div class="stat"><div class="stat__num grad-text">79%</div><div class="stat__label">Loan-fraud recall</div></div>
+          <div class="stat"><div class="stat__num grad-text">10+</div><div class="stat__label">Anomaly types, XAI-explained</div></div>
         </div>
       </div>
     </section>
@@ -90,20 +105,104 @@
 
         <div class="proj-filters reveal" id="projectFilters"></div>
         <div class="projects" id="projectGrid">
-          <noscript>
-            <div class="projects-noscript">
-              <p><strong>JavaScript is off</strong> — here are the newest projects instead of the interactive grid:</p>
-              <ul>
-                <li><strong>Tilik</strong> — source-grounded BPS statistical agent · <a href="projects/tilik-agent/">Read case study</a> · <a href="https://tilikagent.frhvn.my.id/" rel="noopener">Live Demo</a> · <a href="https://github.com/aprirachmadi/tilik-agent" rel="noopener">GitHub</a></li>
-                <li><strong>Dispatch</strong> — AI-assisted IT triage · 33/40 all-field label matches on synthetic cases · <a href="projects/dispatch/">Read case study</a> · <a href="https://github.com/aprirachmadi/dispatch" rel="noopener">GitHub</a></li>
-                <li><strong>Rottom-Chat</strong> — engine-verified mechanics and isolated AI Seats · <a href="https://github.com/aprirachmadi/rottom-chat" rel="noopener">GitHub</a></li>
-                <li><strong>Geo-Lens</strong> — Siamese U-Net · 1024 × 1024 change masks · <a href="https://github.com/aprirachmadi/geo-lens" rel="noopener">GitHub</a> · <a href="https://geo-lens-urban.rachmadiapri.workers.dev/" rel="noopener">Demo</a></li>
-                <li><strong>Recall</strong> — transcript-grounded study companion · 6 STT providers · <a href="https://github.com/aprirachmadi/recall-learning" rel="noopener">GitHub</a></li>
-                <li><strong>Satellite Imagery Precipitation Nowcasting</strong> — compact U-Net · 41 × 41 grid · <a href="https://github.com/aprirachmadi/satellite-imagery-precipitation-nowcasting" rel="noopener">GitHub</a></li>
-                <li><strong>Vote Detection on SIREKAP Forms</strong> — YOLOv8 + TrOCR · 0.8% CER · <a href="https://github.com/aprirachmadi/sirekap-ocr" rel="noopener">GitHub</a> · <a href="https://sirekap-ocr-pemilu2024.streamlit.app/" rel="noopener">Live demo</a></li>
-              </ul>
-            </div>
-          </noscript>
+          <!-- Static copy of PROJECTS in site.js for crawlers and no-JS readers; site.js replaces it.
+               Keep in sync: node tests/static-projects-sync.cjs -->
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">AI Agents</span><span class="project__year">2026</span><span class="project__metric">Source-linked BPS answers</span></div>
+            <h3 class="project__title">Tilik</h3>
+            <p class="project__desc">BPS statistics answered from published observations and SP2020 evidence</p>
+            <div class="project__actions"><a class="btn" href="projects/tilik-agent/">Read case study</a><a class="btn" href="https://github.com/aprirachmadi/tilik-agent" target="_blank" rel="noopener">GitHub Repository</a><a class="btn" href="https://tilikagent.frhvn.my.id/" target="_blank" rel="noopener">Live Demo</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">AI Agents</span><span class="project__year">2026</span><span class="project__metric">33/40 all-field label matches</span></div>
+            <h3 class="project__title">Dispatch</h3>
+            <p class="project__desc">AI-assisted IT triage with a human review workbench</p>
+            <div class="project__actions"><a class="btn" href="projects/dispatch/">Read case study</a><a class="btn" href="https://github.com/aprirachmadi/dispatch" target="_blank" rel="noopener">GitHub Repository</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">AI Agents</span><span class="project__year">2026</span><span class="project__metric">Engine-verified battle mechanics</span></div>
+            <h3 class="project__title">Rottom-Chat</h3>
+            <p class="project__desc">Grounded competitive Pokémon answers and autonomous agent battles</p>
+            <div class="project__actions"><a class="btn" href="https://github.com/aprirachmadi/rottom-chat" target="_blank" rel="noopener">GitHub Repository</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">Computer Vision</span><span class="project__year">2026</span><span class="project__metric">1024 × 1024 change masks</span></div>
+            <h3 class="project__title">Geo-Lens</h3>
+            <p class="project__desc">Full-resolution satellite change detection with a Siamese U-Net</p>
+            <div class="project__actions"><a class="btn" href="projects/geo-lens/">Read case study</a><a class="btn" href="https://github.com/aprirachmadi/geo-lens" target="_blank" rel="noopener">GitHub Repository</a><a class="btn" href="https://geo-lens-urban.rachmadiapri.workers.dev/" target="_blank" rel="noopener">Live Demo</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">Data Science</span><span class="project__year">2026</span><span class="project__metric">Twice-daily automated digests</span></div>
+            <h3 class="project__title">Ingfo-Loker</h3>
+            <p class="project__desc">AI job discovery, ranking, and proposal drafting on autopilot</p>
+            <div class="project__actions"><a class="btn" href="https://github.com/aprirachmadi/ingfo-loker" target="_blank" rel="noopener">GitHub Repository</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">Data Science</span><span class="project__year">2026</span><span class="project__metric">13 deterministic validation rules</span></div>
+            <h3 class="project__title">AI Finance Document Reviewer</h3>
+            <p class="project__desc">Evidence-first review recommendations for finance documents</p>
+            <div class="project__actions"><a class="btn" href="https://github.com/aprirachmadi/ai-finance-document-reviewer" target="_blank" rel="noopener">GitHub Repository</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">NLP</span><span class="project__year">2026</span><span class="project__metric">6 swappable STT providers</span></div>
+            <h3 class="project__title">Recall</h3>
+            <p class="project__desc">Lecture recordings turned into searchable study material</p>
+            <div class="project__actions"><a class="btn" href="https://github.com/aprirachmadi/recall-learning" target="_blank" rel="noopener">GitHub Repository</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">Data Science</span><span class="project__year">2026</span><span class="project__metric">41 × 41 precipitation grid</span></div>
+            <h3 class="project__title">Satellite Imagery Precipitation Nowcasting</h3>
+            <p class="project__desc">Precipitation estimates from geostationary satellite imagery</p>
+            <div class="project__actions"><a class="btn" href="https://github.com/aprirachmadi/satellite-imagery-precipitation-nowcasting" target="_blank" rel="noopener">GitHub Repository</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">Computer Vision</span><span class="project__year">2024</span><span class="project__metric">0.8% CER</span></div>
+            <h3 class="project__title">Vote Detection on SIREKAP Forms</h3>
+            <p class="project__desc">YOLOv8 + TrOCR pipeline reading 2024 election tally forms</p>
+            <div class="project__actions"><a class="btn" href="https://github.com/aprirachmadi/sirekap-ocr" target="_blank" rel="noopener">GitHub Repository</a><a class="btn" href="https://sirekap-ocr-pemilu2024.streamlit.app/" target="_blank" rel="noopener">Live Demo</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">NLP</span><span class="project__year">2023</span><span class="project__metric">99% accuracy</span></div>
+            <h3 class="project__title">Indonesian Political Hoax Detection</h3>
+            <p class="project__desc">IndoBERT NLP model flagging political misinformation</p>
+            <div class="project__actions"><a class="btn" href="https://github.com/aprirachmadi/Indonesian-Political-News-Hoax" target="_blank" rel="noopener">GitHub Repository</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">Computer Vision</span><span class="project__metric">90% accuracy</span></div>
+            <h3 class="project__title">Fire &amp; Smoke Classification</h3>
+            <p class="project__desc">Vision Transformer classifier robust to noisy imagery</p>
+            <div class="project__actions"><a class="btn" href="https://github.com/aprirachmadi" target="_blank" rel="noopener">GitHub Repository</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">Data Science</span><span class="project__year">2023</span><span class="project__metric">88.6% F1-macro</span></div>
+            <h3 class="project__title">Network Intrusion Detection (NIDS)</h3>
+            <p class="project__desc">LightGBM classifier on the CIC-IDS 2017 dataset</p>
+            <div class="project__actions"><a class="btn" href="https://www.canva.com/design/DAFzwdGqk9I/Gm2wSNS3_8p36L63YsCU2Q/edit" target="_blank" rel="noopener">Presentation</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">Computer Vision</span></div>
+            <h3 class="project__title">Vehicle Detection &amp; Counting</h3>
+            <p class="project__desc">Multi-gate vehicle tracking &amp; counting with YOLOv8</p>
+            <div class="project__actions"><a class="btn" href="https://github.com/aprirachmadi/VehicleCounting" target="_blank" rel="noopener">GitHub Repository</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">Data Science</span><span class="project__year">2024</span><span class="project__metric">R² 0.99</span></div>
+            <h3 class="project__title">Carbon Emission Prediction</h3>
+            <p class="project__desc">Random-forest regression on fuel-consumption data</p>
+            <div class="project__actions"><a class="btn" href="https://github.com/aprirachmadi/carbon-emission" target="_blank" rel="noopener">GitHub Repository</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">Computer Vision</span><span class="project__year">2025</span><span class="project__metric">88% accuracy</span></div>
+            <h3 class="project__title">Garbage Classification Web App</h3>
+            <p class="project__desc">Streamlit app sorting organic vs. anorganic waste</p>
+            <div class="project__actions"><a class="btn" href="https://github.com/aprirachmadi/klasifikasi-sampah-2" target="_blank" rel="noopener">GitHub Repository</a><a class="btn" href="https://klasifikasi-sampah-2.streamlit.app/" target="_blank" rel="noopener">Live Demo</a></div>
+          </article>
+          <article class="project project--static reveal">
+            <div class="project__top"><span class="project__tag">Data Science</span><span class="project__year">2025</span></div>
+            <h3 class="project__title">Golden Section Search Optimization</h3>
+            <p class="project__desc">Optimizing Holt's double exponential smoothing</p>
+            <div class="project__actions"><a class="btn" href="https://github.com/aprirachmadi/Optimization-Methods" target="_blank" rel="noopener">GitHub Repository</a></div>
+          </article>
         </div>
         <div class="view-all-wrap">
           <button class="btn" id="viewAllBtn" type="button">View all projects</button>
@@ -181,83 +280,6 @@
       </div>
     </section>
 
-    <!-- AWARDS & HONORS -->
-    <section id="awards">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <p class="eyebrow">Awards &amp; Honors</p>
-          <h2>Tested in <span class="grad-text">national competitions.</span></h2>
-          <p>Data-science and ML competition results across three years, including three consecutive Satria Data finals.</p>
-        </div>
-
-        <div class="timeline timeline--compact">
-          <div class="tl-item tl-item--featured reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Satria Data Big Data Challenge 2024</span>
-              <span class="tl-item__co">· BPTI Kemendikbud-Ristek</span>
-              <span class="tl-item__date">2024</span>
-            </div>
-            <span class="tl-item__place tl-item__place--gold">Best Metrics Performance</span>
-            <p class="tl-item__desc">LightGBM topic classification on political tweets in the preliminary round; in the finals, LDA topic modeling and RoBERTa sentiment analysis on discussion around the 2024 presidential election.</p>
-          </div>
-          <div class="tl-item tl-item--featured reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Gammafest Data Science Competition</span>
-              <span class="tl-item__co">· Gamma Sigma Beta, IPB University</span>
-              <span class="tl-item__date">2024</span>
-            </div>
-            <span class="tl-item__place tl-item__place--gold">1st Place</span>
-            <p class="tl-item__desc">A YOLOv8 detection model (99.5% mAP) plus EfficientNetV2B0 number classification (99.84% F1) to automatically count votes on SIREKAP forms.</p>
-          </div>
-          <div class="tl-item reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Logika UI Statistics Team Competition</span>
-              <span class="tl-item__co">· HM Departemen Matematika, Universitas Indonesia</span>
-              <span class="tl-item__date">2024</span>
-            </div>
-            <span class="tl-item__place">Semifinalist</span>
-            <p class="tl-item__desc">Data preprocessing, multi-table joins, feature engineering, and EDA to build an ML model for credit-scoring classification.</p>
-          </div>
-          <div class="tl-item reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Pekan Raya Statistika (PRS) ASEAN Data Analysis</span>
-              <span class="tl-item__co">· HM Statistika, ITS</span>
-              <span class="tl-item__date">2023</span>
-            </div>
-            <span class="tl-item__place">Top 15 · Semifinalist</span>
-            <p class="tl-item__desc">Preprocessing, visualization, and a LightGBM classifier predicting network-attack type, reaching a 99.58% F1-score.</p>
-          </div>
-          <div class="tl-item reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Satria Data Big Data Challenge 2023</span>
-              <span class="tl-item__co">· BPTI Kemendikbud-Ristek</span>
-              <span class="tl-item__date">2023</span>
-            </div>
-            <span class="tl-item__place">Finalist</span>
-            <p class="tl-item__desc">A TrOCR model for licence-plate recognition in the preliminary round; in the finals, a Siamese BERT to detect disharmony in capital &amp; taxation laws.</p>
-          </div>
-          <div class="tl-item reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Joints Data Mining Competition</span>
-              <span class="tl-item__co">· HIMAKOM, UGM</span>
-              <span class="tl-item__date">2023</span>
-            </div>
-            <span class="tl-item__place">Finalist</span>
-            <p class="tl-item__desc">Damage-grade classification for earthquakes and image classification for early fire detection using deep learning.</p>
-          </div>
-          <div class="tl-item reveal">
-            <div class="tl-item__head">
-              <span class="tl-item__role">Satria Data Big Data Challenge 2022</span>
-              <span class="tl-item__co">· BPTI Kemendikbud-Ristek</span>
-              <span class="tl-item__date">2022</span>
-            </div>
-            <span class="tl-item__place">Finalist</span>
-            <p class="tl-item__desc">Analysis of patient-return status for BPJS Health participants and public-opinion analysis of BPJS services on Twitter using IndoBERT and BERTopic.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ABOUT / SKILLS -->
     <section id="about">
       <div class="wrap">
@@ -297,6 +319,48 @@
             <h3>Serving &amp; Apps</h3>
             <div class="chips"><span class="chip">FastAPI</span><span class="chip">Flask</span><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">Streamlit</span><span class="chip">Docker</span></div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AWARDS & HONORS -->
+    <section id="awards">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Awards &amp; Honors</p>
+          <h2>Tested in <span class="grad-text">national competitions.</span></h2>
+          <p>National data-science and ML competition results, 2022–2024.</p>
+        </div>
+
+        <div class="timeline timeline--compact">
+          <div class="tl-item tl-item--featured reveal">
+            <div class="tl-item__head">
+              <span class="tl-item__role">Gammafest Data Science Competition</span>
+              <span class="tl-item__co">· Gamma Sigma Beta, IPB University</span>
+              <span class="tl-item__date">2024</span>
+            </div>
+            <span class="tl-item__place tl-item__place--gold">1st Place</span>
+            <p class="tl-item__desc">A YOLOv8 detection model (99.5% mAP) plus EfficientNetV2B0 number classification (99.84% F1) to automatically count votes on SIREKAP forms.</p>
+          </div>
+          <div class="tl-item tl-item--featured reveal">
+            <div class="tl-item__head">
+              <span class="tl-item__role">Satria Data Big Data Challenge 2024</span>
+              <span class="tl-item__co">· BPTI Kemendikbud-Ristek</span>
+              <span class="tl-item__date">2024</span>
+            </div>
+            <span class="tl-item__place tl-item__place--gold">Best Metrics Performance</span>
+            <p class="tl-item__desc">LightGBM topic classification on political tweets in the preliminary round; in the finals, LDA topic modeling and RoBERTa sentiment analysis on discussion around the 2024 presidential election.</p>
+          </div>
+          <div class="tl-item reveal">
+            <div class="tl-item__head">
+              <span class="tl-item__role">Satria Data Big Data Challenge</span>
+              <span class="tl-item__co">· BPTI Kemendikbud-Ristek</span>
+              <span class="tl-item__date">2022 — 2024</span>
+            </div>
+            <span class="tl-item__place">3× Finalist</span>
+            <p class="tl-item__desc">Three consecutive finals: IndoBERT and BERTopic on BPJS Health data (2022), TrOCR plate recognition and a Siamese BERT for legal disharmony (2023), and topic and sentiment modeling on 2024 election discourse.</p>
+          </div>
+          <p class="awards-other reveal"><b>Other competitions:</b> Logika UI Statistics (Semifinalist, 2024) · PRS ASEAN Data Analysis, ITS (Top 15, 2023) · Joints Data Mining, UGM (Finalist, 2023)</p>
         </div>
       </div>
     </section>

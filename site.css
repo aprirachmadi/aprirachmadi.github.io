@@ -242,14 +242,7 @@ section { padding: clamp(64px, 11vh, 130px) 0; position: relative; }
 
 .view-all-wrap { text-align: center; margin-top: 44px; }
 .projects-empty { color: var(--muted); font-family: var(--font-mono); font-size: 0.9rem; padding: 30px 0; }
-.projects-noscript {
-  grid-column: 1 / -1;
-  border: 1px dashed var(--border-2); border-radius: 8px; padding: 20px;
-  background: var(--surface); color: var(--muted); font-size: 0.95rem;
-}
-.projects-noscript ul { list-style: none; margin-top: 12px; display: grid; gap: 10px; }
-.projects-noscript a { color: var(--cyan); border-bottom: 1px solid transparent; }
-.projects-noscript a:hover { border-color: var(--cyan); }
+.project--static .project__actions { margin: 16px 0 0; }
 
 /* ---------------- Experience / Awards timeline ---------------- */
 .timeline { position: relative; padding-left: 28px; }
@@ -287,6 +280,8 @@ section { padding: clamp(64px, 11vh, 130px) 0; position: relative; }
 }
 .timeline--compact .tl-item:not(.tl-item--featured) { padding-bottom: 20px; }
 .timeline--compact .tl-item:not(.tl-item--featured) .tl-item__desc { font-size: 0.9rem; }
+.awards-other { color: var(--muted); font-size: 0.9rem; }
+.awards-other b { color: var(--text); font-weight: 600; }
 
 /* ---------------- Contact ---------------- */
 .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 34px; align-items: start; }

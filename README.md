@@ -31,6 +31,10 @@ To add or edit a project, update the `PROJECTS` array near the top of
 `featured` flag, and the expandable detail (overview, methods, outcomes,
 links, image).
 
+After editing `PROJECTS`, run `node tests/static-projects-sync.cjs --write` to
+refresh the static project cards in `index.html` (what crawlers, link previews,
+and no-JS readers see); without `--write` it only checks they are in sync.
+
 ## Run locally
 
 Because it's a static site, you only need any local HTTP server. Any port
