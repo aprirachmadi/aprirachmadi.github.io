@@ -1,126 +1,389 @@
 /* ============================================================
-   Refined Vaporwave Portfolio — interactions
-   - Particle network background (canvas)
-   - Scroll reveal (IntersectionObserver)
+   Evidence Edition Portfolio — interactions
+   - Boot sequence intro (masks load, then hands off to hero)
+   - Signature cursor (dot + eased ring, contextual label)
+   - Orbital field canvas (acid / technical diagram)
+   - Choreographed hero entrance + scroll reveal
+   - Verified-ledger count-up
    - Project data array + category filtering + featured default
-   - Expandable project detail cards with image fallbacks
+   - Expandable exhibit rows with image fallbacks
    - Formspree contact form
    ============================================================ */
 
-/* ---------------- Particle network background ---------------- */
+const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------------- Boot sequence intro ---------------- */
+function showHero() {
+  const hero = document.querySelector(".hero");
+  if (!hero) return;
+  const sequence = [
+    ".hero__topline",
+    ".hero__title-line:nth-child(1)",
+    ".hero__title-line:nth-child(2)",
+    ".hero__body .hero__intro",
+    ".hero__side",
+    ".hero__bottom",
+  ];
+  sequence.forEach((sel, i) => {
+    const el = hero.querySelector(sel);
+    if (el) setTimeout(() => el.classList.add("in"), 120 + i * 120);
+  });
+}
+
+function runIntro() {
+  const intro = document.getElementById("intro");
+  if (!intro || REDUCED_MOTION) { showHero(); if (intro) intro.hidden = true; return; }
+
+  const count = intro.querySelector("#introCount");
+  const bar = intro.querySelector("#introBar");
+  const done = () => {
+    if (!intro.classList.contains("done")) return;
+    showHero();
+    setTimeout(() => { intro.hidden = true; }, 760);
+  };
+
+  const DURATION = 1150;
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min((now - start) / DURATION, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const n = Math.round(eased * 100);
+    if (count) count.textContent = String(n).padStart(3, "0");
+    if (bar) bar.style.width = `${eased * 100}%`;
+    if (p < 1) requestAnimationFrame(tick);
+    else { intro.classList.add("done"); setTimeout(done, 60); }
+  }
+  requestAnimationFrame(tick);
+  setTimeout(() => { intro.classList.add("done"); done(); }, 2800); // failsafe
+}
+runIntro();
+
+/* ---------------- Exhibit year stamp ---------------- */
+(function () {
+  const el = document.getElementById("exhibitYear");
+  if (el) el.textContent = String(new Date().getFullYear());
+})();
+
+/* ---------------- Evidence radar — live telemetry orbit ---------------- */
 (function () {
   const canvas = document.getElementById("particleCanvas");
   if (!canvas) return;
 
+  const hero = canvas.closest(".hero") || canvas.parentElement;
   const ctx = canvas.getContext("2d");
+  if (!hero || !ctx) return;
+
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReduced) return;
+  let w = 1, h = 1, dpr = 1, t = 0, raf = 0, running = false, visible = false;
 
-  const COLORS = [
-    "rgba(26, 82, 118, OPACITY)",   // cyan
-    "rgba(192, 57, 43, OPACITY)",   // magenta
-    "rgba(212, 172, 13, OPACITY)",   // pink
-  ];
-
-  const CONNECT_DIST = 150;
-  const MAX_LINE_OPACITY = 0.18;
-  const PARTICLE_COUNT = 300;
-
-  let particles = [];
-  let w, h;
-  let animId;
+  // Pointer target / smoothed center drift / instrument-lines presence
+  const pointer = { x: 0, y: 0, active: false };
+  const drift = { x: 0, y: 0, sx: 0, sy: 0 };
 
   function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = document.documentElement.scrollHeight;
+    const rect = hero.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = Math.max(1, rect.width);
+    h = Math.max(1, rect.height);
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  function createParticles() {
-    particles = [];
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 2 + 0.8,
-        color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      });
-    }
+  // Point at param a on a rotated ellipse
+  function orbitPt(cx, cy, rx, ry, rot, a) {
+    const px = rx * Math.cos(a);
+    const py = ry * Math.sin(a);
+    const cosR = Math.cos(rot), sinR = Math.sin(rot);
+    return { x: cx + px * cosR - py * sinR, y: cy + px * sinR + py * cosR };
+  }
+
+  function ellipse(cx, cy, rx, ry, rot, color, dash = [], width = 1, dashOff = 0) {
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(rot);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+    ctx.setLineDash(dash);
+    ctx.lineDashOffset = dashOff;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.stroke();
+    ctx.restore();
   }
 
   function draw() {
     ctx.clearRect(0, 0, w, h);
+    const compact = w < 900;
+    const s = compact ? 0.68 : 1;
+    const acidAlpha = compact ? 0.42 : 0.68;
+    const driftAmt = compact ? 10 : 26;
+    const cx = w * (compact ? 0.5 : 0.56) + drift.sx * driftAmt;
+    const cy = h * (compact ? 0.42 : 0.45) + drift.sy * driftAmt;
 
-    // Draw connections first (behind particles)
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < CONNECT_DIST) {
-          const opacity = (1 - dist / CONNECT_DIST) * MAX_LINE_OPACITY;
-          ctx.strokeStyle = `rgba(44, 62, 80, ${opacity})`;
-          ctx.lineWidth = 0.5;
+    const RX = w * 0.37 * s, RY = h * 0.16 * s;   // outer dashed telemetry ring
+    const ACRX = w * 0.53 * s, ACRY = h * 0.64 * s; // giant acid orbit
+
+    // --- Precession: every ring rotates on its own axis, at its own rate ---
+    // Orbit planes drift slowly, so the whole diagram precesses like gyroscopes.
+    const ROT = {
+      a: -0.045 + t * 0.13, // outer telemetry ring (~160 s per tilt loop)
+      b: 0.26 + t * 0.3,    // violet middle ring (fastest)
+      c: -0.45 - t * 0.21,  // gray ring (counter-rotates)
+      g: -0.85 + t * 0.15,  // giant acid orbit (~175 s, the slow anchor)
+      gAqua: -0.84 + t * 0.1,
+      gRose: -0.84 + t * 0.27,
+    };
+
+    // --- Rings: dashes march, so every ring visibly revolves ---
+    ellipse(cx, cy, RX, RY, ROT.a, "rgba(23, 38, 60, 0.24)", [9, 6], 1.2, -t * 30);
+    ellipse(cx, cy, w * 0.15 * s, h * 0.31 * s, ROT.b, "rgba(83, 68, 178, 0.34)", [6, 4], 1.1, t * 26);
+    ellipse(cx, cy, w * 0.2 * s, h * 0.38 * s, ROT.c, "rgba(93, 105, 129, 0.22)", [4, 5], 0.8, -t * 18);
+    ellipse(cx, cy, ACRX, ACRY, ROT.g, `rgba(166, 203, 49, ${acidAlpha})`, [], 2.4);
+    ellipse(cx, cy, w * 0.54 * s, h * 0.64 * s, ROT.gAqua, "rgba(167, 209, 207, 0.34)", [], 14);
+    ellipse(cx, cy, w * 0.54 * s, h * 0.64 * s, ROT.gRose, "rgba(232, 185, 212, 0.3)", [], 24);
+
+    // --- Satellite belt on the outer dashed ring (the node registry) ---
+    const sats = [];
+    for (let i = 0; i < 42; i++) {
+      const a = (i / 42) * Math.PI * 2 + t * 0.14;
+      const p = orbitPt(cx, cy, RX, RY, ROT.a, a);
+      sats.push(p);
+      let r = i % 7 === 0 ? 2.2 : 0.65;
+      let fill = i % 7 === 0 ? "rgba(83, 68, 178, 0.75)" : "rgba(93, 105, 129, 0.4)";
+      let halo = null;
+      if (pointer.active) {
+        const d = Math.hypot(p.x - pointer.x, p.y - pointer.y);
+        if (d < 130) {
+          const k = 1 - d / 130;
+          r += k * 2.2;
+          halo = `rgba(166, 203, 49, ${0.30 * k})`;
+          fill = `rgba(92, 116, 22, ${0.5 + 0.5 * k})`;
+        }
+      }
+      if (halo) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r + 5, 0, Math.PI * 2);
+        ctx.fillStyle = halo;
+        ctx.fill();
+      }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = fill;
+      ctx.fill();
+    }
+
+    // --- Inner nucleus riders ---
+    for (let i = 0; i < 4; i++) {
+      const a = t * (i % 2 ? -0.7 : 0.9) + i * 1.7;
+      const p = orbitPt(cx, cy, w * 0.15 * s, h * 0.31 * s, ROT.b, a);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(83, 68, 178, 0.72)";
+      ctx.fill();
+    }
+
+    // --- Data pulses riding the giant acid ring (telemetry on delivery) ---
+    const pulses = prefersReduced ? [0.15, 0.5, 0.85] : [t * 0.35, t * 0.35 + 2.3, t * 0.35 + 4.6];
+    const TAIL = 9;
+    for (let n = 0; n < pulses.length; n++) {
+      const head = pulses[n];
+      for (let k = TAIL; k >= 0; k--) {
+        const a = head - k * 0.055;
+        const p = orbitPt(cx, cy, ACRX, ACRY, ROT.g, a);
+        const fade = Math.pow(1 - k / (TAIL + 1), 2);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, k === 0 ? 3.4 : 2.6, 0, Math.PI * 2);
+        ctx.fillStyle = k === 0
+          ? "rgba(255, 255, 255, 0.95)"
+          : `rgba(166, 203, 49, ${(0.85 * fade).toFixed(3)})`;
+        ctx.fill();
+        if (k === 0) {
           ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
+          ctx.arc(p.x, p.y, 7, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(166, 203, 49, 0.22)";
+          ctx.fill();
         }
       }
     }
 
-    // Draw particles
-    for (const p of particles) {
-      ctx.fillStyle = p.color.replace("OPACITY", "0.55");
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
+    // --- Instrument lines: cursor constellation to nearest nodes ---
+    if (pointer.active) {
+      const links = sats
+        .map((p) => ({ p, d: Math.hypot(p.x - pointer.x, p.y - pointer.y) }))
+        .sort((a, b) => a.d - b.d)
+        .slice(0, 3);
+      for (const { p, d } of links) {
+        const k = Math.max(0, 1 - d / 240);
+        if (k <= 0.02) continue;
+        ctx.beginPath();
+        ctx.moveTo(pointer.x, pointer.y);
+        ctx.lineTo(p.x, p.y);
+        ctx.strokeStyle = `rgba(83, 68, 178, ${(0.48 * k).toFixed(3)})`;
+        ctx.lineWidth = 0.9;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.6 + k * 1.6, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(166, 203, 49, ${(0.8 * k).toFixed(3)})`;
+        ctx.fill();
+      }
     }
+
+    // --- Wind-carried signal ribbon ---
+    ctx.beginPath();
+    for (let i = 0; i < 260; i++) {
+      const x = w * 0.24 * s + 0.02 * w * s + (i / 259) * w * 0.52 * s;
+      const envelope = Math.exp(-Math.pow((i - 130) / 60, 2));
+      const y = cy + Math.sin(i * 0.63 + t * 8) * envelope * 15 * s * Math.sin(i * 0.12);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = compact ? "rgba(93, 105, 129, 0.16)" : "rgba(93, 105, 129, 0.3)";
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+
+    // --- slowly rotating core marker ---
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(t * 0.25);
+    ctx.strokeStyle = "rgba(83, 68, 178, 0.5)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(-9, 0); ctx.lineTo(9, 0);
+    ctx.moveTo(0, -9); ctx.lineTo(0, 9);
+    ctx.moveTo(6, 0); ctx.lineTo(9, 0); // tick marks break the symmetry
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(0, 0, 3.2, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
   }
 
-  function update() {
-    for (const p of particles) {
-      p.x += p.vx;
-      p.y += p.vy;
-
-      // Wrap around edges
-      if (p.x < -10) p.x = w + 10;
-      if (p.x > w + 10) p.x = -10;
-      if (p.y < -10) p.y = h + 10;
-      if (p.y > h + 10) p.y = -10;
-    }
-  }
-
-  function loop() {
-    update();
+  function frame() {
+    // smooth the drift toward its target, then render
+    drift.sx += (drift.x - drift.sx) * 0.06;
+    drift.sy += (drift.y - drift.sy) * 0.06;
+    t += 0.005;
     draw();
-    animId = requestAnimationFrame(loop);
+    raf = running ? requestAnimationFrame(frame) : 0;
   }
 
-  function handleResize() {
+  function start() {
+    if (running || prefersReduced || !visible) return;
+    running = true;
+    raf = requestAnimationFrame(frame);
+  }
+  function stop() {
+    running = false;
+    if (raf) cancelAnimationFrame(raf);
+    raf = 0;
+  }
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver((entries) => {
+      visible = entries[0].isIntersecting;
+      if (visible) start(); else stop();
+    }, { threshold: 0.05 }).observe(hero);
+  }
+
+  function redraw() {
     resize();
-    createParticles();
-  }
-
-  function handleScroll() {
-    const docH = document.documentElement.scrollHeight;
-    if (docH !== h) {
-      h = canvas.height = docH;
-    }
+    if (prefersReduced) draw();
   }
 
   resize();
-  createParticles();
+  if (prefersReduced) {
+    draw();
+    visible = true;
+  } else {
+    visible = true;
+    start();
+  }
+
+  window.addEventListener("resize", redraw);
+  window.addEventListener("load", redraw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(redraw);
+
+  window.addEventListener("pointermove", (e) => {
+    const rect = hero.getBoundingClientRect();
+    const px = e.clientX - rect.left;
+    const py = e.clientY - rect.top;
+    pointer.active = px >= 0 && px <= rect.width && py >= 0 && py <= rect.height && e.pointerType !== "touch";
+    if (pointer.active) {
+      pointer.x = px;
+      pointer.y = py;
+    }
+    drift.x = (e.clientX / window.innerWidth - 0.5);
+    drift.y = (e.clientY / window.innerHeight - 0.5);
+  }, { passive: true });
+  window.addEventListener("pointerleave", () => { pointer.active = false; }, { passive: true });
+  window.addEventListener("beforeunload", () => cancelAnimationFrame(raf));
+})();
+
+/* ---------------- Signature cursor ---------------- */
+(function () {
+  if (REDUCED_MOTION) return;
+  if (!window.matchMedia("(pointer: fine)").matches) return;
+  const cursor = document.getElementById("cursor");
+  if (!cursor) return;
+  const label = document.getElementById("cursorLabel");
+  document.documentElement.classList.add("has-cursor");
+
+  const ring = cursor.querySelector(".cursor__ring");
+  const dot = cursor.querySelector(".cursor__dot");
+  let tx = innerWidth / 2, ty = innerHeight / 2, rx = tx, ry = ty, raf = 0;
+
+  function loop() {
+    rx += (tx - rx) * 0.16;
+    ry += (ty - ry) * 0.16;
+    ring.style.transform = `translate(${rx}px, ${ry}px)`;
+    dot.style.transform = `translate(${tx}px, ${ty}px)`;
+    raf = requestAnimationFrame(loop);
+  }
   loop();
 
-  window.addEventListener("resize", handleResize);
-  window.addEventListener("scroll", handleScroll, { passive: true });
+  addEventListener("pointermove", (e) => { tx = e.clientX; ty = e.clientY; }, { passive: true });
+  addEventListener("pointerdown", () => cursor.classList.add("press"), { passive: true });
+  addEventListener("pointerup", () => cursor.classList.remove("press"), { passive: true });
 
-  // Cleanup on page unload
-  window.addEventListener("beforeunload", () => {
-    cancelAnimationFrame(animId);
-  });
+  addEventListener("pointerover", (e) => {
+    const interactive = e.target.closest("a, button, .project, input, textarea, select, label");
+    if (interactive) {
+      cursor.classList.add("hover");
+      if (label) label.textContent = interactive.closest(".project") ? "Open exhibit" : "";
+    } else {
+      cursor.classList.remove("hover");
+    }
+  }, { passive: true });
+
+  addEventListener("beforeunload", () => cancelAnimationFrame(raf));
+})();
+
+/* ---------------- Verified-ledger count-up ---------------- */
+(function () {
+  const stats = document.querySelectorAll(".stat__num[data-count]");
+  if (!stats.length) return;
+  if (REDUCED_MOTION || !("IntersectionObserver" in window)) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const suffix = el.dataset.suffix || "";
+      const start = performance.now();
+      const DURATION = 1200;
+      function tick(now) {
+        const p = Math.min((now - start) / DURATION, 1);
+        el.textContent = `${Math.round((1 - Math.pow(1 - p, 4)) * target)}${suffix}`;
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = `${target}${suffix}`;
+        entry.target.parentElement?.classList.toggle("in-focus", true);
+      }
+      requestAnimationFrame(tick);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  stats.forEach((el) => observer.observe(el));
 })();
 
 /* ---------------- Typewriter loop ---------------- */
@@ -128,9 +391,14 @@
   const TYPING_SPEED = 70;   // ms per character
   const HOLD_TIME = 2000;    // ms to hold after typing
   const BLINK_GAP = 400;     // ms cursor hidden before reset
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   document.querySelectorAll(".typewriter").forEach((el) => {
     const fullText = el.dataset.text || el.textContent;
+    if (prefersReduced) {
+      el.textContent = fullText;
+      return;
+    }
     el.textContent = "";
     el.classList.add("typewriter--blink");
 
@@ -504,7 +772,7 @@ const LINK_LABELS = {
   demo: "Live Demo",
 };
 
-/* ---------------- Scroll reveal ---------------- */
+/* ---------------- Scroll reveal (hero is choreographed by the intro instead) ---------------- */
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -522,7 +790,11 @@ function observeReveals(els) {
     revealObserver.observe(el);
   });
 }
-observeReveals(Array.from(document.querySelectorAll(".reveal")));
+observeReveals(
+  Array.from(document.querySelectorAll(".reveal")).filter(
+    (el) => !el.closest(".hero")
+  )
+);
 
 /* ---------------- Scroll-spy (active nav tracking) ---------------- */
 (function () {

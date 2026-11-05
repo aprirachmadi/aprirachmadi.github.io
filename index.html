@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4f5f1" />
   <title>Apri Dwi Rachmadi — AI Engineer & Data Scientist</title>
+  <script>document.documentElement.classList.add("js");</script>
   <meta name="description" content="AI engineer shipping agents and the evaluation pipelines that prove they work — LLM-as-a-Judge, RAG, and production ML." />
   <link rel="canonical" href="https://aprirachmadi.github.io/" />
   <meta property="og:type" content="website" />
@@ -23,7 +25,7 @@
   <link rel="apple-touch-icon" href="assets/site-icon.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="site.css" />
   <noscript>
     <style>
@@ -33,74 +35,135 @@
   </noscript>
 </head>
 <body>
-  <!-- PARTICLE NETWORK BACKGROUND -->
-  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <!-- INTRO / BOOT SEQUENCE (masks load; removed by site.js, hidden for no-JS & reduced-motion) -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <span class="intro__head mono">Apri Dwi Rachmadi — exhibits loading</span>
+    <div class="intro__inner">
+      <span class="intro__count mono" id="introCount">000</span>
+      <span class="intro__bar"><i id="introBar"></i></span>
+    </div>
+  </div>
+
+  <!-- SIGNATURE CURSOR -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__ring"></div>
+    <div class="cursor__dot"></div>
+    <span class="cursor__label mono" id="cursorLabel">Open</span>
+  </div>
 
   <!-- NAV -->
   <header class="nav">
     <div class="wrap nav__inner">
-      <a class="nav__brand" href="#top">apri<b>.</b>rachmadi</a>
-      <nav class="nav__links">
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#awards">Awards</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+      <a class="nav__brand" href="#top">apri<b>.</b>rachmadi<span class="nav__mark" aria-hidden="true">✳</span></a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#projects"><span>01</span> Projects</a>
+        <a href="#experience"><span>02</span> Experience</a>
+        <a href="#awards"><span>03</span> Awards</a>
+        <a href="#about"><span>04</span> About</a>
+        <a href="#contact"><span>05</span> Contact</a>
       </nav>
-      <a class="btn nav__cta" href="#contact">Hire me</a>
+      <div class="nav__end">
+        <span class="nav__status mono"><span class="dot"></span>Open to work</span>
+        <a class="btn nav__cta" href="#contact">Hire me</a>
+      </div>
     </div>
   </header>
 
   <main id="top">
     <!-- HERO -->
     <section class="hero">
-      <div class="hero__glow"></div>
-      <div class="hero__sun"></div>
-      <div class="wrap">
-        <div class="hero__inner reveal">
+      <canvas id="particleCanvas" aria-hidden="true"></canvas>
+      <div class="hero__grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <span class="hero__spark hero__spark--1" aria-hidden="true">✦</span>
+      <span class="hero__spark hero__spark--2" aria-hidden="true">✧</span>
+      <span class="hero__spark hero__spark--3" aria-hidden="true">✦</span>
+      <span class="hero__vertical mono" aria-hidden="true">Exhibits / AI systems / <b id="exhibitYear">2026</b></span>
+
+      <div class="wrap hero__inner">
+        <div class="hero__topline reveal">
           <p class="eyebrow typewriter" data-text="AI Engineer · Data Scientist">AI Engineer · Data Scientist</p>
-          <h1>Apri Dwi Rachmadi</h1>
-          <p class="hero__tag">
-            <b>AI engineer</b> shipping agents and the evaluation pipelines
-            that prove they work — <b>LLM-as-a-Judge</b>, <b>RAG</b>, and
-            production <b>ML</b>.
-          </p>
-          <div class="hero__cta">
-            <a class="btn btn--primary" href="#projects">View Projects</a>
-          </div>
-          <div class="hero__socials" aria-label="Social links">
-            <a href="https://github.com/aprirachmadi" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .6a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.4-5.5-6a4.7 4.7 0 0 1 1.2-3.3c-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.3a11.6 11.6 0 0 1 6.2 0c2.4-1.6 3.4-1.3 3.4-1.3.6 1.7.2 3 .1 3.3a4.7 4.7 0 0 1 1.2 3.3c0 4.6-2.8 5.7-5.5 6 .4.3.7 1 .7 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .6Z"/></svg>
-            </a>
-            <a href="https://huggingface.co/rachmadiapri" target="_blank" rel="noopener" aria-label="Hugging Face" title="Hugging Face">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8.5" cy="10" r="1.2" fill="currentColor"/><circle cx="15.5" cy="10" r="1.2" fill="currentColor"/><path d="M7.2 14.2c2.8 2.7 6.8 2.7 9.6 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-            </a>
-            <a href="https://www.linkedin.com/in/apri-rachmadi/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 8.3H2.4V21h2.8V8.3ZM3.8 3A1.7 1.7 0 1 0 3.8 6.4 1.7 1.7 0 0 0 3.8 3ZM9 8.3H6.3V21H9v-6.3c0-1.7.3-3.3 2.4-3.3s2.1 1.9 2.1 3.4V21h2.8v-6.8c0-3.3-.7-5.8-4.2-5.8-1.7 0-2.8.9-3.2 1.7h-.1V8.3Z"/></svg>
-            </a>
-            <a href="mailto:rachmadiapri@gmail.com" aria-label="Email" title="Email">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3.5 6 8.5 6.4L20.5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
+          <span class="hero__fig mono">APR-2026 / EDITION 03 — SHOWING: ALL EXHIBITS</span>
         </div>
 
-        <div class="stats reveal">
-          <div class="stat"><div class="stat__num grad-text">84%</div><div class="stat__label">LLM-judge human alignment</div></div>
-          <div class="stat"><div class="stat__num grad-text">89%</div><div class="stat__label">Multi-judge RAG alignment</div></div>
-          <div class="stat"><div class="stat__num grad-text">79%</div><div class="stat__label">Loan-fraud recall</div></div>
-          <div class="stat"><div class="stat__num grad-text">10+</div><div class="stat__label">Anomaly types, XAI-explained</div></div>
+        <h1 class="hero__title" aria-label="Apri Dwi Rachmadi">
+          <span class="hero__title-line mask" aria-hidden="true"><span class="mask__inner">Apri <em>Dwi</em></span></span>
+          <span class="hero__title-line mask" aria-hidden="true"><span class="mask__inner">Rachmadi<span class="hero__star" aria-hidden="true">✳</span></span></span>
+        </h1>
+
+        <div class="hero__body">
+          <div class="hero__intro mask reveal" >
+            <div class="mask__inner">
+              <p class="hero__tag">
+                <b>AI engineer</b> shipping agents and the evaluation pipelines
+                that prove they work — <b>LLM-as-a-Judge</b>, <b>RAG</b>, and
+                production <b>ML</b>. <span class="grad-text">Every exhibit shows its metrics.</span>
+              </p>
+              <div class="hero__cta">
+                <a class="btn btn--primary" href="#projects">Open the Index <span aria-hidden="true">↘</span></a>
+                <a class="btn" href="#contact">Commission Work</a>
+              </div>
+              <div class="hero__socials" aria-label="Social links">
+                <a href="https://github.com/aprirachmadi" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .6a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.4-5.5-6a4.7 4.7 0 0 1 1.2-3.3c-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.3a11.6 11.6 0 0 1 6.2 0c2.4-1.6 3.4-1.3 3.4-1.3.6 1.7.2 3 .1 3.3a4.7 4.7 0 0 1 1.2 3.3c0 4.6-2.8 5.7-5.5 6 .4.3.7 1 .7 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .6Z"/></svg>
+                </a>
+                <a href="https://huggingface.co/rachmadiapri" target="_blank" rel="noopener" aria-label="Hugging Face" title="Hugging Face">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8.5" cy="10" r="1.2" fill="currentColor"/><circle cx="15.5" cy="10" r="1.2" fill="currentColor"/><path d="M7.2 14.2c2.8 2.7 6.8 2.7 9.6 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/apri-rachmadi/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 8.3H2.4V21h2.8V8.3ZM3.8 3A1.7 1.7 0 1 0 3.8 6.4 1.7 1.7 0 0 0 3.8 3ZM9 8.3H6.3V21H9v-6.3c0-1.7.3-3.3 2.4-3.3s2.1 1.9 2.1 3.4V21h2.8v-6.8c0-3.3-.7-5.8-4.2-5.8-1.7 0-2.8.9-3.2 1.7h-.1V8.3Z"/></svg>
+                </a>
+                <a href="mailto:rachmadiapri@gmail.com" aria-label="Email" title="Email">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3.5 6 8.5 6.4L20.5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero__side mono reveal">
+            <span class="status-line"><span class="dot"></span>On the bench — open for collaboration</span>
+            <span class="hero__side-meta">Based in Indonesia<br>UTC+7 / Remote-ready</span>
+            <a class="hero__scroll" href="#projects"><span>Verify the work</span><b>↓</b></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__bottom">
+        <div class="wrap hero__bottom-inner mono">
+          <span>Apri Dwi Rachmadi — AI Systems</span>
+          <span>Exhibits 01–16 / verified &amp; on record</span>
+          <span>© 2026 / reserved for future evidence</span>
         </div>
       </div>
     </section>
 
+    <!-- MARQUEE -->
+    <div class="marquee mono" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__row">Ships with receipts ✳ LLM-as-a-Judge ✳ 84% human alignment ✳ RAG ✳ multi-judge 89% ✳ agents ✳ yolo reading ballots at 0.8% CER ✳ fraud recall 79% ✳&nbsp;</span>
+        <span class="marquee__row">Ships with receipts ✳ LLM-as-a-Judge ✳ 84% human alignment ✳ RAG ✳ multi-judge 89% ✳ agents ✳ yolo reading ballots at 0.8% CER ✳ fraud recall 79% ✳&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- STATS / VERIFIED LEDGER -->
+    <div class="stats-band">
+      <div class="wrap">
+        <div class="stats reveal">
+          <div class="stat"><div class="stat__num grad-text" data-count="84" data-suffix="%">84%</div><div class="stat__label">LLM-judge human alignment</div></div>
+          <div class="stat"><div class="stat__num grad-text" data-count="89" data-suffix="%">89%</div><div class="stat__label">Multi-judge RAG alignment</div></div>
+          <div class="stat"><div class="stat__num grad-text" data-count="79" data-suffix="%">79%</div><div class="stat__label">Loan-fraud recall</div></div>
+          <div class="stat"><div class="stat__num grad-text" data-count="10" data-suffix="+">10+</div><div class="stat__label">Anomaly types, XAI-explained</div></div>
+        </div>
+      </div>
+    </div>
+
     <!-- PROJECTS -->
-    <section id="projects">
+    <section id="projects" data-index="01">
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="eyebrow">Projects</p>
-          <h2>Selected work, <span class="grad-text">with the receipts.</span></h2>
+          <p class="eyebrow">01 / Projects</p>
+          <h2><span class="mask"><span class="mask__inner">Selected work, <span class="grad-text">with the receipts.</span></span></span></h2>
           <p>Systems I designed, trained, and built — with the metrics that matter.</p>
-          <p>Click any card to expand the full breakdown.</p>
+          <p>Open any exhibit to expand the full breakdown.</p>
         </div>
 
         <div class="proj-filters reveal" id="projectFilters"></div>
@@ -211,11 +274,11 @@
     </section>
 
     <!-- EXPERIENCE -->
-    <section id="experience">
+    <section id="experience" data-index="02">
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="eyebrow">Experience</p>
-          <h2>Where I've <span class="grad-text">shipped.</span></h2>
+          <p class="eyebrow">02 / Experience</p>
+          <h2><span class="mask"><span class="mask__inner">Where I've <span class="grad-text">shipped.</span></span></span></h2>
         </div>
 
         <div class="timeline">
@@ -281,11 +344,11 @@
     </section>
 
     <!-- AWARDS & HONORS -->
-    <section id="awards">
+    <section id="awards" data-index="03">
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="eyebrow">Awards &amp; Honors</p>
-          <h2>Tested in <span class="grad-text">national competitions.</span></h2>
+          <p class="eyebrow">03 / Awards &amp; Honors</p>
+          <h2><span class="mask"><span class="mask__inner">Tested in <span class="grad-text">national competitions.</span></span></span></h2>
           <p>Data-science and ML competition results across three years, including three consecutive Satria Data finals.</p>
         </div>
 
@@ -358,11 +421,11 @@
     </section>
 
     <!-- ABOUT / SKILLS -->
-    <section id="about">
+    <section id="about" data-index="04">
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="eyebrow">About</p>
-          <h2>I turn statistics &amp; research into <span class="grad-text">working ML systems.</span></h2>
+          <p class="eyebrow">04 / About</p>
+          <h2><span class="mask"><span class="mask__inner">I turn statistics &amp; research into <span class="grad-text">working ML systems.</span></span></span></h2>
           <p>
             Statistics graduate of Universitas Diponegoro and a Bangkit Machine
             Learning Distinction graduate — I build models end-to-end across
@@ -401,11 +464,11 @@
     </section>
 
     <!-- CONTACT -->
-    <section id="contact">
+    <section id="contact" data-index="05">
       <div class="wrap contact-grid">
         <div class="contact-info reveal">
-          <p class="eyebrow">Contact</p>
-          <h2>Let's build intelligent systems together.</h2>
+          <p class="eyebrow">05 / Contact</p>
+          <h2><span class="mask"><span class="mask__inner">Let's build intelligent systems together.</span></span></h2>
           <p>Open to AI / ML Engineer and Data Scientist roles. The fastest way to reach me is email.</p>
           <a class="mail" href="mailto:rachmadiapri@gmail.com">rachmadiapri@gmail.com</a>
           <div class="socials">
@@ -438,11 +501,12 @@
 
   <footer class="footer">
     <div class="wrap footer__inner">
+      <span class="footer__fig">AI Systems / Evidence / Impact</span>
       <span>© 2026 Apri Dwi Rachmadi</span>
       <span>Designed &amp; built with retro-futurist intent.</span>
     </div>
   </footer>
 
-  <script src="site.js?v=tilik-links-20261009"></script>
+  <script src="site.js?v=evidence-precession-20261106"></script>
 </body>
 </html>
