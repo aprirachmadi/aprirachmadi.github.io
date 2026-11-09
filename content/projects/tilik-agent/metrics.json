@@ -1,30 +1,26 @@
 {
   "schemaVersion": 1,
   "project": "Tilik",
-  "task": "Source-grounded questions and statistical analysis over BPS data",
-  "snapshotDate": "2026-10-09",
+  "task": "Source-grounded questions and statistical analysis over BPS, BNPB, BMKG, Bapanas and SiPongi data",
+  "snapshotDate": "2026-11-09",
   "evaluation": {
-    "questionCount": 19,
-    "questionDatasetVersion": "2026-10-04",
-    "conversationCount": 4,
-    "conversationDatasetVersion": "2026-10-02",
     "source": [
-      "src/tilik_agent/evals/datasets/demografi_sosial_questions.json",
+      "src/tilik_agent/evals/datasets/generation_benchmark.json",
+      "src/tilik_agent/evals/datasets/judge_benchmark.json",
       "src/tilik_agent/evals/datasets/demografi_sosial_conversations.json"
     ],
     "publishedAggregateScores": {
-      "task_completion": 0.88,
-      "argument_correctness": 0.8655
+      "task_completion": 0.73,
+      "argument_correctness": 0.81
     },
-    "note": "Historical owner-confirmed judge scores are shown with an asterisk. They have not been retested on the newest evaluation sets. Other metrics have not been tested yet; pipeline_status is operational, not an LLM judge score.",
+    "note": "Judge scores are owner-reported and shown without an asterisk on the page. Other metrics are marked not tested yet; pipeline_status is operational, not an LLM judge score. The question and answer counts come from the Tilik README; it was not verified that the scores were produced on those sets.",
     "scoreProvenance": {
-      "kind": "historical owner-reported results",
+      "kind": "owner-reported results",
       "source": [
-        "portfolio site.js Tilik results",
-        "project owner confirmation on 2026-10-09"
+        "project owner message on 2026-11-09"
       ],
       "savedRunArtifactAvailable": false,
-      "testedAgainstNewestEvaluationSets": false
+      "testedAgainstNewestEvaluationSets": null
     },
     "untestedMetrics": [
       "goal_accuracy",
@@ -39,11 +35,18 @@
       "src/tilik_agent/evals/metrics.py",
       "src/tilik_agent/evals/runner.py",
       "src/tilik_agent/evals/langfuse_dataset.py"
-    ]
+    ],
+    "generationBenchmarkQuestionCount": 45,
+    "judgeHumanAgreement": {
+      "task_completion": 0.91,
+      "argument_correctness": 0.48,
+      "humanLabeledAnswerCount": 33,
+      "note": "Share of benchmark answers where the judge label matches the human label. The argument-correctness judge is a rough signal."
+    }
   },
   "architecture": {
     "orchestration": "LangGraph",
-    "observations": "PostgreSQL with read-only dataset tools",
+    "observations": "BPS MCP server with read-only PostgreSQL dataset tools",
     "publicationRetrieval": "pgvector over the configured SP2020 collection",
     "statisticalOperations": [
       "correlation",
@@ -53,15 +56,29 @@
       "paired_compare"
     ],
     "source": [
-      "src/tilik_agent/agent/graph.py",
-      "src/tilik_agent/agent/sql.py",
-      "src/tilik_agent/agent/statistics.py"
-    ]
+      "README.md pipeline section of the tilik-agent repository"
+    ],
+    "sourceConnectors": [
+      "BPS",
+      "BNPB",
+      "BMKG",
+      "Bapanas",
+      "SiPongi"
+    ],
+    "connectorTransport": "One MCP server per source (stdio locally, Streamable HTTP in Docker Compose)",
+    "liveAndSynced": {
+      "BPS": "loaded observations and SP2020 collection",
+      "BNPB": "synchronized daily from reviewed 2010-2024 CKAN aggregates",
+      "BMKG": "live official feeds",
+      "Bapanas": "live and monthly sync",
+      "SiPongi": "live and monthly sync"
+    }
   },
   "stack": [
     "Python",
     "FastAPI",
     "LangGraph",
+    "MCP",
     "PostgreSQL",
     "pgvector",
     "React",
@@ -75,18 +92,19 @@
   },
   "assets": {
     "workspace": "images/workspace.png",
-    "kind": "existing portfolio screenshot of the Tilik interface; includes prior conversation titles",
-    "source": "portfolio assets/project/tilik-agent.png"
+    "kind": "capture of the live demo: BNPB flood and landslide conversation with chart, cited source and source selector",
+    "source": "https://tilikagent.frhvn.my.id/ (captured 2026-11-09)"
   },
   "links": {
     "sourceRepository": "https://github.com/aprirachmadi/tilik-agent",
-    "liveApplication": null
+    "liveApplication": "https://tilikagent.frhvn.my.id/"
   },
   "guardrails": [
     "Source identifiers are validated; final prose is not fully mechanically fact-checked.",
-    "The agent uses loaded data and the configured publication collection, not live web search.",
+    "The agent answers only from the five connected sources (BPS, BNPB, BMKG, Bapanas, SiPongi), not open web search.",
     "Deterministic statistical operations are distinct from ordinary model-written arithmetic.",
-    "LLM judge scores are referenceless and are not factual-accuracy measurements."
+    "LLM judge scores are referenceless and are not factual-accuracy measurements.",
+    "A SiPongi hotspot is a satellite heat detection, not a confirmed fire."
   ],
   "stackSource": [
     "pyproject.toml",
