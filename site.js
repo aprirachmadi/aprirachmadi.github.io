@@ -440,7 +440,7 @@ const PROJECTS = [
     longDescription: "Tilik answers questions about Indonesian public data. It routes each question to its own BPS, BNPB, BMKG, Bapanas, or SiPongi MCP server. BPS reads published observations and SP2020 passages, BNPB reads synchronized disaster aggregates, and BMKG reads official live feeds. Bapanas reads consumer food prices and SiPongi reads satellite hotspot counts, each live and from a daily monthly sync. Every answer includes cited source links and retrieval times, and comparison questions can also return a chart.",
     feats: ["Routes each question to the right source MCP server", "Reads BPS observations and SP2020 passages with read-only SQL and pgvector retrieval", "Returns cited answers with retrieval times and charts"],
     outcomes: ["Answers carry source links, freshness details, and evidence IDs", "Cited evidence IDs are checked against what was retrieved", "Pipeline status and bounded retrieval failures remain explicit"],
-    results: ["Task completion: 0.8800", "Argument correctness: 0.8655"],
+    results: ["Task completion: 73%", "Argument correctness: 81%"],
     links: [{ type: "case-study", url: "projects/tilik-agent/" }, { type: "github", url: "https://github.com/aprirachmadi/tilik-agent" }, { type: "demo", url: "https://tilikagent.frhvn.my.id/" }],
   },
   {

@@ -186,7 +186,7 @@
   /* ---------------- Projects ---------------- */
   const PROJECTS = window.ANGKOT_PROJECTS || [];
   const STAT = {
-    "tilik-agent": ["0.88", "task completion"],
+    "tilik-agent": ["73%", "task completion"],
     rulebook: ["3", "local models, human-approved rules"],
     dispatch: ["33/40", "all-field label matches"],
     "rottom-chat": ["Verified", "mechanics, same engine as the Arena"],

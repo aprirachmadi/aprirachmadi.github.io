@@ -34,8 +34,8 @@ window.ANGKOT_PROJECTS = [
    "Pipeline status and bounded retrieval failures remain explicit"
   ],
   "results": [
-   "Task completion: 0.8800",
-   "Argument correctness: 0.8655"
+   "Task completion: 73%",
+   "Argument correctness: 81%"
   ],
   "links": [
    {
