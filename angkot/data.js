@@ -35,7 +35,8 @@ window.ANGKOT_PROJECTS = [
   ],
   "results": [
    "Task completion: 73%",
-   "Argument correctness: 81%"
+   "Argument correctness: 81%",
+   "LLM-judge vs. human agreement: task completion 91%, argument correctness 48%"
   ],
   "links": [
    {
