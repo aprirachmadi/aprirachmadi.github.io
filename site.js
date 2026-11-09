@@ -459,7 +459,7 @@ const PROJECTS = [
     feats: ["Three local labelers with word-level votes and confidence", "Orchestrator, diagnoser, and rule-writer agents with a code verifier", "Review queue and trace viewer in a web UI"],
     outcomes: ["Two live loops took the guideline from v1 to v4 with human approvals", "Numbers are parsed in code, not by a model", "Agents never see the evaluation labels"],
     results: ["All-3-agree accuracy on the 10 receipts the rules were written from, v2 to v4: 84.6% to 87.4% (in-sample)"],
-    links: [{ type: "github", url: "https://github.com/aprirachmadi/rulebook" }],
+    links: [{ type: "case-study", url: "projects/rulebook/" }, { type: "github", url: "https://github.com/aprirachmadi/rulebook" }],
   },
   {
     id: "dispatch",

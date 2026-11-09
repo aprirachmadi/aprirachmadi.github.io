@@ -90,6 +90,10 @@ window.ANGKOT_PROJECTS = [
    ],
    "links": [
     {
+     "type": "case-study",
+     "url": "../projects/rulebook/"
+    },
+    {
      "type": "github",
      "url": "https://github.com/aprirachmadi/rulebook"
     }
