@@ -187,11 +187,11 @@
   const PROJECTS = window.ANGKOT_PROJECTS || [];
   const STAT = {
     "tilik-agent": ["0.88", "task completion"],
+    rulebook: ["3", "local models, human-approved rules"],
     dispatch: ["33/40", "all-field label matches"],
     "rottom-chat": ["Verified", "mechanics, same engine as the Arena"],
     "geo-lens": ["1024²", "change masks"],
     "ingfo-loker": ["2×/day", "automated digests"],
-    "ai-finance-document-reviewer": ["13", "deterministic validation rules"],
     "recall-learning": ["6", "swappable STT providers"],
     "satellite-precipitation-nowcasting": ["41×41", "precipitation grid"],
     "sirekap-ocr": ["0.8%", "character error rate"],
