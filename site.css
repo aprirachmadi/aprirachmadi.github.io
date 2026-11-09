@@ -552,7 +552,26 @@ section[data-index]:hover::before { -webkit-text-stroke-color: rgba(166, 203, 49
   background: var(--acid); border-color: var(--acid-ink);
   box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px rgba(166, 203, 49, 0.3);
 }
-.tl-item__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+.tl-item__head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+
+/* Institutional stamp tiles — official marks, ink at rest, color on hover */
+.tl-stamp {
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  height: 32px; padding: 0 6px;
+  border: 1px solid var(--border); border-radius: 2px;
+  background: rgba(255, 255, 255, 0.55);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.tl-stamp__logo {
+  height: 17px; width: auto; max-width: none; object-fit: contain;
+  filter: grayscale(1) contrast(1.08);
+  opacity: 0.75;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+.tl-item:hover .tl-stamp { border-color: var(--border-2); background: #fff; }
+.tl-item:hover .tl-stamp__logo { filter: grayscale(0) contrast(1); opacity: 1; }
+.tl-stamp__tick { display: none; }
 .tl-item__role { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; }
 .tl-item__co { color: var(--violet); font-size: 0.92rem; }
 .tl-item__date { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.06em; color: var(--faint); margin-left: auto; }
