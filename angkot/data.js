@@ -64,7 +64,8 @@ window.ANGKOT_PROJECTS = [
     "PaddleOCR",
     "pytest"
    ],
-   "categories": [
+   "image": "../assets/project/rulebook.jpg",
+  "categories": [
     "ai agents"
    ],
    "featured": true,

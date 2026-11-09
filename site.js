@@ -449,6 +449,7 @@ const PROJECTS = [
     description: "Agentic labeling that drafts, tests, and versions its own guideline rules",
     sub: "Offline multi-agent loop with a human-approved guideline",
     tech: ["Python", "FastAPI", "React", "Ollama", "PaddleOCR", "pytest"],
+    image: "assets/project/rulebook.jpg",
     categories: ["ai agents"],
     featured: true,
     metric: "3 local models, human-approved guideline rules",
